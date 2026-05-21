@@ -10,6 +10,7 @@ export default function HorizontalSection() {
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
+    offset: ["start start", "end end"], 
   });
 
   useEffect(() => {
