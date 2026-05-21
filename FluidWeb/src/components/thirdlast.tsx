@@ -78,25 +78,30 @@ function LogoMarquee() {
 export default function thirdsection() {
   return (
     <>
-      <div className="bg-[#010233] h-screen">
+      <div className="bg-[#010233] md:h-screen">
         <div className="flex flex-col-reverse justify-center min-h-2/5">
-          <h1 className="text-center text-6xl -mb-40 text-white font-bold">
+          <h1 className="text-center text-6xl mt-40 text-white font-bold">
             Get Your Dream Applications<br />Go Global, Instantly
           </h1>
         </div>
-        <div className="min-h-3/5 py-18 px-33 flex flex-row align-middle justify-center items-center">
-          <div className="flex flex-col px-8 py-6.5 mr-6 rounded backdrop-blur-md bg-white/10 border border-white/20 shadow-lg">
-            <h1 className="text-white font-semibold text-4xl">
-              Ready To Launch? Get in contact with<br />our team & get best advice !
+        <div className="min-h-3/5 py-18 px-12 flex flex-col align-middle justify-center items-center
+                        md:px-33 md:flex-row">
+          <div className="flex flex-col px-8 py-6.5 md:mr-6 rounded backdrop-blur-md bg-white/10 border border-white/20 shadow-lg">
+            <h1 className="text-white font-semibold text-3xl text-center
+                            md:text-left md:text-4xl">
+              Ready To Launch? Get in contact with our team & get best advice !
             </h1>
-            <span className="rounded-4xl mt-8 flex flex-row w-fit px-3 py-1 text-white font-medium backdrop-blur-md bg-white/10 border border-white/20 shadow-lg">
+            <span className="rounded-4xl text-center mt-8 flex flex-row w-fit px-3 py-1 text-white font-medium backdrop-blur-md bg-white/10 border border-white/20 shadow-lg">
               Book A Consultancy Meeting
             </span>
           </div>
-          <div className="flex flex-col px-8 py-6 rounded backdrop-blur-md bg-white/10 border border-white/20 shadow-lg">
-            <h1 className="text-white font-semibold text-3xl">Our Past Projects {">_"}</h1>
-            <h1 className="text-white font-semibold text-xl">
-              see case studies, plans, executions,<br />results and client review
+          <div className="flex flex-col mt-10 px-8 py-6.5 rounded backdrop-blur-md bg-white/10 border border-white/20 shadow-lg
+                          md:px-8 md:py-6 md:mt-0">
+            <h1 className="text-white font-semibold text-center text-2xl
+                            md:text-3xl md:text-left">Our Past Projects {">_"}</h1>
+            <h1 className="text-white font-semibold text-xl text-center
+                            md:text-left">
+              See case studies, plans, executions, results and client review
             </h1>
             <span className="rounded-4xl mt-6 flex flex-row w-fit px-3 py-1 text-white font-medium backdrop-blur-md bg-white/10 border border-white/20 shadow-lg">
               Case Studies
@@ -106,7 +111,7 @@ export default function thirdsection() {
       </div>
 
       <div className="flex flex-col py-24 items-center bg-[#010233]">
-        <h1 className="text-white font-semibold text-6xl">Client Reviews</h1>
+        <h1 className="text-white font-semibold text-center text-5xl md:text-6xl">Client Reviews</h1>
         <ReviewsMarquee />
         <LogoMarquee />
       </div>
