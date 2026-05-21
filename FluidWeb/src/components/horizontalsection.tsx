@@ -79,7 +79,7 @@ const x = useTransform(
             />
 
             {/* TEXT */}
-            <h1 className="relative z-10 text-7xl text-white font-bold text-center leading-tight">
+            <h1 className="relative z-10 text-6xl md:text-7xl text-white font-bold text-center leading-tight">
               We Change Dreams
               <br />
               Into Reality

@@ -13,14 +13,15 @@ export default function cards() {
 
 
   return (
-    <div className="w-full h-screen bg-[#010233] px-35 py-30">
+    <div className="w-full h-auto md:h-screen bg-[#010233] px-10 py-20
+      md:px-35 md:py-30">
       <div className="h-full flex-col">
         <div className="flex justify-center">
-          <h1 className="text-6xl text-white font-bold">
+          <h1 className="text-6xl text-center text-white font-bold">
             Why Fluid<span className="font-semibold">Web?</span>
           </h1>
         </div>
-        <div className="grid grid-cols-2 mt-16 gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 mt-16 gap-8 max-w-5xl mx-auto">
           {cards.map((desc: any, index: Key | null | undefined) => (
             <div
               key={index}
