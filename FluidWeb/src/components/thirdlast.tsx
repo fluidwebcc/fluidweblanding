@@ -95,8 +95,8 @@ export default function thirdsection() {
               Book A Consultancy Meeting
             </span>
           </div>
-          <div className="flex flex-col mt-10 px-8 py-6.5 rounded backdrop-blur-md bg-white/10 border border-white/20 shadow-lg
-                          md:px-8 md:py-6 md:mt-0">
+          <div className="flex flex-col items-center mt-10 px-8 py-6.5 rounded backdrop-blur-md bg-white/10 border border-white/20 shadow-lg
+                          md:px-8 md:py-6 md:items-left md:mt-0">
             <h1 className="text-white font-semibold text-center text-2xl
                             md:text-3xl md:text-left">Our Past Projects {">_"}</h1>
             <h1 className="text-white font-semibold text-xl text-center

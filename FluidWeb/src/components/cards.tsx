@@ -13,7 +13,7 @@ export default function cards() {
 
 
   return (
-    <div className="w-full h-screen bg-[#010233] px-10 py-20
+    <div className="w-full h-auto md:h-screen bg-[#010233] px-10 py-20
       md:px-35 md:py-30">
       <div className="h-full flex-col">
         <div className="flex justify-center">

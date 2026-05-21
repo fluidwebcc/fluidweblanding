@@ -4,7 +4,7 @@ import Header from "./header";
 export default function Hero() {
   return (
     <section
-      className="relative min-h-screen w-full bg-cover bg-center bg-no-repeat text-white"
+      className="relative h-svh md:min-h-screen w-full bg-cover bg-center bg-no-repeat text-white"
       style={{ backgroundImage: `url(${bg})` }}
     >
       
@@ -24,7 +24,7 @@ export default function Hero() {
             
             <span
               style={{ fontFamily: "'Oooh Baby', cursive" }}
-              className="text-white text-6xl md:text-6xl"
+              className="text-white text-4xl md:text-6xl"
             >
               solutions
             </span>{" "}
