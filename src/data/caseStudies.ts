@@ -33,6 +33,7 @@ export type CaseStudy = {
   outcome: string;
   stats: CaseStat[];
   stack: string[];
+  logo: string;
   featured: boolean;
   featuredOrder: number;
   accent: string;
@@ -94,6 +95,7 @@ export const caseStudies: CaseStudy[] = [
       "Twilio-class messaging",
       "AI assistants",
     ],
+    logo: "/logos/floor-nexus.png",
     featured: true,
     featuredOrder: 1,
     accent: "#5B8DEF",
@@ -137,6 +139,7 @@ export const caseStudies: CaseStudy[] = [
       { label: "Surfaces", value: "App + admin + marketing", note: "Built under Fluid Web lead" },
     ],
     stack: ["SMS/MMS", "Multi-tenant SaaS", "Agency white-label", "Webhook ingest"],
+    logo: "/logos/treply.svg",
     featured: true,
     featuredOrder: 2,
     accent: "#6EE7B7",
@@ -173,10 +176,11 @@ export const caseStudies: CaseStudy[] = [
       "PPV.MY has hosted real cards across boxing, Muay Thai, and MMA with Mux delivery and Billplz checkout. Native app delivery is on the roadmap.",
     stats: [
       { label: "Payments", value: "Billplz + cards", note: "Malaysia-first checkout" },
-      { label: "Video", value: "Mux", note: "Live + timed replay" },
+      { label: "Streaming", value: "Live + replay", note: "Per-event access windows" },
       { label: "Model", value: "Per-event PPV", note: "Not SVOD" },
     ],
     stack: ["React", "Mux", "Billplz", "Stripe", "tRPC", "better-auth"],
+    logo: "/logos/ppv-my.svg",
     featured: true,
     featuredOrder: 3,
     accent: "#F59E0B",
@@ -221,6 +225,7 @@ export const caseStudies: CaseStudy[] = [
       { label: "Hosting region", value: "AWS Sydney", note: "Public product claim" },
     ],
     stack: ["React", "PostgreSQL RLS", "Stripe", "AI/OCR", "Mobile", "AWS ap-southeast-2"],
+    logo: "/logos/clinicos.svg",
     featured: true,
     featuredOrder: 4,
     accent: "#38BDF8",
@@ -264,6 +269,7 @@ export const caseStudies: CaseStudy[] = [
       { label: "VAT rate", value: "18%", note: "Rwanda-oriented tooling" },
     ],
     stack: ["React", "Express", "Supabase", "Stripe", "Vercel", "Render"],
+    logo: "/logos/smartfaktura.png",
     featured: true,
     featuredOrder: 5,
     accent: "#A3E635",
@@ -302,11 +308,12 @@ export const caseStudies: CaseStudy[] = [
     outcome:
       "Voxtell ships white-label voice experiences with production calling, transcripts, and messaging under partner brands — the technical foundation resellers need to sell AI receptionists without building voice infra themselves. The Retell → Vapi migration and Twilio integration landed as durable pipeline ownership rather than a one-off integration spike.",
     stats: [
-      { label: "Migration", value: "Retell → Vapi", note: "Pipeline ownership" },
-      { label: "Telephony", value: "Twilio", note: "Calling + messaging" },
+      { label: "Voice pipeline", value: "Migrated", note: "Provider cutover owned end-to-end" },
+      { label: "Calling", value: "Production", note: "AI-handled telephony flows" },
       { label: "Theming", value: "White-label", note: "Partner brand depth" },
     ],
     stack: ["Vapi", "Twilio", "White-label theming", "Multi-tenant SaaS"],
+    logo: "/logos/voxtell.png",
     featured: true,
     featuredOrder: 6,
     accent: "#FB7185",
@@ -351,6 +358,7 @@ export const caseStudies: CaseStudy[] = [
       { label: "Delivery model", value: "Same as Treply", note: "Lead engineer + local team" },
     ],
     stack: ["Next.js", "Multi-model AI", "Chrome extension", "Credit billing"],
+    logo: "/logos/otteri.png",
     featured: true,
     featuredOrder: 7,
     accent: "#2DD4BF",
@@ -384,5 +392,65 @@ export const geographyHighlights = [
   {
     place: "Norway → Rwanda GTM",
     detail: "SmartFaktura — Zemichael",
+  },
+] as const;
+
+/** Map pins — accurate client geography for the homepage map. */
+export const mapPins = [
+  {
+    id: "illinois",
+    label: "Bolingbrook, Illinois",
+    detail: "Treply · Otteri — Asghar",
+    lat: 41.6986,
+    lng: -88.0684,
+    accent: "#6EE7B7",
+  },
+  {
+    id: "jacksonville",
+    label: "St. Johns / Jacksonville, FL",
+    detail: "Floor Nexus — Johnny",
+    lat: 30.0819,
+    lng: -81.5478,
+    accent: "#5B8DEF",
+  },
+  {
+    id: "orlando",
+    label: "Orlando, FL",
+    detail: "Voxtell AI",
+    lat: 28.5383,
+    lng: -81.3792,
+    accent: "#FB7185",
+  },
+  {
+    id: "australia",
+    label: "Australia",
+    detail: "clinicOS — Dr Faisal Khan",
+    lat: -33.8688,
+    lng: 151.2093,
+    accent: "#38BDF8",
+  },
+  {
+    id: "malaysia",
+    label: "Kuala Lumpur, Malaysia",
+    detail: "PPV.MY — Hilman Ali",
+    lat: 3.139,
+    lng: 101.6869,
+    accent: "#F59E0B",
+  },
+  {
+    id: "norway",
+    label: "Norway",
+    detail: "SmartFaktura — Zemichael",
+    lat: 59.9139,
+    lng: 10.7522,
+    accent: "#A3E635",
+  },
+  {
+    id: "rwanda",
+    label: "Kigali, Rwanda",
+    detail: "SmartFaktura GTM",
+    lat: -1.9441,
+    lng: 30.0619,
+    accent: "#A3E635",
   },
 ] as const;

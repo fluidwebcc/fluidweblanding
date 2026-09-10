@@ -22,3 +22,21 @@ body {
   from { transform: translateX(-50%); }
   to   { transform: translateX(0); }
 }
+
+.fw-map-pin {
+  background: transparent !important;
+  border: none !important;
+}
+
+.leaflet-container {
+  font: inherit;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.leaflet-popup-tip {
+  background: #fff;
+}

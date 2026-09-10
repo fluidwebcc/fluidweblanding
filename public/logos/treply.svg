@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 96" fill="none">
+  <g>
+    <path d="M14 22 C14 16, 18 12, 24 12 L72 12 C78 12, 82 16, 82 22 L82 58 C82 64, 78 68, 72 68 L48 68 L34 82 L34 68 L24 68 C18 68, 14 64, 14 58 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"></path>
+    <path d="M52 22 L34 44 L46 44 L42 58 L60 36 L48 36 Z" fill="#FFE847" stroke="#0B0A12" stroke-width="2.5" stroke-linejoin="round"></path>
+    <circle cx="68" cy="26" r="4" fill="#3D44FF"></circle>
+  </g>
+  <text x="104" y="62" font-family="Space Grotesk, Inter, sans-serif" font-weight="700" font-size="56" fill="#FFFFFF" letter-spacing="-2">treply</text>
+</svg>
