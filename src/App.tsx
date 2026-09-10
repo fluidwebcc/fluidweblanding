@@ -1,53 +1,17 @@
-import { useEffect } from "react";
-import Lenis from "lenis";
+import { Routes, Route } from "react-router-dom";
+import SiteLayout from "./components/SiteLayout";
+import HomePage from "./pages/HomePage";
+import WorkIndexPage from "./pages/WorkIndexPage";
+import CaseStudyPage from "./pages/CaseStudyPage";
 
-import Hero from "./components/hero";
-import Cards from "./components/cards";
-import Headings from "./components/headings";
-import HorizontalSection from "./components/horizontalsection";
-import ThirdLast from "./components/thirdlast";
-import Footer from "./components/footer"
-
-function App() {
-
-  useEffect(() => {
-
-    const lenis = new Lenis({
-      duration: 1.1,
-      smoothWheel: true,
-    });
-
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    return () => {
-      lenis.destroy();
-    };
-
-  }, []);
-
+export default function App() {
   return (
-    <div>
-
-      <Hero />
-      {/* the floating header is inside hero file */}
-
-      <Cards />
-
-      <Headings />
-
-      <HorizontalSection />
-
-      <ThirdLast />
-
-      <Footer/>
-
-    </div>
+    <Routes>
+      <Route element={<SiteLayout />}>
+        <Route index element={<HomePage />} />
+        <Route path="work" element={<WorkIndexPage />} />
+        <Route path="work/:slug" element={<CaseStudyPage />} />
+      </Route>
+    </Routes>
   );
 }
-
-export default App;

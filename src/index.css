@@ -1,12 +1,15 @@
 @import "tailwindcss";
+
 body {
   overflow-x: hidden;
+  background: #010233;
+  color: #fff;
 }
 
 @theme {
   --font-sf: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
-  --animate-go-left: go-left 18s linear infinite;
+  --animate-go-left: go-left 22s linear infinite;
   --animate-go-right: go-right 30s linear infinite;
 }
 
