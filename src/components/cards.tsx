@@ -1,43 +1,43 @@
-import type { Key } from "react";
-import logo from "../assets/fav.png";
+const points = [
+  {
+    title: "Ship with ownership",
+    body: "We embed as your product engineering partner — not ticket-takers on a time sheet.",
+  },
+  {
+    title: "Full-stack delivery",
+    body: "Web, mobile, AI pipelines, payments, and ops tooling from one coordinated team.",
+  },
+  {
+    title: "Founder-speed cadence",
+    body: "Weekly shipping rhythm, clear scope, and no agency theater between you and the build.",
+  },
+  {
+    title: "Global, production-ready",
+    body: "Live products across the US, Australia, Malaysia, Norway, and Rwanda.",
+  },
+] as const;
 
-export default function cards() {
-
-    const cards=[
-        "We build fast, scalable digital products tailored to your business goals",
-        "From SaaS platforms to websites, we create solutions built to perform",
-        "Strategy, design, and development combined into one seamless experience",
-        "Flexible, reliable, and ready to build whatever your business needs"
-    ];
-
-
-
+export default function Cards() {
   return (
-    <div className="w-full h-auto md:h-screen bg-[#010233] px-10 py-20
-      md:px-35 md:py-30">
-      <div className="h-full flex-col">
-        <div className="flex justify-center">
-          <h1 className="text-6xl text-center text-white font-bold">
-            Why Fluid<span className="font-semibold">Web?</span>
-          </h1>
-        </div>
-        <div className="grid md:grid-cols-2 mt-16 gap-8 max-w-5xl mx-auto">
-          {cards.map((desc: any, index: Key | null | undefined) => (
+    <section className="bg-[#010233] px-5 py-20 text-white sm:px-10 md:px-16 md:py-28">
+      <div className="mx-auto max-w-6xl">
+        <h2 className="text-center text-3xl font-bold md:text-5xl">
+          Why Fluid<span className="font-semibold">Web</span>?
+        </h2>
+        <div className="mt-12 grid gap-4 sm:grid-cols-2">
+          {points.map((point) => (
             <div
-              key={index}
-              className="flex flex-col  justify-between px-6 py-3 pb-5 rounded-xl backdrop-blur-md bg-white/10 border border-white/20 shadow-lg"
-              >
-            <div className="flex-row  rounded px-2 py-1.5 mb-1">
-            <img src={logo} alt="Logo" className="h-10 w-auto mr-4" />
-            </div>
-            <p className="relative z-10 text-2xl font-medium text-white/90 leading-relaxed">
-              {desc}
-            </p>
-
+              key={point.title}
+              className="rounded-2xl border border-white/15 bg-white/[0.06] px-6 py-7 backdrop-blur-md transition hover:border-white/25 hover:bg-white/[0.09]"
+            >
+              <h3 className="text-xl font-semibold">{point.title}</h3>
+              <p className="mt-3 text-base leading-relaxed text-white/70">
+                {point.body}
+              </p>
             </div>
           ))}
-        </div> 
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

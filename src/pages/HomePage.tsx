@@ -1,9 +1,9 @@
 import Hero from "../components/hero";
 import Cards from "../components/cards";
-import Headings from "../components/headings";
-import HorizontalSection from "../components/horizontalsection";
 import WorkPreview from "../components/WorkPreview";
-import ThirdLast from "../components/thirdlast";
+import WorldMapSection from "../components/WorldMapSection";
+import TeamSection from "../components/TeamSection";
+import CtaSection from "../components/CtaSection";
 import Footer from "../components/footer";
 
 export default function HomePage() {
@@ -11,10 +11,10 @@ export default function HomePage() {
     <>
       <Hero />
       <Cards />
-      <Headings />
       <WorkPreview />
-      <HorizontalSection />
-      <ThirdLast />
+      <WorldMapSection />
+      <TeamSection />
+      <CtaSection />
       <Footer />
     </>
   );
