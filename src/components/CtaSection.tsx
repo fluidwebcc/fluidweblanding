@@ -1,30 +1,8 @@
 import { Link } from "react-router-dom";
 import { companyProof } from "../data/caseStudies";
-import { portfolioProducts, type PortfolioProduct } from "../data/products";
 import { PeekGroup } from "./PeekPortrait";
 import { sectionPeeks } from "../data/team";
 import { BOOKING_URL } from "../data/site";
-
-function LogoMarquee({ items }: { items: PortfolioProduct[] }) {
-  const doubled = [...items, ...items];
-
-  return (
-    <div className="overflow-hidden">
-      <div className="flex w-max animate-go-left items-center gap-10 py-2 md:gap-16">
-        {doubled.map((product, i) => (
-          <img
-            key={`${product.name}-${i}`}
-            src={product.logo}
-            alt={product.name}
-            title={product.name}
-            loading="lazy"
-            className="h-10 w-auto shrink-0 rounded-lg object-contain opacity-85 transition hover:opacity-100 md:h-14"
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
 
 export default function CtaSection({ pullUp = false }: { pullUp?: boolean }) {
 
@@ -65,9 +43,6 @@ export default function CtaSection({ pullUp = false }: { pullUp?: boolean }) {
           </div>
         </div>
 
-        <div className="mt-16 space-y-4">
-          <LogoMarquee items={portfolioProducts} />
-        </div>
       </div>
     </section>
   );

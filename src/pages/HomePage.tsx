@@ -1,4 +1,5 @@
 import Hero from "../components/hero";
+import LogoMarquee from "../components/LogoMarquee";
 import Cards from "../components/cards";
 import HorizontalMapSection from "../components/HorizontalMapSection";
 import WorkPreview from "../components/WorkPreview";
@@ -10,6 +11,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <LogoMarquee />
       <Cards />
       <HorizontalMapSection />
       <WorkPreview />
