@@ -74,32 +74,35 @@ export type PeekSlot = {
 /**
  * 1–4 peeks per homepage section. Repeats are allowed only when
  * separated by other sections (same face never in adjacent sections).
+ *
+ * Positions stay on distinct corners (or far-apart inset spots on the
+ * horizontal map panels) so portraits never sit on top of each other.
  */
 export const sectionPeeks = {
   hero: [
     {
       person: teamMembers[0],
-      className: "bottom-[18%] left-[6%] hidden sm:block",
+      className: "bottom-[12%] left-[4%] hidden sm:block",
       rotate: -9,
       size: "lg",
     },
     {
       person: teamMembers[4],
-      className: "top-[22%] right-[8%] hidden md:block",
+      className: "top-[18%] right-[4%] hidden md:block",
       rotate: 7,
       size: "md",
       delay: 0.12,
     },
     {
       person: teamMembers[8],
-      className: "bottom-[12%] right-[14%] hidden lg:block",
+      className: "bottom-[12%] right-[4%] hidden lg:block",
       rotate: 11,
       size: "sm",
       delay: 0.2,
     },
     {
       person: teamMembers[9],
-      className: "top-[32%] left-[5%] hidden md:block",
+      className: "top-[18%] left-[4%] hidden md:block",
       rotate: -6,
       size: "md",
       delay: 0.16,
@@ -136,23 +139,25 @@ export const sectionPeeks = {
     },
   ] satisfies PeekSlot[],
 
+  // Horizontal panels sit edge-to-edge — keep peeks inset from left/right
+  // so they cannot collide across the seam with the neighbouring panel.
   build: [
     {
       person: teamMembers[4],
-      className: "top-16 right-10 hidden md:block lg:right-28",
+      className: "top-12 left-[18%] hidden md:block",
       rotate: -8,
       size: "lg",
     },
     {
       person: teamMembers[8],
-      className: "bottom-24 left-10 hidden sm:block",
+      className: "bottom-16 left-[16%] hidden sm:block",
       rotate: 7,
       size: "md",
       delay: 0.12,
     },
     {
       person: teamMembers[10],
-      className: "bottom-12 right-12 hidden md:block",
+      className: "bottom-14 left-[58%] hidden md:block",
       rotate: -9,
       size: "sm",
       delay: 0.2,
@@ -162,50 +167,43 @@ export const sectionPeeks = {
   tech: [
     {
       person: teamMembers[1],
-      className: "top-20 right-12 hidden md:block",
+      className: "top-12 left-[58%] hidden md:block",
       rotate: 10,
       size: "md",
     },
     {
       person: teamMembers[2],
-      className: "bottom-28 left-8 hidden lg:block",
+      className: "bottom-16 left-[18%] hidden lg:block",
       rotate: -6,
       size: "sm",
       delay: 0.1,
     },
     {
       person: teamMembers[9],
-      className: "bottom-16 right-20 hidden sm:block",
+      className: "bottom-14 left-[60%] hidden sm:block",
       rotate: 8,
       size: "lg",
       delay: 0.18,
-    },
-    {
-      person: teamMembers[11],
-      className: "top-36 left-12 hidden md:block",
-      rotate: -8,
-      size: "md",
-      delay: 0.22,
     },
   ] satisfies PeekSlot[],
 
   engage: [
     {
       person: teamMembers[5],
-      className: "top-24 right-16 hidden md:block",
+      className: "top-14 left-[58%] hidden md:block",
       rotate: -9,
       size: "md",
     },
     {
       person: teamMembers[6],
-      className: "bottom-20 left-12 hidden sm:block",
+      className: "bottom-16 left-[16%] hidden sm:block",
       rotate: 8,
       size: "lg",
       delay: 0.12,
     },
     {
       person: teamMembers[10],
-      className: "top-12 left-10 hidden lg:block",
+      className: "top-12 left-[16%] hidden lg:block",
       rotate: 7,
       size: "md",
       delay: 0.18,
@@ -215,22 +213,22 @@ export const sectionPeeks = {
   pace: [
     {
       person: teamMembers[3],
-      className: "top-16 right-10 hidden md:block",
+      className: "top-14 left-[58%] hidden md:block",
       rotate: 6,
       size: "sm",
     },
     {
       person: teamMembers[7],
-      className: "bottom-20 right-8 hidden sm:block md:right-20",
+      className: "bottom-16 left-[16%] hidden sm:block",
       rotate: 11,
       size: "md",
       delay: 0.15,
     },
     {
       person: teamMembers[11],
-      className: "bottom-16 left-10 hidden sm:block",
+      className: "top-12 left-[16%] hidden lg:block",
       rotate: -7,
-      size: "lg",
+      size: "md",
       delay: 0.2,
     },
   ] satisfies PeekSlot[],
@@ -238,27 +236,27 @@ export const sectionPeeks = {
   work: [
     {
       person: teamMembers[0],
-      className: "-left-2 -top-8 sm:-left-6",
+      className: "top-6 left-4 sm:left-6",
       rotate: 7,
       size: "sm",
     },
     {
       person: teamMembers[1],
-      className: "top-10 right-4 hidden sm:block md:right-10 lg:right-16",
+      className: "top-6 right-4 hidden sm:block md:right-8",
       rotate: -10,
       size: "lg",
       delay: 0.1,
     },
     {
       person: teamMembers[8],
-      className: "bottom-8 left-[42%] hidden lg:block",
+      className: "bottom-6 left-6 hidden lg:block",
       rotate: 5,
       size: "sm",
       delay: 0.18,
     },
     {
       person: teamMembers[9],
-      className: "bottom-10 right-6 hidden md:block lg:right-12",
+      className: "bottom-6 right-6 hidden md:block",
       rotate: -8,
       size: "md",
       delay: 0.22,
@@ -268,28 +266,28 @@ export const sectionPeeks = {
   team: [
     {
       person: teamMembers[2],
-      className: "-top-2 right-0 hidden sm:block md:right-8",
+      className: "top-2 right-2 hidden sm:block md:right-8",
       rotate: 8,
       size: "md",
     },
     {
       person: teamMembers[5],
-      className: "top-32 -left-3 hidden md:block",
+      className: "top-28 left-0 hidden md:block",
       rotate: -7,
       size: "sm",
       delay: 0.12,
     },
     {
       person: teamMembers[10],
-      className: "-bottom-3 right-16 hidden sm:block",
+      className: "bottom-4 right-4 hidden sm:block md:right-10",
       rotate: 6,
       size: "md",
       delay: 0.2,
     },
     {
       person: teamMembers[11],
-      className: "bottom-24 left-8 hidden lg:block",
-      rotate: 9,
+      className: "bottom-4 left-2 hidden md:block",
+      rotate: -5,
       size: "sm",
       delay: 0.16,
     },
@@ -298,30 +296,30 @@ export const sectionPeeks = {
   cta: [
     {
       person: teamMembers[3],
-      className: "-top-6 right-6 md:-top-8 md:right-12",
+      className: "-top-5 right-4 md:-top-7 md:right-10",
       rotate: 9,
       size: "lg",
     },
     {
+      person: teamMembers[7],
+      className: "-top-4 left-4 hidden md:block md:-top-6 md:left-8",
+      rotate: 6,
+      size: "sm",
+      delay: 0.12,
+    },
+    {
       person: teamMembers[4],
-      className: "-bottom-5 left-8 hidden sm:block",
+      className: "-bottom-4 left-4 hidden sm:block md:left-8",
       rotate: -8,
       size: "md",
       delay: 0.1,
     },
     {
-      person: teamMembers[7],
-      className: "top-1/2 -right-3 hidden lg:block",
-      rotate: 6,
-      size: "sm",
-      delay: 0.18,
-    },
-    {
       person: teamMembers[9],
-      className: "bottom-8 left-[42%] hidden md:block",
+      className: "-bottom-4 right-4 hidden md:block md:right-10",
       rotate: -5,
       size: "sm",
-      delay: 0.14,
+      delay: 0.18,
     },
   ] satisfies PeekSlot[],
 } as const;
