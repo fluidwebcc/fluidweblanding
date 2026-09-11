@@ -54,6 +54,11 @@ export const teamMembers = [
     role: "Full Stack Developer",
     image: "/team/abdul-wahab.png",
   },
+  {
+    name: "Ahmad Yousaf",
+    role: "Frontend Web Developer",
+    image: "/team/ahmad-yousaf.png",
+  },
 ] as const;
 
 export const TEAM_SIZE_LABEL = "30+";
@@ -175,6 +180,13 @@ export const sectionPeeks = {
       size: "lg",
       delay: 0.18,
     },
+    {
+      person: teamMembers[11],
+      className: "top-36 left-12 hidden md:block",
+      rotate: -8,
+      size: "md",
+      delay: 0.22,
+    },
   ] satisfies PeekSlot[],
 
   engage: [
@@ -213,6 +225,13 @@ export const sectionPeeks = {
       rotate: 11,
       size: "md",
       delay: 0.15,
+    },
+    {
+      person: teamMembers[11],
+      className: "bottom-16 left-10 hidden sm:block",
+      rotate: -7,
+      size: "lg",
+      delay: 0.2,
     },
   ] satisfies PeekSlot[],
 
@@ -266,6 +285,13 @@ export const sectionPeeks = {
       rotate: 6,
       size: "md",
       delay: 0.2,
+    },
+    {
+      person: teamMembers[11],
+      className: "bottom-24 left-8 hidden lg:block",
+      rotate: 9,
+      size: "sm",
+      delay: 0.16,
     },
   ] satisfies PeekSlot[],
 
