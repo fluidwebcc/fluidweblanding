@@ -27,7 +27,7 @@ export default function TeamSection() {
                 <img
                   src={person.image}
                   alt={person.name}
-                  className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                  className="h-full w-full object-cover object-top transition duration-500 group-hover:scale-[1.03]"
                   loading="lazy"
                 />
               </div>

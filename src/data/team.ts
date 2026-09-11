@@ -36,17 +36,17 @@ export const teamMembers = [
   {
     name: "Muhammad Azhar",
     role: "Senior Full Stack Developer",
-    image: avatar("AzharSeniorDev441"),
+    image: "/team/azhar.png",
   },
   {
     name: "Abdul Basit",
     role: "Full Stack Developer",
-    image: avatar("BasitFullStack773"),
+    image: "/team/basit.png",
   },
   {
     name: "Hussnain Anjum",
     role: "Project Manager",
-    image: avatar("HussnainAnjumPM88"),
+    image: "/team/hussnain.png",
   },
   {
     name: "Abisha Iqbal",
@@ -61,27 +61,22 @@ export const teamMembers = [
   {
     name: "Usama Ahmed",
     role: "Full Stack Developer",
-    image: avatar("UsamaAhmedDev229"),
+    image: "/team/usama.png",
   },
   {
     name: "Muhammad Taaha",
     role: "Full Stack Developer",
-    image: avatar("TaahaDevMale604"),
+    image: "/team/taaha.png",
   },
   {
     name: "Enayat Ur Rehman",
     role: "Full Stack Developer",
-    image: avatar("EnayatRehmanDev18"),
+    image: "/team/enayat.png",
   },
   {
     name: "Abdullah Azhar",
     role: "Full Stack Developer",
-    image: avatar("AbdullahAzharMale77"),
-  },
-  {
-    name: "Abdullah Saleem",
-    role: "Quality Assurance Engineer",
-    image: avatar("AbdullahSaleemQA33"),
+    image: "/team/abdullah-azhar.png",
   },
 ] as const;
 

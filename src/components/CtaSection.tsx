@@ -18,7 +18,9 @@ export default function CtaSection() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
-              href="mailto:hello@fluidweb.cc"
+              href="https://calendar.app.google/q12BZhXT8aWccdjY9"
+              target="_blank"
+              rel="noreferrer"
               className="rounded-2xl bg-white px-6 py-3 font-semibold text-[#010233] transition hover:bg-white/90"
             >
               Book a meeting
