@@ -1,3 +1,4 @@
+import { BOOKING_URL } from "../data/site";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { BackToWork } from "../components/SiteLayout";
 import { allCaseStudiesSorted, getCaseStudy } from "../data/caseStudies";
@@ -25,7 +26,7 @@ export default function CaseStudyPage() {
             alt={`${study.name} logo`}
             className="mb-6 h-10 w-auto max-w-[220px] object-contain object-left"
           />
-          <p className="text-xs font-medium tracking-[0.18em] text-white/60 uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-white/45 uppercase">
             {study.sector}
             <span className="mx-2 text-white/20">·</span>
             {study.location}
@@ -33,16 +34,16 @@ export default function CaseStudyPage() {
           <h1 className="mt-3 text-3xl font-bold tracking-tight md:text-5xl">
             {study.name}
           </h1>
-          <p className="mt-3 max-w-2xl text-base text-white/75 md:text-lg">
+          <p className="mt-3 max-w-2xl text-base text-white/65 md:text-lg">
             {study.tagline}
           </p>
-          <div className="mt-5 flex flex-wrap items-center gap-4 text-sm text-white/62">
+          <div className="mt-5 flex flex-wrap items-center gap-4 text-sm text-white/50">
             <span>{study.engagementLabel}</span>
             <a
               href={study.url}
               target="_blank"
               rel="noreferrer"
-              className="font-medium text-white/80 underline-offset-4 hover:underline"
+              className="font-medium underline-offset-4 hover:underline"
               style={{ color: study.accent }}
             >
               Visit live product ↗
@@ -60,45 +61,159 @@ export default function CaseStudyPage() {
                 >
                   {stat.value}
                 </div>
-                <div className="mt-1 text-xs text-white/62">{stat.label}</div>
+                <div className="mt-1 text-xs text-white/50">{stat.label}</div>
               </div>
             ))}
           </div>
         ) : null}
 
-        <div className="space-y-10 py-10 text-[15px] leading-relaxed text-white/80 md:text-base">
-          <section>
-            <h2 className="text-lg font-semibold text-white md:text-xl">Overview</h2>
-            <p className="mt-3">{study.summary}</p>
-          </section>
+        <div className="py-10 text-[15px] leading-relaxed text-white/75 md:text-base">
+          <p className="text-lg leading-relaxed text-white/80 md:text-xl">
+            {study.summary}
+          </p>
+        </div>
 
-          <section>
-            <h2 className="text-lg font-semibold text-white md:text-xl">Challenge</h2>
-            <p className="mt-3">{study.problem}</p>
-          </section>
+        <section className="border-t border-white/10 pt-10">
+          <h2 className="text-xl font-semibold md:text-2xl">
+            What we walked into
+          </h2>
+          <div className="mt-4 space-y-4 text-[15px] leading-relaxed text-white/75 md:text-base">
+            {study.situation.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+        </section>
 
+        <section className="mt-12">
+          <h2 className="text-xl font-semibold md:text-2xl">The problem</h2>
+          <div className="mt-4 space-y-4 text-[15px] leading-relaxed text-white/75 md:text-base">
+            {study.problem.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+        </section>
+
+        <div className="mt-12 space-y-12 border-t border-white/10 pt-10 text-[15px] leading-relaxed text-white/75 md:text-base">
+          {study.sections.map((section) => (
+            <section key={section.heading}>
+              <h2 className="text-xl font-semibold text-white md:text-2xl">
+                {section.heading}
+              </h2>
+              <div className="mt-4 space-y-4">
+                {section.body.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+              {section.bullets ? (
+                <ul className="mt-5 space-y-2 border-l border-white/15 pl-4">
+                  {section.bullets.map((bullet) => (
+                    <li key={bullet} className="text-white/65">
+                      {bullet}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </section>
+          ))}
+        </div>
+
+        <section className="mt-12 border-t border-white/10 pt-10">
+          <h2 className="text-xl font-semibold md:text-2xl">
+            The hard parts
+          </h2>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            {study.hardParts.map((part) => (
+              <div
+                key={part.title}
+                className="rounded-2xl border border-white/12 bg-white/5 px-5 py-5"
+              >
+                <h3 className="font-semibold text-white">{part.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-white/65">
+                  {part.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-12 border-t border-white/10 pt-10">
+          <h2 className="text-xl font-semibold md:text-2xl">How it ran</h2>
+          <div className="mt-6 space-y-6">
+            {study.timeline.map((step, index) => (
+              <div key={step.title} className="flex gap-5">
+                <div
+                  className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border text-sm font-semibold"
+                  style={{ borderColor: study.accent, color: study.accent }}
+                >
+                  {index + 1}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h3 className="font-semibold text-white">{step.title}</h3>
+                  <p className="mt-1.5 text-[15px] leading-relaxed text-white/65">
+                    {step.body}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-12 border-t border-white/10 pt-10">
+          <h2 className="text-xl font-semibold md:text-2xl">Results</h2>
+          <div className="mt-4 space-y-4 text-[15px] leading-relaxed text-white/75 md:text-base">
+            {study.outcome.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+        </section>
+
+        <div className="mt-12 grid gap-6 border-t border-white/10 pt-10 md:grid-cols-2">
           <section>
-            <h2 className="text-lg font-semibold text-white md:text-xl">Solution</h2>
-            <p className="mt-3">{study.approach}</p>
-            <ul className="mt-4 space-y-2 border-l border-white/15 pl-4">
-              {study.whatWeBuilt.map((item) => (
-                <li key={item} className="text-white/75">
+            <h2 className="text-lg font-semibold text-white md:text-xl">
+              Built with
+            </h2>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {study.stack.map((item) => (
+                <span
+                  key={item}
+                  className="rounded-xl border border-white/15 bg-white/6 px-3.5 py-2 text-sm font-medium text-white/80"
+                >
                   {item}
-                </li>
+                </span>
               ))}
-            </ul>
+            </div>
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-white md:text-xl">Results</h2>
-            <p className="mt-3">{study.outcome}</p>
+            <h2 className="text-lg font-semibold text-white md:text-xl">
+              Scope of our work
+            </h2>
+            <p className="mt-4 text-[15px] leading-relaxed text-white/60">
+              {study.scopeNote}
+            </p>
           </section>
         </div>
 
-        <div className="border-t border-white/10 pt-10">
+        <div className="mt-12 rounded-2xl border border-white/12 bg-white/5 px-6 py-7">
+          <h2 className="text-xl font-semibold">Got something similar?</h2>
+          <p className="mt-2 max-w-xl text-sm text-white/60 md:text-base">
+            Tell us where delivery is stuck. We will give you an honest read on
+            scope and shape before anyone talks contracts.
+          </p>
+          <a
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-5 inline-flex rounded-xl bg-white px-5 py-3 text-sm font-semibold text-[#010233] transition hover:bg-white/85"
+          >
+            Book a technical review
+          </a>
+        </div>
+
+        <div className="mt-12 border-t border-white/10 pt-10">
           <div className="flex items-end justify-between gap-4">
             <h2 className="text-xl font-semibold">More work</h2>
-            <Link to="/work" className="text-sm text-white/62 hover:text-white">
+            <Link to="/work" className="text-sm text-white/50 hover:text-white">
               All case studies →
             </Link>
           </div>
@@ -116,7 +231,9 @@ export default function CaseStudyPage() {
                 />
                 <div className="min-w-0 flex-1">
                   <div className="font-semibold">{item.name}</div>
-                  <div className="truncate text-sm text-white/62">{item.tagline}</div>
+                  <div className="truncate text-sm text-white/50">
+                    {item.tagline}
+                  </div>
                 </div>
               </Link>
             ))}

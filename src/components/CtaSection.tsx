@@ -1,12 +1,48 @@
 import { Link } from "react-router-dom";
-import { allCaseStudiesSorted, companyProof } from "../data/caseStudies";
+import { companyProof } from "../data/caseStudies";
+import { portfolioProducts, type PortfolioProduct } from "../data/products";
 import { PeekGroup } from "./PeekPortrait";
 import { sectionPeeks } from "../data/team";
 import { BOOKING_URL } from "../data/site";
 
+function MarqueeRow({
+  items,
+  direction,
+}: {
+  items: PortfolioProduct[];
+  direction: "left" | "right";
+}) {
+  const doubled = [...items, ...items];
+
+  return (
+    <div className="overflow-hidden">
+      <div
+        className={`flex w-max gap-12 py-1 md:gap-16 ${
+          direction === "left" ? "animate-go-left" : "animate-go-right"
+        }`}
+      >
+        {doubled.map((product, i) => (
+          <span
+            key={`${product.name}-${i}`}
+            className="flex items-baseline gap-3 whitespace-nowrap"
+          >
+            <span className="text-2xl font-bold text-white/25 md:text-4xl">
+              {product.name}
+            </span>
+            <span className="text-[10px] tracking-[0.14em] text-white/15 uppercase md:text-xs">
+              {product.location}
+            </span>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function CtaSection({ pullUp = false }: { pullUp?: boolean }) {
-  const names = allCaseStudiesSorted.map((c) => c.name);
-  const doubled = [...names, ...names];
+  const half = Math.ceil(portfolioProducts.length / 2);
+  const rowOne = portfolioProducts.slice(0, half);
+  const rowTwo = portfolioProducts.slice(half);
 
   return (
     <section
@@ -45,17 +81,12 @@ export default function CtaSection({ pullUp = false }: { pullUp?: boolean }) {
           </div>
         </div>
 
-        <div className="mt-16 overflow-hidden">
-          <div className="flex w-max gap-16 animate-go-left py-2">
-            {doubled.map((name, i) => (
-              <span
-                key={`${name}-${i}`}
-                className="whitespace-nowrap text-3xl font-bold text-white/25 md:text-4xl"
-              >
-                {name}
-              </span>
-            ))}
-          </div>
+        <div className="mt-16 space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-white/35 uppercase">
+            Products we&apos;ve built and led
+          </p>
+          <MarqueeRow items={rowOne} direction="left" />
+          <MarqueeRow items={rowTwo} direction="right" />
         </div>
       </div>
     </section>

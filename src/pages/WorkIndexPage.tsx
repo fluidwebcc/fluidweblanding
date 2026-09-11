@@ -4,6 +4,7 @@ import {
   companyProof,
   geographyHighlights,
 } from "../data/caseStudies";
+import { additionalProducts } from "../data/products";
 
 export default function WorkIndexPage() {
   return (
@@ -69,6 +70,28 @@ export default function WorkIndexPage() {
             </Link>
           ))}
         </div>
+
+        <section className="border-t border-white/10 py-12">
+          <h2 className="text-xl font-semibold">Also shipped</h2>
+          <p className="mt-2 max-w-2xl text-sm text-white/55 md:text-base">
+            Products where we owned a defined slice rather than the whole build
+            — frontend delivery, dashboards, design-to-code, or a single
+            product surface. No case study, but the work is real.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-2.5">
+            {additionalProducts.map((product) => (
+              <span
+                key={product.name}
+                className="rounded-xl border border-white/12 bg-white/5 px-4 py-2.5 text-sm text-white/75"
+              >
+                <span className="font-medium text-white">{product.name}</span>
+                <span className="ml-2 text-xs text-white/40">
+                  {product.location}
+                </span>
+              </span>
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   );
