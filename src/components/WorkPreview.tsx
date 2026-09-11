@@ -29,7 +29,7 @@ export default function WorkPreview() {
             <Link
               key={study.slug}
               to={`/work/${study.slug}`}
-              className="group flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-white/25 hover:bg-white/[0.06]"
+              className="group flex flex-col rounded-2xl border border-white/10 bg-white/3 p-5 transition hover:border-white/25 hover:bg-white/6"
             >
               <div className="flex h-16 items-center">
                 <img

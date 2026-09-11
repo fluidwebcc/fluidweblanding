@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
-import { useEffect, type ReactNode } from "react";
+import { useEffect } from "react";
 import Lenis from "lenis";
 import Header from "./header";
 import Footer from "./footer";
@@ -18,14 +18,15 @@ export default function SiteLayout() {
       smoothWheel: true,
     });
 
+    let rafId = 0;
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
-    const id = requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
     return () => {
-      cancelAnimationFrame(id);
+      cancelAnimationFrame(rafId);
       lenis.destroy();
     };
   }, []);
@@ -36,7 +37,7 @@ export default function SiteLayout() {
         <Outlet />
       ) : (
         <>
-          <div className="absolute top-0 left-0 w-full z-50">
+          <div className="absolute top-0 left-0 z-50 w-full">
             <Header />
           </div>
           <div className="pt-24 md:pt-32">
@@ -45,20 +46,6 @@ export default function SiteLayout() {
           <Footer />
         </>
       )}
-    </div>
-  );
-}
-
-export function PageShell({
-  children,
-  narrow = false,
-}: {
-  children: ReactNode;
-  narrow?: boolean;
-}) {
-  return (
-    <div className={`mx-auto w-full px-5 pb-24 sm:px-10 ${narrow ? "max-w-3xl" : "max-w-6xl"}`}>
-      {children}
     </div>
   );
 }

@@ -15,7 +15,7 @@ export default function CtaSection() {
           <p className="mt-4 max-w-xl text-base text-white/65 md:text-lg">
             {companyProof.productsShipped} products. {companyProof.continents}{" "}
             continents. Squads or solo. Tell us what&apos;s stuck — we&apos;ll get it
-            done the modern way.
+            done.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a

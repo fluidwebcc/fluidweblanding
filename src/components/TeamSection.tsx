@@ -21,7 +21,7 @@ export default function TeamSection() {
           {teamMembers.map((person) => (
             <div
               key={person.name}
-              className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition hover:border-white/25 hover:bg-white/[0.06]"
+              className="group overflow-hidden rounded-2xl border border-white/10 bg-white/3 transition hover:border-white/25 hover:bg-white/6"
             >
               <div className="aspect-square bg-[#16194E]/80">
                 <img

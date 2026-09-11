@@ -22,9 +22,9 @@ export default function WorkIndexPage() {
             improved for clients who needed to move faster.
           </p>
           <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/45">
-            {geographyHighlights.map((g) => (
-              <span key={g.place}>
-                <span className="font-medium text-white/75">{g.place}</span>
+            {geographyHighlights.map((place) => (
+              <span key={place} className="font-medium text-white/75">
+                {place}
               </span>
             ))}
           </div>
@@ -37,9 +37,9 @@ export default function WorkIndexPage() {
             <Link
               key={study.slug}
               to={`/work/${study.slug}`}
-              className="group flex flex-col gap-4 py-8 transition hover:bg-white/[0.02] sm:flex-row sm:items-center sm:gap-8"
+              className="group flex flex-col gap-4 py-8 transition hover:bg-white/2 sm:flex-row sm:items-center sm:gap-8"
             >
-              <div className="flex h-16 w-28 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] px-3">
+              <div className="flex h-16 w-28 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/4 px-3">
                 <img
                   src={study.logo}
                   alt={`${study.name} logo`}

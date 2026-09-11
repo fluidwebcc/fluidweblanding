@@ -107,7 +107,7 @@ export default function CaseStudyPage() {
               <Link
                 key={item.slug}
                 to={`/work/${item.slug}`}
-                className="flex items-center gap-4 py-5 transition hover:bg-white/[0.02]"
+                className="flex items-center gap-4 py-5 transition hover:bg-white/2"
               >
                 <img
                   src={item.logo}

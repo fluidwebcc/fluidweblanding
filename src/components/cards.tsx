@@ -15,7 +15,7 @@ const points = [
   },
   {
     title: `${companyProof.continents} continents, teams & solo`,
-    body: `Our engineers have deployed across ${companyProof.continents} continents — North America, Oceania, Asia, Europe, and Africa — embedded with clients or shipping alone when that's what the job needs.`,
+    body: `Our engineers have deployed across ${companyProof.continents} continents — North America, South America, Oceania, Asia, Europe, and Africa — embedded with clients or shipping alone when that's what the job needs.`,
   },
 ] as const;
 
@@ -33,7 +33,7 @@ export default function Cards() {
           {points.map((point) => (
             <div
               key={point.title}
-              className="rounded-2xl border border-white/15 bg-white/[0.06] px-6 py-7 backdrop-blur-md transition hover:border-white/25 hover:bg-white/[0.09]"
+              className="rounded-2xl border border-white/15 bg-white/6 px-6 py-7 backdrop-blur-md transition hover:border-white/25 hover:bg-white/9"
             >
               <h3 className="text-xl font-semibold">{point.title}</h3>
               <p className="mt-3 text-base leading-relaxed text-white/70">
