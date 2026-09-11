@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import bg from "../assets/bg.png";
 import Header from "./header";
 import { companyProof } from "../data/caseStudies";
+import { PeekGroup } from "./PeekPortrait";
+import { sectionPeeks } from "../data/team";
 
 export default function Hero() {
   return (
@@ -9,7 +11,8 @@ export default function Hero() {
       className="relative h-svh w-full overflow-hidden bg-cover bg-center bg-no-repeat text-white md:min-h-screen"
       style={{ backgroundImage: `url(${bg})` }}
     >
-      <div className="absolute inset-0 bg-[#010233]/35" />
+      <div className="absolute inset-0 z-[1] bg-[#010233]/35" />
+      <PeekGroup slots={sectionPeeks.hero} id="hero" />
       <div className="absolute top-0 left-0 z-50 w-full">
         <Header />
       </div>

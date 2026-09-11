@@ -3,6 +3,8 @@ import SiteLayout from "./components/SiteLayout";
 import HomePage from "./pages/HomePage";
 import WorkIndexPage from "./pages/WorkIndexPage";
 import CaseStudyPage from "./pages/CaseStudyPage";
+import PracticePage from "./pages/PracticePage";
+import FaqPage from "./pages/FaqPage";
 
 export default function App() {
   return (
@@ -11,6 +13,9 @@ export default function App() {
         <Route index element={<HomePage />} />
         <Route path="work" element={<WorkIndexPage />} />
         <Route path="work/:slug" element={<CaseStudyPage />} />
+        <Route path="services/:slug" element={<PracticePage kind="service" />} />
+        <Route path="engage/:slug" element={<PracticePage kind="engage" />} />
+        <Route path="faq" element={<FaqPage />} />
       </Route>
     </Routes>
   );

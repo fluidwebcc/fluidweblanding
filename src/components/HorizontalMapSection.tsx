@@ -14,6 +14,8 @@ import {
   Graticule,
 } from "react-simple-maps";
 import { mapPins, type MapPin } from "../data/caseStudies";
+import { PeekGroup } from "./PeekPortrait";
+import { sectionPeeks } from "../data/team";
 
 const GEO_URL = "/maps/countries-110m.json";
 
@@ -179,6 +181,8 @@ function FullScreenMap() {
     leaveTimer.current = window.setTimeout(() => setActive(null), 120);
   };
 
+  const activePin = mapPins.find((p) => p.id === active);
+
   return (
     <div
       className="relative h-full w-[220vh] shrink-0 overflow-hidden"
@@ -229,8 +233,6 @@ function FullScreenMap() {
 
         {mapPins.map((pin) => {
           const isActive = pin.id === active;
-          const cardOnLeft = pin.lng > 40;
-          const cardX = cardOnLeft ? -268 : 18;
           return (
             <Marker key={pin.id} coordinates={[pin.lng, pin.lat]}>
               <g
@@ -252,27 +254,32 @@ function FullScreenMap() {
                   strokeWidth={2}
                 />
               </g>
-
-              {isActive ? (
-                <foreignObject
-                  x={cardX}
-                  y={-28}
-                  width={260}
-                  height={250}
-                  style={{ overflow: "visible", pointerEvents: "auto" }}
-                >
-                  <div
-                    onMouseEnter={() => showPin(pin.id)}
-                    onMouseLeave={onMarkerLeave}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <PinCard pin={pin} onClose={closeCard} />
-                  </div>
-                </foreignObject>
-              ) : null}
             </Marker>
           );
         })}
+
+        {activePin ? (
+          <Marker
+            key={`${activePin.id}-card`}
+            coordinates={[activePin.lng, activePin.lat]}
+          >
+            <foreignObject
+              x={activePin.lng > 40 ? -268 : 18}
+              y={-28}
+              width={260}
+              height={280}
+              style={{ overflow: "visible", pointerEvents: "auto" }}
+            >
+              <div
+                onMouseEnter={() => showPin(activePin.id)}
+                onMouseLeave={onMarkerLeave}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <PinCard pin={activePin} onClose={closeCard} />
+              </div>
+            </foreignObject>
+          </Marker>
+        ) : null}
       </ComposableMap>
 
       <div className="pointer-events-none absolute inset-y-0 right-0 w-40 bg-gradient-to-r from-transparent to-[#071038]" />
@@ -297,7 +304,7 @@ function PanelShell({
     >
       {fadeFrom ? (
         <div
-          className="pointer-events-none absolute inset-y-0 left-0 w-32 md:w-48"
+          className="pointer-events-none absolute inset-y-0 left-0 z-20 w-32 md:w-48"
           style={{
             background: `linear-gradient(to right, ${fadeFrom}, transparent)`,
           }}
@@ -305,13 +312,13 @@ function PanelShell({
       ) : null}
       {fadeTo ? (
         <div
-          className="pointer-events-none absolute inset-y-0 right-0 w-32 md:w-48"
+          className="pointer-events-none absolute inset-y-0 right-0 z-20 w-32 md:w-48"
           style={{
             background: `linear-gradient(to left, ${fadeTo}, transparent)`,
           }}
         />
       ) : null}
-      <div className="relative z-10">{children}</div>
+      {children}
     </div>
   );
 }
@@ -323,27 +330,32 @@ function BuildPanel() {
       fadeFrom="#071038"
       fadeTo="#0c1454"
     >
-      <p className="text-xs font-medium tracking-[0.2em] text-white/45 uppercase">
-        What we build
-      </p>
-      <h2 className="mt-3 max-w-2xl text-3xl font-bold text-white md:text-5xl">
-        Product surfaces that ship
-      </h2>
-      <p className="mt-4 max-w-xl text-base text-white/55 md:text-lg">
-        The kinds of development we do every week — end to end, not slideware.
-      </p>
-      <div className="mt-10 grid max-w-5xl gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {capabilities.map((item) => (
-          <div
-            key={item.title}
-            className="rounded-2xl border border-white/12 bg-white/5 px-5 py-5"
-          >
-            <h3 className="text-base font-semibold text-white md:text-lg">
-              {item.title}
-            </h3>
-            <p className="mt-2 text-sm leading-relaxed text-white/55">{item.body}</p>
-          </div>
-        ))}
+      <PeekGroup slots={sectionPeeks.build} id="build" />
+      <div className="relative z-10">
+        <p className="text-xs font-medium tracking-[0.2em] text-white/45 uppercase">
+          What we build
+        </p>
+        <h2 className="mt-3 max-w-2xl text-3xl font-bold text-white md:text-5xl">
+          Product surfaces that ship
+        </h2>
+        <p className="mt-4 max-w-xl text-base text-white/55 md:text-lg">
+          The kinds of development we do every week — end to end, not slideware.
+        </p>
+        <div className="mt-10 grid max-w-5xl gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {capabilities.map((item) => (
+            <div
+              key={item.title}
+              className="rounded-2xl border border-white/12 bg-white/5 px-5 py-5"
+            >
+              <h3 className="text-base font-semibold text-white md:text-lg">
+                {item.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-white/55">
+                {item.body}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </PanelShell>
   );
@@ -356,34 +368,37 @@ function TechPanel() {
       fadeFrom="#0c1454"
       fadeTo="#121a5c"
     >
-      <p className="text-xs font-medium tracking-[0.2em] text-white/45 uppercase">
-        Stack
-      </p>
-      <h2 className="mt-3 max-w-2xl text-3xl font-bold text-white md:text-5xl">
-        Technologies we work with
-      </h2>
-      <p className="mt-4 max-w-xl text-base text-white/55 md:text-lg">
-        Modern tooling with AI in the loop — old waterfall stacks don&apos;t scale
-        here.
-      </p>
-      <div className="mt-10 grid max-w-5xl gap-8 sm:grid-cols-2">
-        {techGroups.map((group) => (
-          <div key={group.label}>
-            <p className="text-[10px] font-semibold tracking-[0.18em] text-white/40 uppercase">
-              {group.label}
-            </p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {group.items.map((item) => (
-                <span
-                  key={item}
-                  className="rounded-xl border border-white/15 bg-white/7 px-3.5 py-2 text-sm font-medium text-white/85"
-                >
-                  {item}
-                </span>
-              ))}
+      <PeekGroup slots={sectionPeeks.tech} id="tech" />
+      <div className="relative z-10">
+        <p className="text-xs font-medium tracking-[0.2em] text-white/45 uppercase">
+          Stack
+        </p>
+        <h2 className="mt-3 max-w-2xl text-3xl font-bold text-white md:text-5xl">
+          Technologies we work with
+        </h2>
+        <p className="mt-4 max-w-xl text-base text-white/55 md:text-lg">
+          Modern tooling with AI in the loop — old waterfall stacks don&apos;t scale
+          here.
+        </p>
+        <div className="mt-10 grid max-w-5xl gap-8 sm:grid-cols-2">
+          {techGroups.map((group) => (
+            <div key={group.label}>
+              <p className="text-[10px] font-semibold tracking-[0.18em] text-white/40 uppercase">
+                {group.label}
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {group.items.map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-xl border border-white/15 bg-white/7 px-3.5 py-2 text-sm font-medium text-white/85"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </PanelShell>
   );
@@ -396,26 +411,29 @@ function EngagePanel() {
       fadeFrom="#121a5c"
       fadeTo="#16194E"
     >
-      <p className="text-xs font-medium tracking-[0.2em] text-white/45 uppercase">
-        How we embed
-      </p>
-      <h2 className="mt-3 max-w-2xl text-3xl font-bold text-white md:text-5xl">
-        Squads, solo, or stay
-      </h2>
-      <p className="mt-4 max-w-xl text-base text-white/55 md:text-lg">
-        Pick the shape that matches the bottleneck — we pick up the pace either
-        way.
-      </p>
-      <div className="mt-10 grid max-w-4xl gap-4 sm:grid-cols-2">
-        {engagementModes.map((mode) => (
-          <div
-            key={mode.label}
-            className="rounded-2xl border border-white/12 bg-white/5 px-6 py-6"
-          >
-            <h3 className="text-xl font-semibold text-white">{mode.label}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-white/55">{mode.note}</p>
-          </div>
-        ))}
+      <PeekGroup slots={sectionPeeks.engage} id="engage" />
+      <div className="relative z-10">
+        <p className="text-xs font-medium tracking-[0.2em] text-white/45 uppercase">
+          How we embed
+        </p>
+        <h2 className="mt-3 max-w-2xl text-3xl font-bold text-white md:text-5xl">
+          Squads, solo, or stay
+        </h2>
+        <p className="mt-4 max-w-xl text-base text-white/55 md:text-lg">
+          Pick the shape that matches the bottleneck — we pick up the pace either
+          way.
+        </p>
+        <div className="mt-10 grid max-w-4xl gap-4 sm:grid-cols-2">
+          {engagementModes.map((mode) => (
+            <div
+              key={mode.label}
+              className="rounded-2xl border border-white/12 bg-white/5 px-6 py-6"
+            >
+              <h3 className="text-xl font-semibold text-white">{mode.label}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-white/55">{mode.note}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </PanelShell>
   );
@@ -424,39 +442,42 @@ function EngagePanel() {
 function PacePanel() {
   return (
     <PanelShell className="w-[100vw] bg-[#16194E] md:w-[95vw]" fadeFrom="#16194E">
-      <p className="text-xs font-medium tracking-[0.2em] text-white/45 uppercase">
-        The mission
-      </p>
-      <h2 className="mt-3 max-w-3xl text-3xl font-bold leading-tight text-white md:text-6xl">
-        Ship faster. Build better.
-      </h2>
-      <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/60 md:text-xl">
-        AI-native engineering for startups and teams that are stuck. Old
-        waterfall habits don&apos;t scale — we embed, accelerate, and get the
-        product into market.
-      </p>
-      <div className="mt-10 flex flex-wrap gap-8 text-white">
-        <div>
-          <div className="text-3xl font-bold md:text-4xl">15+</div>
-          <div className="mt-1 text-sm text-white/45">Products shipped</div>
+      <PeekGroup slots={sectionPeeks.pace} id="pace" />
+      <div className="relative z-10">
+        <p className="text-xs font-medium tracking-[0.2em] text-white/45 uppercase">
+          The mission
+        </p>
+        <h2 className="mt-3 max-w-3xl text-3xl font-bold leading-tight text-white md:text-6xl">
+          Ship faster. Build better.
+        </h2>
+        <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/60 md:text-xl">
+          AI-native engineering for startups and teams that are stuck. Old
+          waterfall habits don&apos;t scale — we embed, accelerate, and get the
+          product into market.
+        </p>
+        <div className="mt-10 flex flex-wrap gap-8 text-white">
+          <div>
+            <div className="text-3xl font-bold md:text-4xl">15+</div>
+            <div className="mt-1 text-sm text-white/45">Products shipped</div>
+          </div>
+          <div>
+            <div className="text-3xl font-bold md:text-4xl">6</div>
+            <div className="mt-1 text-sm text-white/45">Continents</div>
+          </div>
+          <div>
+            <div className="text-3xl font-bold md:text-4xl">30+</div>
+            <div className="mt-1 text-sm text-white/45">Team strong</div>
+          </div>
         </div>
-        <div>
-          <div className="text-3xl font-bold md:text-4xl">6</div>
-          <div className="mt-1 text-sm text-white/45">Continents</div>
-        </div>
-        <div>
-          <div className="text-3xl font-bold md:text-4xl">30+</div>
-          <div className="mt-1 text-sm text-white/45">Team strong</div>
-        </div>
+        <a
+          href="https://calendar.app.google/q12BZhXT8aWccdjY9"
+          target="_blank"
+          rel="noreferrer"
+          className="mt-10 inline-flex w-fit rounded-2xl bg-white px-6 py-3 font-semibold text-[#010233] transition hover:bg-white/90"
+        >
+          Book a meeting
+        </a>
       </div>
-      <a
-        href="https://calendar.app.google/q12BZhXT8aWccdjY9"
-        target="_blank"
-        rel="noreferrer"
-        className="mt-10 inline-flex w-fit rounded-2xl bg-white px-6 py-3 font-semibold text-[#010233] transition hover:bg-white/90"
-      >
-        Book a meeting
-      </a>
     </PanelShell>
   );
 }

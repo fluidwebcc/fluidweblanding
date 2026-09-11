@@ -1,19 +1,27 @@
 import { Link } from "react-router-dom";
 import { companyProof, featuredCaseStudies } from "../data/caseStudies";
+import { PeekGroup } from "./PeekPortrait";
+import { sectionPeeks } from "../data/team";
 
 export default function WorkPreview() {
   return (
-    <section id="work" className="w-full bg-[#010233] px-5 py-20 text-white sm:px-10 md:px-16 md:py-28">
-      <div className="mx-auto max-w-6xl">
+    <section
+      id="work"
+      className="relative w-full overflow-visible bg-[#010233] px-5 py-20 text-white sm:px-10 md:px-16 md:py-28"
+    >
+      <PeekGroup slots={sectionPeeks.work} id="work" />
+
+      <div className="relative mx-auto max-w-6xl">
         <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-xl">
+          <div className="relative max-w-xl">
             <p className="text-xs font-medium tracking-[0.18em] text-white/45 uppercase">
               Selected work
             </p>
             <h2 className="mt-3 text-3xl font-bold md:text-5xl">Case studies</h2>
             <p className="mt-3 text-base text-white/60">
-              What we did, what moved, and how fast — from {companyProof.productsShipped}{" "}
-              products we&apos;ve shipped with founders and operators.
+              What we did, what moved, and how fast — from{" "}
+              {companyProof.productsShipped} products we&apos;ve shipped with
+              founders and operators.
             </p>
           </div>
           <Link
@@ -38,9 +46,7 @@ export default function WorkPreview() {
                   className="max-h-10 max-w-[140px] object-contain object-left"
                 />
               </div>
-              <div className="mt-4 text-xs text-white/40">
-                {study.location}
-              </div>
+              <div className="mt-4 text-xs text-white/40">{study.location}</div>
               <h3 className="mt-1 text-xl font-bold group-hover:underline">
                 {study.name}
               </h3>
