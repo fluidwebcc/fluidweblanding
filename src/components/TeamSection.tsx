@@ -1,45 +1,4 @@
-const team = [
-  {
-    name: "Noor",
-    role: "Founder · Engineering",
-    image: "/team/noor.svg",
-  },
-  {
-    name: "Aisha",
-    role: "Delivery lead",
-    image: "/team/aisha.svg",
-  },
-  {
-    name: "Marcus",
-    role: "Senior engineer",
-    image: "/team/marcus.svg",
-  },
-  {
-    name: "Sofia",
-    role: "Product design",
-    image: "/team/sofia.svg",
-  },
-  {
-    name: "Rayan",
-    role: "Mobile",
-    image: "/team/rayan.svg",
-  },
-  {
-    name: "Elena",
-    role: "Platform",
-    image: "/team/elena.svg",
-  },
-  {
-    name: "Jamal",
-    role: "Client success",
-    image: "/team/jamal.svg",
-  },
-  {
-    name: "Mira",
-    role: "Quality & release",
-    image: "/team/mira.svg",
-  },
-] as const;
+import { TEAM_SIZE_LABEL, teamMembers } from "../data/team";
 
 export default function TeamSection() {
   return (
@@ -50,16 +9,16 @@ export default function TeamSection() {
             Team
           </p>
           <h2 className="mt-3 text-3xl font-bold md:text-5xl">
-            The people shipping with you
+            A team of {TEAM_SIZE_LABEL} strong
           </h2>
           <p className="mt-4 text-base leading-relaxed text-white/60 md:text-lg">
-            A compact crew across product, mobile, design, and delivery — built to
-            embed with founders and move fast.
+            Senior builders across engineering, delivery, and QA — the people who
+            lead client work day to day.
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4">
-          {team.map((person) => (
+        <div className="mt-12 grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3 lg:grid-cols-3">
+          {teamMembers.map((person) => (
             <div
               key={person.name}
               className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition hover:border-white/25 hover:bg-white/[0.06]"

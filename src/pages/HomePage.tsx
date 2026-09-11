@@ -1,7 +1,7 @@
 import Hero from "../components/hero";
 import Cards from "../components/cards";
+import HorizontalMapSection from "../components/HorizontalMapSection";
 import WorkPreview from "../components/WorkPreview";
-import WorldMapSection from "../components/WorldMapSection";
 import TeamSection from "../components/TeamSection";
 import CtaSection from "../components/CtaSection";
 import Footer from "../components/footer";
@@ -11,8 +11,8 @@ export default function HomePage() {
     <>
       <Hero />
       <Cards />
+      <HorizontalMapSection />
       <WorkPreview />
-      <WorldMapSection />
       <TeamSection />
       <CtaSection />
       <Footer />

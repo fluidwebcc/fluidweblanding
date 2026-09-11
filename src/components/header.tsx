@@ -16,9 +16,6 @@ export default function Header() {
           <a href="/#team" className="transition hover:text-white">
             Team
           </a>
-          <a href="/#map" className="transition hover:text-white">
-            Locations
-          </a>
           <a
             href="mailto:hello@fluidweb.cc"
             className="rounded-xl bg-white/10 px-3 py-1.5 transition hover:bg-white/20 hover:text-white"

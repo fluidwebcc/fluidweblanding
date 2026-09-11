@@ -50,12 +50,6 @@ export default function Footer() {
               >
                 Team
               </a>
-              <a
-                href="/#map"
-                className="text-white/60 hover:text-white transition-colors text-xs sm:text-base"
-              >
-                Locations
-              </a>
             </div>
           </div>
         </div>
