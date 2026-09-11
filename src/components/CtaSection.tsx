@@ -5,34 +5,21 @@ import { PeekGroup } from "./PeekPortrait";
 import { sectionPeeks } from "../data/team";
 import { BOOKING_URL } from "../data/site";
 
-function MarqueeRow({
-  items,
-  direction,
-}: {
-  items: PortfolioProduct[];
-  direction: "left" | "right";
-}) {
+function LogoMarquee({ items }: { items: PortfolioProduct[] }) {
   const doubled = [...items, ...items];
 
   return (
     <div className="overflow-hidden">
-      <div
-        className={`flex w-max gap-12 py-1 md:gap-16 ${
-          direction === "left" ? "animate-go-left" : "animate-go-right"
-        }`}
-      >
+      <div className="flex w-max animate-go-left items-center gap-10 py-2 md:gap-16">
         {doubled.map((product, i) => (
-          <span
+          <img
             key={`${product.name}-${i}`}
-            className="flex items-baseline gap-3 whitespace-nowrap"
-          >
-            <span className="text-2xl font-bold text-white/25 md:text-4xl">
-              {product.name}
-            </span>
-            <span className="text-[10px] tracking-[0.14em] text-white/15 uppercase md:text-xs">
-              {product.location}
-            </span>
-          </span>
+            src={product.logo}
+            alt={product.name}
+            title={product.name}
+            loading="lazy"
+            className="h-10 w-auto shrink-0 rounded-lg object-contain opacity-85 transition hover:opacity-100 md:h-14"
+          />
         ))}
       </div>
     </div>
@@ -40,9 +27,6 @@ function MarqueeRow({
 }
 
 export default function CtaSection({ pullUp = false }: { pullUp?: boolean }) {
-  const half = Math.ceil(portfolioProducts.length / 2);
-  const rowOne = portfolioProducts.slice(0, half);
-  const rowTwo = portfolioProducts.slice(half);
 
   return (
     <section
@@ -82,11 +66,7 @@ export default function CtaSection({ pullUp = false }: { pullUp?: boolean }) {
         </div>
 
         <div className="mt-16 space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-white/35 uppercase">
-            Products we&apos;ve built and led
-          </p>
-          <MarqueeRow items={rowOne} direction="left" />
-          <MarqueeRow items={rowTwo} direction="right" />
+          <LogoMarquee items={portfolioProducts} />
         </div>
       </div>
     </section>

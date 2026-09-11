@@ -58,9 +58,9 @@ export const caseStudies: CaseStudy[] = [
     location: "Florida, USA",
     engagementLabel: "Technology ownership · team of 12+",
     stats: [
-      { label: "Active users", value: "500" },
-      { label: "Transactions to date", value: "$500K" },
+      { label: "Processed to date", value: "$500K" },
       { label: "Engineers today", value: "12" },
+      { label: "Product surfaces", value: "5" },
       { label: "Release cadence", value: "Weekly+" },
     ],
     situation: [
@@ -185,7 +185,7 @@ export const caseStudies: CaseStudy[] = [
     outcome: [
       "Floor Nexus runs on a platform that is substantially larger than the one we inherited — we describe it internally as going from a product that was seventy percent built to something several times its original scope, across five surfaces that did not meaningfully exist before.",
       "Billing now runs on business-level plans on a modern Stripe integration, migrated from a legacy account and API without interrupting collection — which turned a commercial model the company could not previously express into one it sells on today.",
-      "The platform serves around 500 active users and has processed approximately $500,000 in transactions to date. Five manufacturers operate their CRM and point-of-sale on the vendor platform, with more onboarding in December, against a catalog of roughly forty-five manufacturers and eight thousand products.",
+      "The platform has processed approximately $500,000 in transactions to date. Five manufacturers operate their CRM and point-of-sale on the vendor platform, with more onboarding in December, against a catalog of roughly forty-five manufacturers and eight thousand products.",
       "Twelve engineers ship weekly and frequently more often. Technology ownership sits with Fluid Web, which is why the founder's time goes to customers and growth rather than engineering triage.",
     ],
     scopeNote:
@@ -332,7 +332,7 @@ export const caseStudies: CaseStudy[] = [
       { label: "Public events", value: "5" },
       { label: "Unique views", value: "~50K" },
       { label: "Broadcast length", value: "3–6 hrs" },
-      { label: "Live since", value: "December" },
+      { label: "Live since", value: "December 2025" },
     ],
     situation: [
       "Independent combat-sports promotions in Malaysia were stuck between two bad options. International OTT platforms ignored local payment rails, which is fatal in a market where most buyers are not paying by international card. Do-it-yourself streaming leaked revenue and looked unprofessional on the night that mattered most.",

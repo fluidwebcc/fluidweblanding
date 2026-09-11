@@ -78,17 +78,27 @@ export default function WorkIndexPage() {
             — frontend delivery, dashboards, design-to-code, or a single
             product surface. No case study, but the work is real.
           </p>
-          <div className="mt-6 flex flex-wrap gap-2.5">
+          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
             {additionalProducts.map((product) => (
-              <span
+              <div
                 key={product.name}
-                className="rounded-xl border border-white/12 bg-white/5 px-4 py-2.5 text-sm text-white/75"
+                className="flex flex-col gap-3 rounded-xl border border-white/12 bg-white/5 p-3"
               >
-                <span className="font-medium text-white">{product.name}</span>
-                <span className="ml-2 text-xs text-white/40">
-                  {product.location}
-                </span>
-              </span>
+                <div className="flex h-14 items-center">
+                  <img
+                    src={product.logo}
+                    alt={product.name}
+                    loading="lazy"
+                    className="max-h-10 w-auto max-w-full rounded-lg object-contain object-left"
+                  />
+                </div>
+                <div className="px-1 pb-1">
+                  <div className="text-sm font-medium text-white">
+                    {product.name}
+                  </div>
+                  <div className="text-xs text-white/40">{product.location}</div>
+                </div>
+              </div>
             ))}
           </div>
         </section>
