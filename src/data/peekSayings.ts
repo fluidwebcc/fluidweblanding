@@ -103,9 +103,8 @@ export const peekSayings = [
 ] as const;
 
 export function randomPeekSaying(exclude?: string): string {
-  if (peekSayings.length === 0) return "Ship it.";
   let next = peekSayings[Math.floor(Math.random() * peekSayings.length)]!;
-  if (exclude && peekSayings.length > 1) {
+  if (exclude) {
     let guard = 0;
     while (next === exclude && guard < 8) {
       next = peekSayings[Math.floor(Math.random() * peekSayings.length)]!;

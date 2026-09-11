@@ -2,13 +2,20 @@ import { Link } from "react-router-dom";
 import { allCaseStudiesSorted, companyProof } from "../data/caseStudies";
 import { PeekGroup } from "./PeekPortrait";
 import { sectionPeeks } from "../data/team";
+import { BOOKING_URL } from "../data/site";
 
-export default function CtaSection() {
+export default function CtaSection({ pullUp = false }: { pullUp?: boolean }) {
   const names = allCaseStudiesSorted.map((c) => c.name);
   const doubled = [...names, ...names];
 
   return (
-    <section className="bg-[#010233] px-5 py-20 text-white sm:px-10 md:px-16 md:py-28">
+    <section
+      className={
+        pullUp
+          ? "relative z-20 -mt-16 bg-[#010233] px-5 pb-20 pt-8 text-white sm:px-10 md:-mt-28 md:px-16 md:pb-28 md:pt-10"
+          : "bg-[#010233] px-5 py-20 text-white sm:px-10 md:px-16 md:py-28"
+      }
+    >
       <div className="mx-auto max-w-6xl">
         <div className="relative overflow-visible rounded-3xl border border-white/15 bg-gradient-to-br from-[#16194E] to-[#010233] px-6 py-12 md:px-12 md:py-16">
           <PeekGroup slots={sectionPeeks.cta} id="cta" />
@@ -22,7 +29,7 @@ export default function CtaSection() {
           </p>
           <div className="relative z-10 mt-8 flex flex-wrap gap-3">
             <a
-              href="https://calendar.app.google/q12BZhXT8aWccdjY9"
+              href={BOOKING_URL}
               target="_blank"
               rel="noreferrer"
               className="rounded-2xl bg-white px-6 py-3 font-semibold text-[#010233] transition hover:bg-white/90"

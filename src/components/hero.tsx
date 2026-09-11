@@ -4,6 +4,7 @@ import Header from "./header";
 import { companyProof } from "../data/caseStudies";
 import { PeekGroup } from "./PeekPortrait";
 import { sectionPeeks } from "../data/team";
+import { BOOKING_URL } from "../data/site";
 
 export default function Hero() {
   return (
@@ -23,7 +24,7 @@ export default function Hero() {
             Product engineering · startups &amp; stuck teams
           </p>
           <h1 className="mt-4 text-4xl font-bold leading-[1.15] md:text-6xl">
-            Fluid Web picks up the{" "}
+            Fluidweb picks up the{" "}
             <span
               style={{ fontFamily: "'Oooh Baby', cursive" }}
               className="text-5xl md:text-7xl"
@@ -45,7 +46,7 @@ export default function Hero() {
               View case studies
             </Link>
             <a
-              href="https://calendar.app.google/q12BZhXT8aWccdjY9"
+              href={BOOKING_URL}
               target="_blank"
               rel="noreferrer"
               className="rounded-2xl border border-white/20 bg-white/10 px-6 py-3 font-semibold backdrop-blur-md transition hover:bg-white/15"

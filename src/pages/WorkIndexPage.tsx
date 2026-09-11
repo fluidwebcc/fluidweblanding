@@ -10,20 +10,20 @@ export default function WorkIndexPage() {
     <div className="bg-[#010233] text-white">
       <header className="border-b border-white/10">
         <div className="mx-auto max-w-5xl px-5 py-12 sm:px-8 md:py-16">
-          <p className="text-xs font-medium tracking-[0.18em] text-white/45 uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-white/60 uppercase">
             Work
           </p>
           <h1 className="mt-3 text-4xl font-bold tracking-tight md:text-5xl">
             Case studies
           </h1>
-          <p className="mt-4 max-w-2xl text-base text-white/60 md:text-lg">
+          <p className="mt-4 max-w-2xl text-base text-white/72 md:text-lg">
             {companyProof.productsShipped} products. Engineers deployed across{" "}
             {companyProof.continents} continents — teams and solo. Here&apos;s what we
             improved for clients who needed to move faster.
           </p>
-          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/45">
+          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/60">
             {geographyHighlights.map((place) => (
-              <span key={place} className="font-medium text-white/75">
+              <span key={place} className="font-medium text-white/80">
                 {place}
               </span>
             ))}
@@ -47,13 +47,13 @@ export default function WorkIndexPage() {
                 />
               </div>
               <div className="min-w-0 flex-1">
-                <div className="text-xs tracking-wide text-white/40 uppercase">
+                <div className="text-xs tracking-wide text-white/55 uppercase">
                   {study.location}
                   <span className="mx-2">·</span>
                   {study.sector}
                 </div>
                 <h2 className="mt-1 text-2xl font-bold md:text-3xl">{study.name}</h2>
-                <p className="mt-1 text-sm text-white/60 md:text-base">{study.tagline}</p>
+                <p className="mt-1 text-sm text-white/72 md:text-base">{study.tagline}</p>
               </div>
               {study.stats[0] ? (
                 <div className="shrink-0 sm:text-right">
@@ -63,7 +63,7 @@ export default function WorkIndexPage() {
                   >
                     {study.stats[0].value}
                   </div>
-                  <div className="text-xs text-white/40">{study.stats[0].label}</div>
+                  <div className="text-xs text-white/55">{study.stats[0].label}</div>
                 </div>
               ) : null}
             </Link>

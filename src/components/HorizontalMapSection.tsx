@@ -16,6 +16,7 @@ import {
 import { mapPins, type MapPin } from "../data/caseStudies";
 import { PeekGroup } from "./PeekPortrait";
 import { sectionPeeks } from "../data/team";
+import { BOOKING_URL } from "../data/site";
 
 const GEO_URL = "/maps/countries-110m.json";
 
@@ -304,7 +305,7 @@ function PanelShell({
     >
       {fadeFrom ? (
         <div
-          className="pointer-events-none absolute inset-y-0 left-0 z-20 w-32 md:w-48"
+          className="pointer-events-none absolute inset-y-0 left-0 z-[1] w-24 md:w-36"
           style={{
             background: `linear-gradient(to right, ${fadeFrom}, transparent)`,
           }}
@@ -312,7 +313,7 @@ function PanelShell({
       ) : null}
       {fadeTo ? (
         <div
-          className="pointer-events-none absolute inset-y-0 right-0 z-20 w-32 md:w-48"
+          className="pointer-events-none absolute inset-y-0 right-0 z-[1] w-24 md:w-36"
           style={{
             background: `linear-gradient(to left, ${fadeTo}, transparent)`,
           }}
@@ -331,7 +332,7 @@ function BuildPanel() {
       fadeTo="#0c1454"
     >
       <PeekGroup slots={sectionPeeks.build} id="build" />
-      <div className="relative z-10">
+      <div className="relative z-30">
         <p className="text-xs font-medium tracking-[0.2em] text-white/45 uppercase">
           What we build
         </p>
@@ -369,7 +370,7 @@ function TechPanel() {
       fadeTo="#121a5c"
     >
       <PeekGroup slots={sectionPeeks.tech} id="tech" />
-      <div className="relative z-10">
+      <div className="relative z-30">
         <p className="text-xs font-medium tracking-[0.2em] text-white/45 uppercase">
           Stack
         </p>
@@ -412,7 +413,7 @@ function EngagePanel() {
       fadeTo="#16194E"
     >
       <PeekGroup slots={sectionPeeks.engage} id="engage" />
-      <div className="relative z-10">
+      <div className="relative z-30">
         <p className="text-xs font-medium tracking-[0.2em] text-white/45 uppercase">
           How we embed
         </p>
@@ -443,7 +444,7 @@ function PacePanel() {
   return (
     <PanelShell className="w-[100vw] bg-[#16194E] md:w-[95vw]" fadeFrom="#16194E">
       <PeekGroup slots={sectionPeeks.pace} id="pace" />
-      <div className="relative z-10">
+      <div className="relative z-30">
         <p className="text-xs font-medium tracking-[0.2em] text-white/45 uppercase">
           The mission
         </p>
@@ -470,7 +471,7 @@ function PacePanel() {
           </div>
         </div>
         <a
-          href="https://calendar.app.google/q12BZhXT8aWccdjY9"
+          href={BOOKING_URL}
           target="_blank"
           rel="noreferrer"
           className="mt-10 inline-flex w-fit rounded-2xl bg-white px-6 py-3 font-semibold text-[#010233] transition hover:bg-white/90"
@@ -493,9 +494,9 @@ export default function HorizontalMapSection() {
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 70,
-    damping: 28,
-    mass: 0.55,
+    stiffness: 160,
+    damping: 34,
+    mass: 0.28,
     restDelta: 0.0005,
   });
 
@@ -534,7 +535,7 @@ export default function HorizontalMapSection() {
       ref={targetRef}
       className="relative"
       style={{
-        height: travel > 0 ? `calc(100vh + ${travel * 1.15}px)` : "420vh",
+        height: travel > 0 ? `calc(100vh + ${travel * 0.72}px)` : "280vh",
       }}
     >
       <div className="sticky top-0 h-svh overflow-hidden md:h-screen">

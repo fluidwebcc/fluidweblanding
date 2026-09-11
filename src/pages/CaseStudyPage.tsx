@@ -25,7 +25,7 @@ export default function CaseStudyPage() {
             alt={`${study.name} logo`}
             className="mb-6 h-10 w-auto max-w-[220px] object-contain object-left"
           />
-          <p className="text-xs font-medium tracking-[0.18em] text-white/45 uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-white/60 uppercase">
             {study.sector}
             <span className="mx-2 text-white/20">·</span>
             {study.location}
@@ -33,10 +33,10 @@ export default function CaseStudyPage() {
           <h1 className="mt-3 text-3xl font-bold tracking-tight md:text-5xl">
             {study.name}
           </h1>
-          <p className="mt-3 max-w-2xl text-base text-white/65 md:text-lg">
+          <p className="mt-3 max-w-2xl text-base text-white/75 md:text-lg">
             {study.tagline}
           </p>
-          <div className="mt-5 flex flex-wrap items-center gap-4 text-sm text-white/50">
+          <div className="mt-5 flex flex-wrap items-center gap-4 text-sm text-white/62">
             <span>{study.engagementLabel}</span>
             <a
               href={study.url}
@@ -60,13 +60,13 @@ export default function CaseStudyPage() {
                 >
                   {stat.value}
                 </div>
-                <div className="mt-1 text-xs text-white/50">{stat.label}</div>
+                <div className="mt-1 text-xs text-white/62">{stat.label}</div>
               </div>
             ))}
           </div>
         ) : null}
 
-        <div className="space-y-10 py-10 text-[15px] leading-relaxed text-white/75 md:text-base">
+        <div className="space-y-10 py-10 text-[15px] leading-relaxed text-white/80 md:text-base">
           <section>
             <h2 className="text-lg font-semibold text-white md:text-xl">Overview</h2>
             <p className="mt-3">{study.summary}</p>
@@ -82,7 +82,7 @@ export default function CaseStudyPage() {
             <p className="mt-3">{study.approach}</p>
             <ul className="mt-4 space-y-2 border-l border-white/15 pl-4">
               {study.whatWeBuilt.map((item) => (
-                <li key={item} className="text-white/65">
+                <li key={item} className="text-white/75">
                   {item}
                 </li>
               ))}
@@ -98,7 +98,7 @@ export default function CaseStudyPage() {
         <div className="border-t border-white/10 pt-10">
           <div className="flex items-end justify-between gap-4">
             <h2 className="text-xl font-semibold">More work</h2>
-            <Link to="/work" className="text-sm text-white/50 hover:text-white">
+            <Link to="/work" className="text-sm text-white/62 hover:text-white">
               All case studies →
             </Link>
           </div>
@@ -116,7 +116,7 @@ export default function CaseStudyPage() {
                 />
                 <div className="min-w-0 flex-1">
                   <div className="font-semibold">{item.name}</div>
-                  <div className="truncate text-sm text-white/50">{item.tagline}</div>
+                  <div className="truncate text-sm text-white/62">{item.tagline}</div>
                 </div>
               </Link>
             ))}

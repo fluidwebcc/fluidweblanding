@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/fluidlogo.png";
+import { BOOKING_URL } from "../data/site";
 
 export default function Header() {
   return (
@@ -10,17 +11,19 @@ export default function Header() {
         </Link>
 
         <nav className="hidden items-center gap-6 text-sm font-medium text-white/80 md:flex">
-          <a href="/#work" className="transition hover:text-white">
+          <Link to="/#work" className="transition hover:text-white">
             Work
-          </a>
-          <a href="/#team" className="transition hover:text-white">
+          </Link>
+          <Link to="/#team" className="transition hover:text-white">
             Team
-          </a>
+          </Link>
           <a
-            href="mailto:hello@fluidweb.cc"
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noreferrer"
             className="rounded-xl bg-white/10 px-3 py-1.5 transition hover:bg-white/20 hover:text-white"
           >
-            Contact
+            Book a call
           </a>
         </nav>
 

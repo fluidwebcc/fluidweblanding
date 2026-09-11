@@ -14,7 +14,7 @@ export default function HomePage() {
       <HorizontalMapSection />
       <WorkPreview />
       <TeamSection />
-      <CtaSection />
+      <CtaSection pullUp />
       <Footer />
     </>
   );
