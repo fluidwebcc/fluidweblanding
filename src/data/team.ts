@@ -49,6 +49,11 @@ export const teamMembers = [
     role: "Mobile App Developer",
     image: "/team/muzammil.png",
   },
+  {
+    name: "Abdul Wahab",
+    role: "Full Stack Developer",
+    image: "/team/abdul-wahab.png",
+  },
 ] as const;
 
 export const TEAM_SIZE_LABEL = "30+";
@@ -140,6 +145,13 @@ export const sectionPeeks = {
       size: "md",
       delay: 0.12,
     },
+    {
+      person: teamMembers[10],
+      className: "bottom-12 right-12 hidden md:block",
+      rotate: -9,
+      size: "sm",
+      delay: 0.2,
+    },
   ] satisfies PeekSlot[],
 
   tech: [
@@ -178,6 +190,13 @@ export const sectionPeeks = {
       rotate: 8,
       size: "lg",
       delay: 0.12,
+    },
+    {
+      person: teamMembers[10],
+      className: "top-12 left-10 hidden lg:block",
+      rotate: 7,
+      size: "md",
+      delay: 0.18,
     },
   ] satisfies PeekSlot[],
 
@@ -240,6 +259,13 @@ export const sectionPeeks = {
       rotate: -7,
       size: "sm",
       delay: 0.12,
+    },
+    {
+      person: teamMembers[10],
+      className: "-bottom-3 right-16 hidden sm:block",
+      rotate: 6,
+      size: "md",
+      delay: 0.2,
     },
   ] satisfies PeekSlot[],
 
