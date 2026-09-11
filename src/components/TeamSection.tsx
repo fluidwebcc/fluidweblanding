@@ -12,8 +12,8 @@ export default function TeamSection() {
             A team of {TEAM_SIZE_LABEL} strong
           </h2>
           <p className="mt-4 text-base leading-relaxed text-white/60 md:text-lg">
-            Senior builders across engineering, delivery, and QA — the people who
-            lead client work day to day.
+            Senior builders who embed with startups and product teams — pick up
+            the pace, ship the modern way, and get things done.
           </p>
         </div>
 

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { featuredCaseStudies } from "../data/caseStudies";
+import { companyProof, featuredCaseStudies } from "../data/caseStudies";
 
 export default function WorkPreview() {
   return (
@@ -12,7 +12,8 @@ export default function WorkPreview() {
             </p>
             <h2 className="mt-3 text-3xl font-bold md:text-5xl">Case studies</h2>
             <p className="mt-3 text-base text-white/60">
-              Real products we engineered end to end — or led from the inside.
+              What we did, what moved, and how fast — from {companyProof.productsShipped}{" "}
+              products we&apos;ve shipped with founders and operators.
             </p>
           </div>
           <Link

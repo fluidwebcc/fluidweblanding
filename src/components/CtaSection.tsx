@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { allCaseStudiesSorted } from "../data/caseStudies";
+import { allCaseStudiesSorted, companyProof } from "../data/caseStudies";
 
 export default function CtaSection() {
   const names = allCaseStudiesSorted.map((c) => c.name);
@@ -10,11 +10,12 @@ export default function CtaSection() {
       <div className="mx-auto max-w-6xl">
         <div className="rounded-3xl border border-white/15 bg-gradient-to-br from-[#16194E] to-[#010233] px-6 py-12 md:px-12 md:py-16">
           <h2 className="max-w-2xl text-3xl font-bold md:text-5xl">
-            Ready to ship your next product?
+            Stuck shipping? We&apos;ll pick up the pace.
           </h2>
           <p className="mt-4 max-w-xl text-base text-white/65 md:text-lg">
-            Tell us what you&apos;re building. We&apos;ll bring the team, the cadence,
-            and the delivery.
+            {companyProof.productsShipped} products. {companyProof.continents}{" "}
+            continents. Squads or solo. Tell us what&apos;s stuck — we&apos;ll get it
+            done the modern way.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a

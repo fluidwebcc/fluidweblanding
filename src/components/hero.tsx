@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import bg from "../assets/bg.png";
 import Header from "./header";
+import { companyProof } from "../data/caseStudies";
 
 export default function Hero() {
   return (
@@ -16,22 +17,21 @@ export default function Hero() {
       <main className="relative z-10 flex min-h-screen items-center justify-center px-5 text-center">
         <div className="flex max-w-3xl flex-col items-center">
           <p className="text-xs font-medium tracking-[0.22em] text-white/55 uppercase">
-            Fluid Web
+            Product engineering · startups &amp; stuck teams
           </p>
           <h1 className="mt-4 text-4xl font-bold leading-[1.15] md:text-6xl">
-            Digital &amp; web{" "}
+            Fluid Web picks up the{" "}
             <span
               style={{ fontFamily: "'Oooh Baby', cursive" }}
               className="text-5xl md:text-7xl"
             >
-              solutions
+              pace
             </span>
-            <br />
-            for tech founders
           </h1>
-          <p className="mt-5 max-w-lg text-base text-white/70 md:text-lg">
-            Product engineering teams that ship SaaS, mobile, and AI platforms —
-            from fragile MVP to production scale.
+          <p className="mt-5 max-w-xl text-base text-white/70 md:text-lg">
+            For startups and teams stuck shipping slow. We embed engineers —
+            squads or solo — across {companyProof.continents} continents, and we
+            get the product done the modern way.
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-3">

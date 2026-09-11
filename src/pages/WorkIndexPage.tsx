@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
-import { allCaseStudiesSorted, geographyHighlights } from "../data/caseStudies";
+import {
+  allCaseStudiesSorted,
+  companyProof,
+  geographyHighlights,
+} from "../data/caseStudies";
 
 export default function WorkIndexPage() {
   return (
@@ -13,8 +17,9 @@ export default function WorkIndexPage() {
             Case studies
           </h1>
           <p className="mt-4 max-w-2xl text-base text-white/60 md:text-lg">
-            Selected products Fluid Web engineered across the US, Australia, Malaysia,
-            and Norway.
+            {companyProof.productsShipped} products. Engineers deployed across{" "}
+            {companyProof.continents} continents — teams and solo. Here&apos;s what we
+            improved for clients who needed to move faster.
           </p>
           <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/45">
             {geographyHighlights.map((g) => (
