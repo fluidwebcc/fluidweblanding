@@ -27,27 +27,63 @@ const MAP_SCALE = MAP_H / Math.PI;
 const capabilities = [
   {
     title: "SaaS platforms",
-    body: "Multi-tenant products, admin consoles, billing, and the ops tooling founders actually need.",
+    body: "Multi-tenant products, billing, and ops.",
+    badge: "Web",
+    accent: "#9BB0E8",
+    wash: "rgba(122, 148, 220, 0.34)",
+    art: "saas" as const,
+    stat: "Full stack",
+    statLabel: "admin to ops",
   },
   {
     title: "Mobile apps",
-    body: "iOS and Android that ship with the web product — not a six-month afterthought.",
+    body: "iOS and Android that ship with the web product.",
+    badge: "Native",
+    accent: "#7ED4C8",
+    wash: "rgba(80, 176, 168, 0.32)",
+    art: "mobile" as const,
+    stat: "iOS · Android",
+    statLabel: "not an afterthought",
   },
   {
     title: "AI in production",
-    body: "Voice agents, document intake, multi-model workspaces — wired to real workflows, not demos.",
+    body: "Voice, documents, and models in real workflows.",
+    badge: "AI",
+    accent: "#C4A4F5",
+    wash: "rgba(156, 118, 214, 0.32)",
+    art: "ai" as const,
+    stat: "Live",
+    statLabel: "not demos",
   },
   {
     title: "Realtime & messaging",
-    body: "SMS/MMS at scale, chat, notifications, and the compliance paths that keep them live.",
+    body: "SMS, chat, and notifications that stay up.",
+    badge: "Comms",
+    accent: "#6EC8F5",
+    wash: "rgba(80, 168, 214, 0.3)",
+    art: "realtime" as const,
+    stat: "At scale",
+    statLabel: "compliance included",
   },
   {
     title: "Payments & media",
-    body: "Checkout, subscriptions, live streaming, and the money/media rails your GTM depends on.",
+    body: "Checkout, subscriptions, and live streaming rails.",
+    badge: "GTM",
+    accent: "#F5C15D",
+    wash: "rgba(214, 164, 64, 0.28)",
+    art: "payments" as const,
+    stat: "GTM",
+    statLabel: "money and media",
   },
   {
     title: "Rescue & rebuild",
-    body: "Stuck roadmaps, fragile stacks, revolving freelancers — we embed and pick up the pace.",
+    body: "Stuck roadmaps — we embed and pick up the pace.",
+    badge: "Rescue",
+    accent: "#F5A07A",
+    wash: "rgba(214, 118, 80, 0.3)",
+    art: "rescue" as const,
+    stat: "Embed",
+    statLabel: "fragile stacks, we take over",
   },
 ] as const;
 
@@ -290,6 +326,144 @@ function PanelShell({
   );
 }
 
+function SaasArt() {
+  return (
+    <svg viewBox="0 0 56 52" className="h-12 w-[4.6rem]" aria-hidden>
+      <rect x="6" y="10" width="32" height="24" rx="5" fill="currentColor" opacity="0.14" />
+      <rect x="6" y="10" width="32" height="24" rx="5" fill="none" stroke="currentColor" strokeWidth="1.5" opacity="0.75" />
+      <rect x="18" y="20" width="32" height="24" rx="5" fill="none" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M24 28h16M24 33h10" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" opacity="0.7" />
+    </svg>
+  );
+}
+
+function MobileArt() {
+  return (
+    <svg viewBox="0 0 40 52" className="h-12 w-10" aria-hidden>
+      <rect x="8" y="4" width="24" height="44" rx="6" fill="currentColor" opacity="0.14" />
+      <rect x="8" y="4" width="24" height="44" rx="6" fill="none" stroke="currentColor" strokeWidth="1.6" />
+      <circle cx="20" cy="41" r="1.6" fill="currentColor" />
+      <path d="M16 10h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function AiArt() {
+  return (
+    <svg viewBox="0 0 56 52" className="h-12 w-12" aria-hidden>
+      <circle cx="28" cy="26" r="18" fill="none" stroke="currentColor" strokeWidth="1.2" opacity="0.3" />
+      <circle cx="28" cy="26" r="11" fill="none" stroke="currentColor" strokeWidth="1.3" opacity="0.55" />
+      <circle cx="28" cy="26" r="4" fill="currentColor" opacity="0.9" />
+      <path
+        d="M28 6v6M28 40v6M8 26h6M42 26h6"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        opacity="0.7"
+      />
+    </svg>
+  );
+}
+
+function RealtimeArt() {
+  return (
+    <svg viewBox="0 0 56 52" className="h-12 w-12" aria-hidden>
+      <circle cx="14" cy="26" r="4" fill="currentColor" />
+      <path
+        d="M22 16c8 4 8 16 0 20M30 11c12 6 12 24 0 30M38 7c16 8 16 32 0 40"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function PaymentsArt() {
+  return (
+    <svg viewBox="0 0 56 52" className="h-12 w-12" aria-hidden>
+      <rect x="6" y="14" width="44" height="28" rx="6" fill="currentColor" opacity="0.14" />
+      <rect x="6" y="14" width="44" height="28" rx="6" fill="none" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M6 24h44" stroke="currentColor" strokeWidth="1.5" />
+      <rect x="12" y="30" width="12" height="4" rx="1.5" fill="currentColor" opacity="0.8" />
+    </svg>
+  );
+}
+
+function RescueArt() {
+  return (
+    <svg viewBox="0 0 56 52" className="h-12 w-12" aria-hidden>
+      <path
+        d="M12 28a16 16 0 0 1 26-10"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path d="M34 10l5 8-9 1" fill="currentColor" />
+      <path
+        d="M44 24a16 16 0 0 1-26 10"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path d="M22 42l-5-8 9-1" fill="currentColor" />
+    </svg>
+  );
+}
+
+const surfaceArt = {
+  saas: SaasArt,
+  mobile: MobileArt,
+  ai: AiArt,
+  realtime: RealtimeArt,
+  payments: PaymentsArt,
+  rescue: RescueArt,
+} as const;
+
+function SurfaceCard({ item }: { item: (typeof capabilities)[number] }) {
+  const Art = surfaceArt[item.art];
+  return (
+    <article
+      className="glow-card relative flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-white/14 px-4 py-4 text-left sm:rounded-[1.75rem] sm:px-6 sm:py-6"
+      style={{
+        background: `linear-gradient(165deg, ${item.wash} 0%, rgba(8, 12, 48, 0.92) 52%, rgba(4, 8, 36, 0.96) 100%)`,
+        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.22), 0 18px 40px rgba(0,0,0,0.28)",
+        color: item.accent,
+      }}
+    >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-14 -right-8 h-36 w-36 rounded-full blur-3xl"
+        style={{ background: item.wash }}
+      />
+      <div className="relative z-[2] flex items-center justify-between">
+        <Art />
+        <span
+          className="rounded-full border px-2 py-0.5 text-[9px] font-semibold tracking-[0.16em] uppercase sm:px-2.5 sm:py-1 sm:text-[10px]"
+          style={{ borderColor: `${item.accent}55`, color: item.accent }}
+        >
+          {item.badge}
+        </span>
+      </div>
+      <h3 className="relative z-[2] mt-3 text-base font-bold text-white sm:mt-4 sm:text-[1.35rem]">
+        {item.title}
+      </h3>
+      <p className="relative z-[2] mt-1.5 line-clamp-3 text-[13px] leading-relaxed text-white/75 sm:mt-2 sm:text-sm">
+        {item.body}
+      </p>
+      <div className="relative z-[2] mt-auto border-t border-white/12 pt-3">
+        <div className="text-sm font-bold tracking-tight sm:text-base" style={{ color: item.accent }}>
+          {item.stat}
+        </div>
+        <div className="text-[10px] text-white/45 sm:text-[11px]">{item.statLabel}</div>
+      </div>
+    </article>
+  );
+}
+
 function BuildPanel() {
   return (
     <PanelShell
@@ -298,29 +472,23 @@ function BuildPanel() {
       fadeTo="#0c1454"
     >
       <PeekGroup slots={sectionPeeks.build} id="build" />
-      <div className="relative z-30">
-        <p className="text-xs font-medium tracking-[0.2em] text-white/45 uppercase">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute top-1/2 left-1/2 h-[28rem] w-[28rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#8b9ad4]/20 blur-[110px]"
+      />
+      <div className="relative z-10 mx-auto w-full max-w-5xl text-center">
+        <p className="text-xs font-medium tracking-[0.22em] text-white/45 uppercase">
           What we build
         </p>
-        <h2 className="mt-3 max-w-2xl text-3xl font-bold text-white md:text-5xl">
+        <h2 className="mt-2 text-2xl font-bold text-white sm:mt-3 sm:text-3xl md:text-5xl">
           Product surfaces that ship
         </h2>
-        <p className="mt-4 max-w-xl text-base text-white/55 md:text-lg">
+        <p className="mx-auto mt-2 max-w-xl text-sm text-white/55 sm:mt-4 md:text-base">
           The kinds of development we do every week — end to end, not slideware.
         </p>
-        <div className="mt-10 grid max-w-5xl gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-6 grid grid-cols-2 gap-2.5 sm:mt-10 sm:gap-4 md:grid-cols-3">
           {capabilities.map((item) => (
-            <div
-              key={item.title}
-              className="glow-card rounded-2xl border border-white/12 bg-white/5 px-5 py-5"
-            >
-              <h3 className="text-base font-semibold text-white md:text-lg">
-                {item.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/55">
-                {item.body}
-              </p>
-            </div>
+            <SurfaceCard key={item.title} item={item} />
           ))}
         </div>
       </div>
