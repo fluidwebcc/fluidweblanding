@@ -296,27 +296,46 @@ export const sectionPeeks = {
     },
   ] satisfies PeekLayout[],
 
+  // Perimeter only — keep clear of the bottom-left CTA button row.
   cta: [
     {
-      className: "-top-10 -right-2 md:-top-14 md:-right-6",
-      rotate: 9,
-      size: "lg",
-    },
-    {
-      className: "-top-8 -left-2 hidden md:block md:-top-11 md:-left-5",
-      rotate: 6,
-      size: "sm",
-      delay: 0.12,
-    },
-    {
-      className: "-bottom-8 -left-2 hidden sm:block md:-bottom-11 md:-left-5",
+      className: "top-1 left-[14%] -translate-y-1/2 md:left-[20%]",
       rotate: -8,
       size: "md",
+    },
+    {
+      className: "top-0 right-[14%] -translate-y-1/3 md:right-[18%]",
+      rotate: 11,
+      size: "sm",
       delay: 0.1,
     },
     {
-      className: "-bottom-7 -right-2 hidden md:block md:-bottom-10 md:-right-5",
+      className: "top-2 left-[46%] -translate-x-1/2 -translate-y-1/2 hidden md:block",
+      rotate: 6,
+      size: "sm",
+      delay: 0.14,
+    },
+    {
+      className: "top-[22%] -right-3 md:top-[26%] md:-right-5",
+      rotate: -9,
+      size: "lg",
+      delay: 0.16,
+    },
+    {
+      className: "top-[38%] -right-4 hidden sm:block md:-right-6",
+      rotate: 7,
+      size: "md",
+      delay: 0.2,
+    },
+    {
+      className: "bottom-2 right-[10%] translate-y-1/4 md:right-[14%]",
       rotate: -5,
+      size: "md",
+      delay: 0.12,
+    },
+    {
+      className: "bottom-1 left-[62%] translate-y-1/3 hidden md:block",
+      rotate: 8,
       size: "sm",
       delay: 0.18,
     },

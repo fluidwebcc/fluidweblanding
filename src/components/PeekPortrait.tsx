@@ -110,24 +110,35 @@ export default function PeekPortrait({
   );
 }
 
-function pickLayoutSubset(slots: readonly PeekLayout[]): PeekLayout[] {
+function pickLayoutSubset(
+  slots: readonly PeekLayout[],
+  count?: number,
+): PeekLayout[] {
   if (slots.length <= 2) return [...slots];
+  if (count !== undefined) {
+    return shuffle(slots).slice(0, Math.min(count, slots.length));
+  }
   const min = 2;
-  const count = min + Math.floor(Math.random() * (slots.length - min + 1));
-  return shuffle(slots).slice(0, count);
+  const n = min + Math.floor(Math.random() * (slots.length - min + 1));
+  return shuffle(slots).slice(0, n);
 }
 
 export function PeekGroup({
   slots,
   id,
   all = false,
+  count,
 }: {
   slots: readonly PeekLayout[];
   id: string;
   /** Use every slot (hero corners). Other sections still pick a random subset. */
   all?: boolean;
+  /** Pick exactly this many slots (shuffled) instead of a random 2–N. */
+  count?: number;
 }) {
-  const [layouts] = useState(() => (all ? [...slots] : pickLayoutSubset(slots)));
+  const [layouts] = useState(() =>
+    all ? [...slots] : pickLayoutSubset(slots, count),
+  );
   const people = useCyclingPeekPeople(layouts.length);
 
   return (
