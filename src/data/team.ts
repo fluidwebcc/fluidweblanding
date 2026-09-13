@@ -186,21 +186,15 @@ export const sectionPeeks = {
 
   tech: [
     {
-      className: "top-12 left-[58%] hidden md:block",
+      className: "top-4 right-4 hidden lg:block",
       rotate: 10,
-      size: "md",
+      size: "sm",
     },
     {
-      className: "bottom-16 left-[18%] hidden lg:block",
+      className: "bottom-4 left-4 hidden lg:block",
       rotate: -6,
       size: "sm",
       delay: 0.1,
-    },
-    {
-      className: "bottom-14 left-[60%] hidden sm:block",
-      rotate: 8,
-      size: "lg",
-      delay: 0.18,
     },
   ] satisfies PeekLayout[],
 

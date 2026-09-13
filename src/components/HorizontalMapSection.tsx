@@ -16,6 +16,7 @@ import {
 import { mapPins, type MapPin } from "../data/caseStudies";
 import { PeekGroup } from "./PeekPortrait";
 import { sectionPeeks } from "../data/team";
+import TechConstellation from "./TechConstellation";
 
 const GEO_URL = "/maps/countries-110m.json";
 
@@ -47,25 +48,6 @@ const capabilities = [
   {
     title: "Rescue & rebuild",
     body: "Stuck roadmaps, fragile stacks, revolving freelancers — we embed and pick up the pace.",
-  },
-] as const;
-
-const techGroups = [
-  {
-    label: "Product",
-    items: ["React", "Next.js", "TypeScript", "Node", "tRPC", "React Native"],
-  },
-  {
-    label: "Data & cloud",
-    items: ["PostgreSQL", "Supabase", "AWS", "Vercel", "Python"],
-  },
-  {
-    label: "Money & media",
-    items: ["Stripe", "Twilio", "Mux", "Live streaming"],
-  },
-  {
-    label: "AI layer",
-    items: ["LLMs", "Vapi", "Voice agents", "Document AI", "Multi-model"],
   },
 ] as const;
 
@@ -273,15 +255,19 @@ function PanelShell({
   className = "",
   fadeFrom,
   fadeTo,
+  padded = true,
 }: {
   children: ReactNode;
   className?: string;
   fadeFrom?: string;
   fadeTo?: string;
+  padded?: boolean;
 }) {
   return (
     <div
-      className={`relative flex h-full shrink-0 flex-col justify-center overflow-hidden px-10 md:px-16 lg:px-24 ${className}`}
+      className={`relative flex h-full shrink-0 flex-col justify-center overflow-hidden ${
+        padded ? "px-10 md:px-16 lg:px-24" : ""
+      } ${className}`}
     >
       {fadeFrom ? (
         <div
@@ -348,39 +334,10 @@ function TechPanel() {
       className="w-[100vw] bg-[#0c1454] md:w-[110vw]"
       fadeFrom="#0c1454"
       fadeTo="#010233"
+      padded={false}
     >
       <PeekGroup slots={sectionPeeks.tech} id="tech" />
-      <div className="relative z-30">
-        <p className="text-xs font-medium tracking-[0.2em] text-white/45 uppercase">
-          Stack
-        </p>
-        <h2 className="mt-3 max-w-2xl text-3xl font-bold text-white md:text-5xl">
-          Technologies we work with
-        </h2>
-        <p className="mt-4 max-w-xl text-base text-white/55 md:text-lg">
-          Modern tooling with AI in the loop — old waterfall stacks don&apos;t scale
-          here.
-        </p>
-        <div className="mt-10 grid max-w-5xl gap-8 sm:grid-cols-2">
-          {techGroups.map((group) => (
-            <div key={group.label}>
-              <p className="text-[10px] font-semibold tracking-[0.18em] text-white/40 uppercase">
-                {group.label}
-              </p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {group.items.map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-xl border border-white/15 bg-white/7 px-3.5 py-2 text-sm font-medium text-white/85"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      <TechConstellation />
     </PanelShell>
   );
 }

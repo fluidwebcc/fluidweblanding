@@ -6,30 +6,142 @@ import {
   useTransform,
   type MotionValue,
 } from "framer-motion";
+import { PeekGroup } from "./PeekPortrait";
+import { sectionPeeks } from "../data/team";
 
 const modes = [
   {
     label: "Dedicated squads",
     body: "12+ engineers on a product when you need horsepower.",
+    stat: "12+",
+    statLabel: "engineers on a product",
+    accent: "#9BB0E8",
+    wash: "rgba(122, 148, 220, 0.34)",
+    art: "squads" as const,
   },
   {
     label: "Solo embeds",
     body: "One senior owns the build end to end — fast and accountable.",
+    stat: "1",
+    statLabel: "senior, end to end",
+    accent: "#7ED4C8",
+    wash: "rgba(80, 176, 168, 0.32)",
+    art: "solo" as const,
   },
   {
     label: "Greenfield",
     body: "0 → live without discovery theater or agency drag.",
+    stat: "0 → live",
+    statLabel: "no discovery theater",
+    accent: "#F5C15D",
+    wash: "rgba(214, 164, 64, 0.28)",
+    art: "greenfield" as const,
   },
   {
     label: "Ongoing ownership",
     body: "We stay embedded and keep the release train moving.",
+    stat: "Stay",
+    statLabel: "the release train keeps moving",
+    accent: "#C4A4F5",
+    wash: "rgba(156, 118, 214, 0.32)",
+    art: "stay" as const,
   },
 ] as const;
 
 const COUNT = modes.length;
 
-const CARD_SURFACE =
-  "overflow-hidden border border-white/15 bg-white/[0.08] shadow-[inset_0_1px_0_rgba(255,255,255,0.16)]";
+function SquadArt() {
+  const faces = [
+    { x: 18, y: 22, r: 14 },
+    { x: 38, y: 16, r: 13 },
+    { x: 56, y: 22, r: 14 },
+    { x: 28, y: 36, r: 12 },
+    { x: 48, y: 36, r: 12 },
+  ];
+  return (
+    <svg viewBox="0 0 76 52" className="h-12 w-[4.6rem]" aria-hidden>
+      {faces.map((f, i) => (
+        <g key={i}>
+          <circle cx={f.x} cy={f.y} r={f.r} fill="currentColor" opacity={0.18 + i * 0.07} />
+          <circle cx={f.x} cy={f.y} r={f.r} fill="none" stroke="currentColor" strokeWidth="1.4" opacity="0.7" />
+          <circle cx={f.x - 4} cy={f.y - 2} r="1.3" fill="currentColor" />
+          <circle cx={f.x + 4} cy={f.y - 2} r="1.3" fill="currentColor" />
+          <path
+            d={`M${f.x - 4} ${f.y + 5}c2 2.4 6 2.4 8 0`}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.3"
+            strokeLinecap="round"
+          />
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+function SoloArt() {
+  return (
+    <svg viewBox="0 0 52 52" className="h-12 w-12" aria-hidden>
+      <circle cx="26" cy="26" r="22" fill="currentColor" opacity="0.14" />
+      <circle cx="26" cy="26" r="22" fill="none" stroke="currentColor" strokeWidth="1.5" opacity="0.7" />
+      <circle cx="26" cy="21" r="8" fill="none" stroke="currentColor" strokeWidth="1.6" />
+      <path
+        d="M12 42c3.5-9 10-13 14-13s10.5 4 14 13"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function GreenfieldArt() {
+  return (
+    <svg viewBox="0 0 56 52" className="h-12 w-12" aria-hidden>
+      <circle cx="28" cy="28" r="20" fill="none" stroke="currentColor" strokeWidth="1.2" opacity="0.3" />
+      <circle cx="28" cy="28" r="13" fill="none" stroke="currentColor" strokeWidth="1.3" opacity="0.5" />
+      <circle cx="28" cy="28" r="5" fill="currentColor" opacity="0.9" />
+      <path
+        d="M28 8v6M28 38v6M8 28h6M42 28h6"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        opacity="0.7"
+      />
+    </svg>
+  );
+}
+
+function StayArt() {
+  return (
+    <svg viewBox="0 0 56 52" className="h-12 w-12" aria-hidden>
+      <path
+        d="M12 28a16 16 0 0 1 26-10"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path d="M34 10l5 8-9 1" fill="currentColor" />
+      <path
+        d="M44 24a16 16 0 0 1-26 10"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path d="M22 42l-5-8 9-1" fill="currentColor" />
+    </svg>
+  );
+}
+
+const artMap = {
+  squads: SquadArt,
+  solo: SoloArt,
+  greenfield: GreenfieldArt,
+  stay: StayArt,
+} as const;
 
 function FanCard({
   item,
@@ -44,6 +156,7 @@ function FanCard({
   x: MotionValue<number>;
   cardRef?: Ref<HTMLElement>;
 }) {
+  const Art = artMap[item.art];
   const scale = useTransform(progress, (p) => {
     const d = Math.abs(index - p * (COUNT - 1));
     return 1.06 - Math.min(d, 1.8) * 0.08;
@@ -68,16 +181,84 @@ function FanCard({
   return (
     <motion.article
       ref={cardRef}
-      className={`glow-card relative flex h-[16.5rem] w-[19.5rem] shrink-0 flex-col justify-center rounded-[1.75rem] px-7 py-8 sm:h-[18rem] sm:w-[22rem] sm:px-8 md:h-[19rem] md:w-[24rem] ${CARD_SURFACE}`}
-      style={{ x, scale, opacity, y, rotate, zIndex }}
+      className="glow-card relative flex h-[18rem] w-[20rem] shrink-0 flex-col overflow-hidden rounded-[1.75rem] border border-white/14 px-7 py-7 sm:h-[19.5rem] sm:w-[22.5rem] sm:px-8 md:h-[21rem] md:w-[24.5rem]"
+      style={{
+        x,
+        scale,
+        opacity,
+        y,
+        rotate,
+        zIndex,
+        background: `linear-gradient(165deg, ${item.wash} 0%, rgba(8, 12, 48, 0.92) 48%, rgba(4, 8, 36, 0.96) 100%)`,
+        boxShadow: `inset 0 1px 0 rgba(255,255,255,0.22), 0 18px 40px rgba(0,0,0,0.28)`,
+        color: item.accent,
+      }}
     >
-      <h3 className="relative z-[2] text-3xl font-bold text-balance text-white sm:text-4xl">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-16 -right-10 h-48 w-48 rounded-full blur-3xl"
+        style={{ background: item.wash }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute right-4 bottom-8 select-none text-[5.5rem] leading-none font-bold text-white/[0.06] sm:text-[6.5rem]"
+      >
+        {item.stat}
+      </div>
+
+      <div className="relative z-[2] flex items-center justify-between">
+        <Art />
+        <span
+          className="rounded-full border px-2.5 py-1 text-[10px] font-semibold tracking-[0.16em] uppercase"
+          style={{ borderColor: `${item.accent}55`, color: item.accent }}
+        >
+          {item.art === "squads"
+            ? "Team"
+            : item.art === "solo"
+              ? "Embed"
+              : item.art === "greenfield"
+                ? "Build"
+                : "Retain"}
+        </span>
+      </div>
+
+      <h3 className="relative z-[2] mt-5 text-3xl font-bold text-balance text-white sm:text-[2.05rem]">
         {item.label}
       </h3>
-      <p className="relative z-[2] mt-3 text-base leading-relaxed text-white/80 sm:text-lg">
+      <p className="relative z-[2] mt-2 text-base leading-relaxed text-white/75 sm:text-[1.05rem]">
         {item.body}
       </p>
+
+      <div className="relative z-[2] mt-auto border-t border-white/12 pt-4">
+        <div className="text-xl font-bold tracking-tight" style={{ color: item.accent }}>
+          {item.stat}
+        </div>
+        <div className="text-xs text-white/45">{item.statLabel}</div>
+      </div>
     </motion.article>
+  );
+}
+
+function StaticCard({ item }: { item: (typeof modes)[number] }) {
+  const Art = artMap[item.art];
+  return (
+    <div
+      className="glow-card relative overflow-hidden rounded-[1.75rem] border border-white/14 px-7 py-8"
+      style={{
+        background: `linear-gradient(165deg, ${item.wash} 0%, rgba(8, 12, 48, 0.92) 55%)`,
+        color: item.accent,
+      }}
+    >
+      <Art />
+      <h3 className="mt-4 text-2xl font-bold text-white">{item.label}</h3>
+      <p className="mt-2 text-base leading-relaxed text-white/80">{item.body}</p>
+      <div className="mt-5 border-t border-white/12 pt-4">
+        <div className="text-lg font-bold" style={{ color: item.accent }}>
+          {item.stat}
+        </div>
+        <div className="text-xs text-white/45">{item.statLabel}</div>
+      </div>
+    </div>
   );
 }
 
@@ -159,13 +340,7 @@ export default function EngageFanSection() {
         {heading}
         <div className="mx-auto mt-12 grid max-w-4xl gap-4 sm:grid-cols-2">
           {modes.map((item) => (
-            <div
-              key={item.label}
-              className={`glow-card rounded-[1.75rem] px-7 py-8 ${CARD_SURFACE}`}
-            >
-              <h3 className="text-2xl font-bold">{item.label}</h3>
-              <p className="mt-3 text-base leading-relaxed text-white/80">{item.body}</p>
-            </div>
+            <StaticCard key={item.label} item={item} />
           ))}
         </div>
       </section>
@@ -178,13 +353,12 @@ export default function EngageFanSection() {
         ref={rootRef}
         className="sticky top-0 flex h-svh items-end gap-6 overflow-hidden pb-16 pt-44 sm:gap-7 md:h-screen md:items-center md:gap-8 md:pt-52 md:pb-10"
       >
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 -z-10"
-        >
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-[#010233]" />
           <div className="absolute top-[58%] left-1/2 h-[26rem] w-[26rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#8b9ad4]/25 blur-[110px]" />
         </div>
+
+        <PeekGroup slots={sectionPeeks.engage} id="engage" />
 
         <div className="pointer-events-none absolute inset-x-0 top-0 z-10 pt-32 md:pt-36">
           {heading}
