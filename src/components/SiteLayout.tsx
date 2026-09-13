@@ -71,9 +71,6 @@ export default function SiteLayout() {
       smoothWheel: true,
     });
     lenisInstance = lenis;
-    lenis.on("scroll", () => {
-      window.dispatchEvent(new Event("liquidglass-scroll"));
-    });
 
     let rafId = 0;
     function raf(time: number) {
@@ -109,18 +106,24 @@ export default function SiteLayout() {
   }, [location.pathname, location.hash, location.key]);
 
   return (
-    <div ref={liquidRootRef} className="relative isolate min-h-svh text-white">
+    <div className="relative isolate min-h-svh text-white">
       <div aria-hidden className="site-atmosphere" />
 
-      <LiquidGlassNav
-        barRef={barRef}
-        workRef={workRef}
-        teamRef={teamRef}
-        bookRef={bookRef}
-        instanceRef={instanceRef}
-        ready={ready}
-        failed={failed}
-      />
+      {/* Viewport-sized glass root — never capture the full page. */}
+      <div
+        ref={liquidRootRef}
+        className="pointer-events-none fixed inset-0 z-50"
+      >
+        <LiquidGlassNav
+          barRef={barRef}
+          workRef={workRef}
+          teamRef={teamRef}
+          bookRef={bookRef}
+          instanceRef={instanceRef}
+          ready={ready}
+          failed={failed}
+        />
+      </div>
 
       <div className="relative z-[1]">
         {isHome ? (

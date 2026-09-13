@@ -89,7 +89,7 @@ export default function TeamSection() {
   return (
     <section
       id="team"
-      className="relative overflow-visible px-5 pt-20 pb-6 text-white sm:px-10 md:px-16 md:pt-28 md:pb-8"
+      className="relative z-10 overflow-visible px-5 pt-20 pb-6 text-white sm:px-10 md:px-16 md:pt-28 md:pb-8"
     >
       <div className="relative mx-auto max-w-6xl">
         <PeekGroup slots={sectionPeeks.team} id="team" />

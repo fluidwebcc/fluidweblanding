@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import {
   motion,
   useScroll,
   useSpring,
   useTransform,
+  type MotionValue,
 } from "framer-motion";
 import {
   ComposableMap,
@@ -17,6 +18,7 @@ import { mapPins, type MapPin } from "../data/caseStudies";
 import { PeekGroup } from "./PeekPortrait";
 import { sectionPeeks } from "../data/team";
 import TechConstellation from "./TechConstellation";
+import EngageFanSection from "./EngageFanSection";
 
 const GEO_URL = "/maps/countries-110m.json";
 
@@ -510,6 +512,10 @@ function TechPanel() {
   );
 }
 
+function HowWeEmbedPanel({ trackX }: { trackX: MotionValue<number> }) {
+  return <EngageFanSection trackX={trackX} />;
+}
+
 export default function HorizontalMapSection() {
   const targetRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -531,11 +537,11 @@ export default function HorizontalMapSection() {
 
   const washColor = useTransform(
     smoothProgress,
-    [0, 0.38, 0.7, 1],
-    ["#010233", "#071038", "#0c1454", "#0c1454"],
+    [0, 0.28, 0.52, 0.78, 1],
+    ["#010233", "#071038", "#0c1454", "#010233", "#010233"],
   );
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const measure = () => {
       if (!trackRef.current) return;
       const next = Math.max(0, trackRef.current.scrollWidth - window.innerWidth);
@@ -562,7 +568,7 @@ export default function HorizontalMapSection() {
       ref={targetRef}
       className="relative"
       style={{
-        height: travel > 0 ? `calc(100vh + ${travel * 0.72}px)` : "280vh",
+        height: travel > 0 ? `calc(100vh + ${travel}px)` : "480vh",
       }}
     >
       <div className="sticky top-0 h-svh overflow-hidden md:h-screen">
@@ -575,6 +581,7 @@ export default function HorizontalMapSection() {
           <FullScreenMap />
           <BuildPanel />
           <TechPanel />
+          <HowWeEmbedPanel trackX={x} />
         </motion.div>
       </div>
     </section>

@@ -1,7 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState, type Ref } from "react";
 import {
   motion,
-  useScroll,
   useSpring,
   useTransform,
   type MotionValue,
@@ -147,13 +146,11 @@ function FanCard({
   item,
   index,
   progress,
-  x,
   cardRef,
 }: {
   item: (typeof modes)[number];
   index: number;
   progress: MotionValue<number>;
-  x: MotionValue<number>;
   cardRef?: Ref<HTMLElement>;
 }) {
   const Art = artMap[item.art];
@@ -183,7 +180,6 @@ function FanCard({
       ref={cardRef}
       className="glow-card relative flex h-[18rem] w-[20rem] shrink-0 flex-col overflow-hidden rounded-[1.75rem] border border-white/14 px-7 py-7 sm:h-[19.5rem] sm:w-[22.5rem] sm:px-8 md:h-[21rem] md:w-[24.5rem]"
       style={{
-        x,
         scale,
         opacity,
         y,
@@ -262,27 +258,58 @@ function StaticCard({ item }: { item: (typeof modes)[number] }) {
   );
 }
 
-export default function EngageFanSection() {
-  const targetRef = useRef<HTMLElement>(null);
-  const rootRef = useRef<HTMLDivElement>(null);
+const heading = (
+  <div className="mx-auto max-w-3xl px-5 text-center">
+    <p className="text-xs font-medium tracking-[0.22em] text-white/45 uppercase">
+      How we embed
+    </p>
+    <h2 className="mt-3 text-3xl font-bold text-white md:text-5xl">
+      Squads, solo, or stay
+    </h2>
+    <p className="mx-auto mt-4 max-w-xl text-sm text-white/55 md:text-base">
+      Pick the shape that matches the bottleneck — we pick up the pace either
+      way.
+    </p>
+  </div>
+);
+
+export default function EngageFanSection({
+  trackX,
+}: {
+  trackX: MotionValue<number>;
+}) {
+  const panelRef = useRef<HTMLDivElement>(null);
   const firstCardRef = useRef<HTMLElement>(null);
 
-  const [span, setSpan] = useState({ from: 0, to: 0 });
   const [reduce, setReduce] = useState(false);
-
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-    offset: ["start start", "end end"],
+  const [metrics, setMetrics] = useState({
+    width: 0,
+    left: 0,
+    vw: 0,
+    pad: 0,
+    max: 1,
   });
 
-  const smooth = useSpring(scrollYProgress, {
+  const metricsRef = useRef(metrics);
+  metricsRef.current = metrics;
+
+  const local = useTransform(trackX, (x) => {
+    const m = metricsRef.current;
+    return Math.min(1, Math.max(0, (-x - m.left) / m.max));
+  });
+
+  const smooth = useSpring(local, {
     stiffness: 140,
     damping: 32,
     mass: 0.32,
     restDelta: 0.0005,
   });
 
-  const x = useTransform(smooth, (p) => span.from + (span.to - span.from) * p);
+  const pinX = useTransform(trackX, (x) => {
+    const m = metricsRef.current;
+    const localX = -x - m.left;
+    return Math.min(Math.max(0, localX), Math.max(0, m.width - m.vw));
+  });
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -295,21 +322,27 @@ export default function EngageFanSection() {
   useLayoutEffect(() => {
     const measure = () => {
       const card = firstCardRef.current;
-      if (!card) return;
+      const panel = panelRef.current;
+      if (!card || !panel) return;
       const cardW = card.offsetWidth;
-      const styles = rootRef.current ? getComputedStyle(rootRef.current) : null;
-      const gap = styles ? Number.parseFloat(styles.columnGap || styles.gap || "24") : 24;
-      const trackW = COUNT * cardW + (COUNT - 1) * gap;
+      const styles = getComputedStyle(panel);
+      const gap = Number.parseFloat(styles.columnGap || styles.gap || "24") || 24;
       const vw = window.innerWidth;
-      setSpan({
-        from: vw / 2 - cardW / 2,
-        to: vw / 2 - (trackW - cardW / 2),
+      const trackW = COUNT * cardW + (COUNT - 1) * gap;
+      const pad = vw / 2 - cardW / 2;
+      const width = Math.max(vw, pad + trackW + pad);
+      setMetrics({
+        width,
+        left: panel.offsetLeft,
+        vw,
+        pad,
+        max: Math.max(1, width - vw),
       });
     };
 
     measure();
     const ro = new ResizeObserver(measure);
-    if (rootRef.current) ro.observe(rootRef.current);
+    if (panelRef.current) ro.observe(panelRef.current);
     window.addEventListener("resize", measure);
     const t = window.setTimeout(measure, 80);
     return () => {
@@ -319,62 +352,56 @@ export default function EngageFanSection() {
     };
   }, [reduce]);
 
-  const heading = (
-    <div className="mx-auto max-w-3xl px-5 text-center">
-      <p className="text-xs font-medium tracking-[0.22em] text-white/45 uppercase">
-        How we embed
-      </p>
-      <h2 className="mt-3 text-3xl font-bold text-white md:text-5xl">
-        Squads, solo, or stay
-      </h2>
-      <p className="mx-auto mt-4 max-w-xl text-sm text-white/55 md:text-base">
-        Pick the shape that matches the bottleneck — we pick up the pace either
-        way.
-      </p>
-    </div>
-  );
-
   if (reduce) {
     return (
-      <section className="relative overflow-hidden px-5 py-20 text-white sm:px-10 md:px-16 md:py-28">
+      <div className="relative flex h-full w-screen shrink-0 flex-col justify-center overflow-hidden px-5 py-20 text-white sm:px-10 md:px-16">
         {heading}
         <div className="mx-auto mt-12 grid max-w-4xl gap-4 sm:grid-cols-2">
           {modes.map((item) => (
             <StaticCard key={item.label} item={item} />
           ))}
         </div>
-      </section>
+      </div>
     );
   }
 
   return (
-    <section ref={targetRef} className="relative h-[200vh] md:h-[220vh]">
-      <div
-        ref={rootRef}
-        className="sticky top-0 flex h-svh items-end gap-6 overflow-hidden pb-16 pt-44 sm:gap-7 md:h-screen md:items-center md:gap-8 md:pt-52 md:pb-10"
+    <div
+      ref={panelRef}
+      className="relative flex h-full shrink-0 items-end gap-6 overflow-hidden pb-16 pt-44 sm:gap-7 md:items-center md:gap-8 md:pt-52 md:pb-10"
+      style={{
+        width: metrics.width || "100vw",
+        paddingLeft: metrics.pad,
+        paddingRight: metrics.pad,
+      }}
+    >
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-[#010233]" />
+      </div>
+
+      <motion.div
+        className="absolute inset-y-0 left-0 z-10"
+        style={{ x: pinX, width: metrics.vw || "100vw" }}
       >
-        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-[#010233]" />
-          <div className="absolute top-[58%] left-1/2 h-[26rem] w-[26rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#8b9ad4]/25 blur-[110px]" />
-        </div>
-
+        <div
+          aria-hidden
+          className="pointer-events-none absolute top-[58%] left-1/2 h-[26rem] w-[26rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#8b9ad4]/25 blur-[110px]"
+        />
         <PeekGroup slots={sectionPeeks.engage} id="engage" />
-
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-10 pt-32 md:pt-36">
+        <div className="pointer-events-none absolute inset-x-0 top-0 pt-32 md:pt-36">
           {heading}
         </div>
+      </motion.div>
 
-        {modes.map((item, i) => (
-          <FanCard
-            key={item.label}
-            item={item}
-            index={i}
-            progress={smooth}
-            x={x}
-            cardRef={i === 0 ? firstCardRef : undefined}
-          />
-        ))}
-      </div>
-    </section>
+      {modes.map((item, i) => (
+        <FanCard
+          key={item.label}
+          item={item}
+          index={i}
+          progress={smooth}
+          cardRef={i === 0 ? firstCardRef : undefined}
+        />
+      ))}
+    </div>
   );
 }

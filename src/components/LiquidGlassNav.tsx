@@ -4,31 +4,37 @@ import logo from "../assets/fluidlogo.png";
 import { BOOKING_URL } from "../data/site";
 import type { LiquidGlassInstance } from "../hooks/useLiquidGlass";
 
-/** Frosted glass — the nav chrome (demo frosted panel). */
+/** Frosted glass — still see-through, just a light blur on the edges. */
 export const FROSTED_BAR_GLASS = {
-  blurAmount: 0.25,
+  blurAmount: 0.18,
   cornerRadius: 20,
-  zRadius: 28,
-  refraction: 0.69,
-  chromAberration: 0.04,
-  edgeHighlight: 0.08,
-  fresnel: 1,
-  shadowOpacity: 0.28,
-  brightness: 0,
+  zRadius: 24,
+  refraction: 0.48,
+  chromAberration: 0.025,
+  edgeHighlight: 0.1,
+  fresnel: 0.85,
+  shadowOpacity: 0.2,
+  brightness: 0.04,
+  opacity: 0.46,
+  tintStrength: 0.04,
+  saturation: 0.04,
   floating: false,
   button: false,
 } as const;
 
-/** Regular glass — nav action pills (demo regular + button mode). */
+/** Action pills — same idea, a bit tighter. */
 export const REGULAR_BTN_GLASS = {
-  blurAmount: 0,
+  blurAmount: 0.14,
   cornerRadius: 12,
-  zRadius: 20,
-  refraction: 0.69,
-  chromAberration: 0.05,
+  zRadius: 16,
+  refraction: 0.42,
+  chromAberration: 0.02,
   edgeHighlight: 0.08,
-  fresnel: 1,
-  shadowOpacity: 0.25,
+  fresnel: 0.8,
+  shadowOpacity: 0.16,
+  brightness: 0.04,
+  opacity: 0.4,
+  tintStrength: 0.03,
   button: true,
   floating: false,
 } as const;
@@ -44,7 +50,7 @@ type LiquidGlassNavProps = {
 };
 
 const BAR_FALLBACK =
-  "border border-white/20 bg-white/[0.12] shadow-lg";
+  "border border-white/20 bg-white/[0.08] shadow-lg";
 const BTN_FALLBACK =
   "border border-white/20 bg-white/10 shadow-md";
 
@@ -99,23 +105,6 @@ export default function LiquidGlassNav({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ready]);
 
-  useEffect(() => {
-    if (!ready) return;
-    const onScroll = () => {
-      // Fixed chrome — still dirty so refraction tracks scrolling content.
-      if (barRef.current) instanceRef.current?.markChanged(barRef.current);
-      for (const ref of [workRef, teamRef, bookRef]) {
-        if (ref.current) instanceRef.current?.markChanged(ref.current);
-      }
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("liquidglass-scroll", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("liquidglass-scroll", onScroll);
-    };
-  }, [ready, barRef, workRef, teamRef, bookRef, instanceRef]);
-
   const btnClass =
     "pointer-events-auto fixed z-[56] flex items-center justify-center rounded-xl text-sm font-medium text-white";
 
@@ -124,8 +113,8 @@ export default function LiquidGlassNav({
       {/* Frosted glass bar — logo left, invisible slots pin buttons to the right */}
       <div
         ref={barRef}
-        className={`fixed top-6 left-1/2 z-50 flex h-16 w-[min(92vw,44rem)] -translate-x-1/2 items-center justify-between px-5 sm:px-6 ${
-          failed ? BAR_FALLBACK : "bg-transparent"
+        className={`pointer-events-auto fixed top-6 left-1/2 z-50 flex h-16 w-[min(92vw,44rem)] -translate-x-1/2 items-center justify-between px-5 sm:px-6 ${
+          failed || !ready ? BAR_FALLBACK : "bg-transparent"
         }`}
       >
         <Link to="/" className="relative z-[2] flex shrink-0 items-center">
@@ -161,7 +150,7 @@ export default function LiquidGlassNav({
       <Link
         ref={workRef}
         to="/work"
-        className={`${btnClass} ${failed ? BTN_FALLBACK : "bg-transparent"}`}
+        className={`${btnClass} ${failed || !ready ? BTN_FALLBACK : "bg-transparent"}`}
         style={{ left: 0, top: 0, width: 0, height: 0 }}
       >
         Work
@@ -169,7 +158,7 @@ export default function LiquidGlassNav({
       <Link
         ref={teamRef}
         to="/team"
-        className={`${btnClass} hidden md:flex ${failed ? BTN_FALLBACK : "bg-transparent"}`}
+        className={`${btnClass} hidden md:flex ${failed || !ready ? BTN_FALLBACK : "bg-transparent"}`}
         style={{ left: 0, top: 0, width: 0, height: 0 }}
       >
         Team
@@ -179,7 +168,7 @@ export default function LiquidGlassNav({
         href={BOOKING_URL}
         target="_blank"
         rel="noreferrer"
-        className={`${btnClass} hidden md:flex ${failed ? BTN_FALLBACK : "bg-transparent"}`}
+        className={`${btnClass} hidden md:flex ${failed || !ready ? BTN_FALLBACK : "bg-transparent"}`}
         style={{ left: 0, top: 0, width: 0, height: 0 }}
       >
         Book a call

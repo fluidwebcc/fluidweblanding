@@ -20,9 +20,9 @@ export const teamMembers = [
     image: "/team/jawad-asghar.png",
   },
   {
-    name: "Ramzan Nasir",
-    role: "Product/UI Lead",
-    image: "/team/ramzan-nasir.png",
+    name: "Hussnain Anjum",
+    role: "Project Manager",
+    image: "/team/hussnain.png",
   },
   {
     name: "Abdul Basit",
@@ -30,9 +30,9 @@ export const teamMembers = [
     image: "/team/basit.png",
   },
   {
-    name: "Hussnain Anjum",
-    role: "Project Manager",
-    image: "/team/hussnain.png",
+    name: "Ramzan Nasir",
+    role: "Product/UI Lead",
+    image: "/team/ramzan-nasir.png",
   },
   {
     name: "Abisha Gill",
@@ -298,24 +298,24 @@ export const sectionPeeks = {
 
   cta: [
     {
-      className: "-top-5 right-4 md:-top-7 md:right-10",
+      className: "-top-10 -right-2 md:-top-14 md:-right-6",
       rotate: 9,
       size: "lg",
     },
     {
-      className: "-top-4 left-4 hidden md:block md:-top-6 md:left-8",
+      className: "-top-8 -left-2 hidden md:block md:-top-11 md:-left-5",
       rotate: 6,
       size: "sm",
       delay: 0.12,
     },
     {
-      className: "-bottom-4 left-4 hidden sm:block md:left-8",
+      className: "-bottom-8 -left-2 hidden sm:block md:-bottom-11 md:-left-5",
       rotate: -8,
       size: "md",
       delay: 0.1,
     },
     {
-      className: "-bottom-4 right-4 hidden md:block md:right-10",
+      className: "-bottom-7 -right-2 hidden md:block md:-bottom-10 md:-right-5",
       rotate: -5,
       size: "sm",
       delay: 0.18,

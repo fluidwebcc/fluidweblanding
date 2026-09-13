@@ -14,7 +14,7 @@ export default function CtaSection({ pullUp = false }: { pullUp?: boolean }) {
           : "relative px-5 py-20 text-white sm:px-10 md:px-16 md:py-28"
       }
     >
-      <div className="mx-auto max-w-6xl">
+      <div className="relative mx-auto max-w-6xl">
         <div className="glow-card relative overflow-visible rounded-3xl border border-white/15 bg-gradient-to-br from-[#16194E] to-[#010233] px-6 py-12 md:px-12 md:py-16">
           <PeekGroup slots={sectionPeeks.cta} id="cta" />
           <h2 className="relative z-10 max-w-2xl text-3xl font-bold md:text-5xl">

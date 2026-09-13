@@ -34,6 +34,7 @@ const mediaClass =
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [loadVideo, setLoadVideo] = useState(false);
+  const [videoPlaying, setVideoPlaying] = useState(false);
 
   useEffect(() => {
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -56,16 +57,21 @@ export default function Hero() {
     const syncPlayback = () => {
       if (motionQuery.matches) {
         video.pause();
+        setVideoPlaying(false);
       } else {
         void video.play().catch(() => {});
       }
     };
 
+    const handlePlaying = () => setVideoPlaying(true);
+
     syncPlayback();
     video.addEventListener("canplay", syncPlayback);
+    video.addEventListener("playing", handlePlaying);
     motionQuery.addEventListener("change", syncPlayback);
     return () => {
       video.removeEventListener("canplay", syncPlayback);
+      video.removeEventListener("playing", handlePlaying);
       motionQuery.removeEventListener("change", syncPlayback);
     };
   }, [loadVideo]);
@@ -76,13 +82,15 @@ export default function Hero() {
       className="relative h-svh w-full overflow-hidden text-white md:min-h-screen"
     >
       <div className="pointer-events-none absolute inset-0 z-0 bg-[#010233]" />
-      <img
-        src={HERO_POSTER}
-        alt=""
-        fetchPriority="high"
-        className={mediaClass}
-        draggable={false}
-      />
+      {!videoPlaying ? (
+        <img
+          src={HERO_POSTER}
+          alt=""
+          fetchPriority="high"
+          className={mediaClass}
+          draggable={false}
+        />
+      ) : null}
       {loadVideo ? (
         <video
           ref={videoRef}
@@ -91,7 +99,6 @@ export default function Hero() {
           loop
           playsInline
           preload="auto"
-          poster={HERO_POSTER}
           aria-hidden
           className={mediaClass}
         >
