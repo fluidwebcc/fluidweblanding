@@ -1,25 +1,53 @@
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import bg from "../assets/bg.png";
 import { companyProof } from "../data/caseStudies";
 import { PeekGroup } from "./PeekPortrait";
 import { sectionPeeks } from "../data/team";
 import { BOOKING_URL } from "../data/site";
 
+const HERO_VIDEO = "/videos/14473573_640_360_30fps.mp4";
+
 export default function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const syncPlayback = () => {
+      if (motionQuery.matches) {
+        video.pause();
+      } else {
+        void video.play().catch(() => {});
+      }
+    };
+
+    syncPlayback();
+    motionQuery.addEventListener("change", syncPlayback);
+    return () => motionQuery.removeEventListener("change", syncPlayback);
+  }, []);
+
   return (
     <section
       id="liquid-hero"
       className="relative h-svh w-full overflow-hidden text-white md:min-h-screen"
     >
-      <img
-        src={bg}
-        alt=""
-        className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover"
-        draggable={false}
+      <div className="pointer-events-none absolute inset-0 z-0 bg-[#010233]" />
+      <video
+        ref={videoRef}
+        src={HERO_VIDEO}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-0 h-full w-full scale-105 object-cover opacity-[0.32] [filter:brightness(0.72)_contrast(1.1)_saturate(0.5)]"
       />
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-[#010233]/25" />
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,transparent_10%,rgba(1,2,51,0.4)_65%,rgba(1,2,51,0.72)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-[#010233]/35" />
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,rgba(1,2,51,0.48)_0%,rgba(1,2,51,0.14)_42%,rgba(1,2,51,0.7)_100%)]" />
 
       <PeekGroup slots={sectionPeeks.hero} id="hero" />
 
