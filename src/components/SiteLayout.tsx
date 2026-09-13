@@ -1,8 +1,14 @@
+import { useEffect, useMemo, useRef, type RefObject } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
-import { useEffect } from "react";
 import Lenis from "lenis";
-import Header from "./header";
+import type { GlassConfig } from "@ybouane/liquidglass";
 import Footer from "./footer";
+import LiquidGlassCursor, { CURSOR_GLASS } from "./LiquidGlassCursor";
+import LiquidGlassNav, {
+  FROSTED_BAR_GLASS,
+  REGULAR_BTN_GLASS,
+} from "./LiquidGlassNav";
+import { useLiquidGlass } from "../hooks/useLiquidGlass";
 
 let lenisInstance: Lenis | null = null;
 
@@ -22,12 +28,53 @@ export default function SiteLayout() {
   const location = useLocation();
   const isHome = location.pathname === "/";
 
+  const liquidRootRef = useRef<HTMLDivElement>(null);
+  const barRef = useRef<HTMLDivElement>(null);
+  const workRef = useRef<HTMLAnchorElement>(null);
+  const teamRef = useRef<HTMLAnchorElement>(null);
+  const bookRef = useRef<HTMLAnchorElement>(null);
+  const dropRef = useRef<HTMLDivElement>(null);
+
+  const glassTargets = useMemo(() => {
+    const targets: {
+      ref: RefObject<HTMLElement | null>;
+      config: Partial<GlassConfig>;
+    }[] = [
+      { ref: barRef, config: { ...FROSTED_BAR_GLASS } },
+      { ref: workRef, config: { ...REGULAR_BTN_GLASS } },
+      { ref: teamRef, config: { ...REGULAR_BTN_GLASS } },
+      { ref: bookRef, config: { ...REGULAR_BTN_GLASS } },
+    ];
+    if (isHome) {
+      targets.push({ ref: dropRef, config: { ...CURSOR_GLASS } });
+    }
+    return targets;
+  }, [isHome]);
+
+  const { ready, failed, instanceRef } = useLiquidGlass(
+    liquidRootRef,
+    glassTargets,
+    {
+      revision: `${location.pathname}:${isHome ? "home" : "page"}`,
+      settleMs: 200,
+    },
+  );
+
+  // Heavy sections (map) wait for this before mounting so prewarm stays fast.
+  useEffect(() => {
+    if (!ready) return;
+    window.dispatchEvent(new Event("liquidglass-ready"));
+  }, [ready]);
+
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.1,
       smoothWheel: true,
     });
     lenisInstance = lenis;
+    lenis.on("scroll", () => {
+      window.dispatchEvent(new Event("liquidglass-scroll"));
+    });
 
     let rafId = 0;
     function raf(time: number) {
@@ -50,8 +97,6 @@ export default function SiteLayout() {
       return;
     }
 
-    // The target section may not be mounted on the first frame after a route
-    // change, so retry briefly before giving up.
     let frames = 0;
     let rafId = 0;
     const attempt = () => {
@@ -65,15 +110,36 @@ export default function SiteLayout() {
   }, [location.pathname, location.hash, location.key]);
 
   return (
-    <div className="relative flex min-h-svh flex-col bg-[#010233] text-white">
+    <div ref={liquidRootRef} className="relative min-h-svh text-white">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 bg-[#010233]"
+      />
+
+      <LiquidGlassNav
+        barRef={barRef}
+        workRef={workRef}
+        teamRef={teamRef}
+        bookRef={bookRef}
+        instanceRef={instanceRef}
+        ready={ready}
+        failed={failed}
+      />
+
+      {isHome && (
+        <LiquidGlassCursor
+          dropRef={dropRef}
+          instanceRef={instanceRef}
+          ready={ready}
+          failed={failed}
+        />
+      )}
+
       {isHome ? (
         <Outlet />
       ) : (
         <>
-          <div className="absolute top-0 left-0 z-50 w-full">
-            <Header />
-          </div>
-          <main className="relative z-0 flex-1 pt-24 md:pt-32">
+          <main className="relative z-0 flex-1 pt-28 md:pt-32">
             <Outlet />
           </main>
           <div className="relative z-10 mt-auto">

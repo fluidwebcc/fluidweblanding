@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import bg from "../assets/bg.png";
-import Header from "./header";
 import { companyProof } from "../data/caseStudies";
 import { PeekGroup } from "./PeekPortrait";
 import { sectionPeeks } from "../data/team";
@@ -9,53 +9,61 @@ import { BOOKING_URL } from "../data/site";
 export default function Hero() {
   return (
     <section
-      className="relative h-svh w-full overflow-hidden bg-cover bg-center bg-no-repeat text-white md:min-h-screen"
-      style={{ backgroundImage: `url(${bg})` }}
+      id="liquid-hero"
+      className="relative h-svh w-full overflow-hidden text-white md:min-h-screen"
     >
-      <div className="absolute inset-0 z-[1] bg-[#010233]/35" />
+      <img
+        src={bg}
+        alt=""
+        className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover"
+        draggable={false}
+      />
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-[#010233]/25" />
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,transparent_10%,rgba(1,2,51,0.4)_65%,rgba(1,2,51,0.72)_100%)]" />
+
       <PeekGroup slots={sectionPeeks.hero} id="hero" />
-      <div className="absolute top-0 left-0 z-50 w-full">
-        <Header />
-      </div>
 
-      <main className="relative z-10 flex min-h-screen items-center justify-center px-5 text-center">
-        <div className="flex max-w-3xl flex-col items-center">
-          <p className="text-xs font-medium tracking-[0.22em] text-white/55 uppercase">
-            Product engineering · startups &amp; stuck teams
-          </p>
-          <h1 className="mt-4 text-4xl font-bold leading-[1.15] md:text-6xl">
-            Fluidweb picks up the{" "}
-            <span
-              style={{ fontFamily: "'Oooh Baby', cursive" }}
-              className="text-5xl md:text-7xl"
-            >
-              pace
-            </span>
-          </h1>
-          <p className="mt-5 max-w-xl text-base text-white/70 md:text-lg">
-            For startups and teams stuck shipping slow. We embed engineers —
-            squads or solo — across {companyProof.continents} continents, and we
-            get the product done the modern way.
-          </p>
+      <motion.div
+        className="absolute top-1/2 left-1/2 z-10 w-[min(100%-2.5rem,42rem)] -translate-x-1/2 -translate-y-1/2 px-6 py-8 text-center md:px-10 md:py-10"
+        initial={{ y: 16 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <p className="text-xs font-medium tracking-[0.22em] text-white/60 uppercase">
+          Product engineering · startups &amp; stuck teams
+        </p>
+        <h1 className="mt-4 text-4xl font-bold leading-[1.15] md:text-6xl">
+          Fluidweb picks up the{" "}
+          <span
+            style={{ fontFamily: "'Oooh Baby', cursive" }}
+            className="text-5xl md:text-7xl"
+          >
+            pace
+          </span>
+        </h1>
+        <p className="mx-auto mt-5 max-w-xl text-base text-white/75 md:text-lg">
+          For startups and teams stuck shipping slow. We embed engineers —
+          squads or solo — across {companyProof.continents} continents, and we
+          get the product done the modern way.
+        </p>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link
-              to="/work"
-              className="rounded-2xl bg-[#16194E] px-6 py-3 font-semibold shadow-[inset_0_1px_2px_rgba(255,255,255,0.2),0_4px_15px_rgba(0,0,0,0.4)] transition hover:shadow-[0_0_20px_rgba(120,130,255,0.55)]"
-            >
-              View case studies
-            </Link>
-            <a
-              href={BOOKING_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-2xl border border-white/20 bg-white/10 px-6 py-3 font-semibold backdrop-blur-md transition hover:bg-white/15"
-            >
-              Book a meeting
-            </a>
-          </div>
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <Link
+            to="/work"
+            className="rounded-2xl bg-[#16194E]/92 px-6 py-3 font-semibold shadow-[inset_0_1px_2px_rgba(255,255,255,0.2),0_4px_15px_rgba(0,0,0,0.35)] transition hover:bg-[#1c2160] hover:shadow-[0_0_20px_rgba(120,130,255,0.45)]"
+          >
+            View case studies
+          </Link>
+          <a
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-2xl border border-white/25 bg-white/10 px-6 py-3 font-semibold transition hover:bg-white/18"
+          >
+            Book a meeting
+          </a>
         </div>
-      </main>
+      </motion.div>
     </section>
   );
 }
