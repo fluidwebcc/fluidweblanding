@@ -27,7 +27,7 @@ export default function Cards() {
   const people = useCyclingPeekPeople(peeks.length);
 
   return (
-    <section className="relative z-10 overflow-visible bg-[#010233] px-5 py-20 text-white sm:px-10 md:px-16 md:py-28">
+    <section className="relative z-10 overflow-visible px-5 py-20 text-white sm:px-10 md:px-16 md:py-28">
       <div className="relative mx-auto max-w-6xl">
         <h2 className="text-center text-3xl font-bold md:text-5xl">
           Why Fluid<span className="font-semibold">Web</span>?
@@ -41,7 +41,7 @@ export default function Cards() {
             const person = people[i];
             return (
               <div key={point.title} className="relative">
-                <div className="relative rounded-2xl border border-white/15 bg-white/6 px-6 py-7 transition hover:border-white/25 hover:bg-white/9">
+                <div className="glow-card relative rounded-2xl border border-white/15 bg-white/6 px-6 py-7 transition hover:border-white/25 hover:bg-white/9">
                   <h3 className="text-xl font-semibold">{point.title}</h3>
                   <p className="mt-3 text-base leading-relaxed text-white/70">
                     {point.body}

@@ -5,7 +5,7 @@ import { BOOKING_URL } from "../data/site";
 
 export default function TeamPage() {
   return (
-    <div className="bg-[#010233] text-white">
+    <div className="text-white">
       <header className="border-b border-white/10">
         <div className="mx-auto max-w-6xl px-5 py-12 sm:px-8 md:py-16">
           <p className="text-xs font-medium tracking-[0.18em] text-white/60 uppercase">
@@ -29,7 +29,7 @@ export default function TeamPage() {
           ))}
         </div>
 
-        <div className="mt-16 rounded-2xl border border-white/12 bg-white/5 px-6 py-7">
+        <div className="glow-card mt-16 rounded-2xl border border-white/12 bg-white/5 px-6 py-7">
           <h2 className="text-xl font-semibold">Want this team on your product?</h2>
           <p className="mt-2 max-w-xl text-sm text-white/72 md:text-base">
             Squads when you need horsepower, solo when you need someone who owns

@@ -8,7 +8,7 @@ import { additionalProducts } from "../data/products";
 
 export default function WorkIndexPage() {
   return (
-    <div className="bg-[#010233] text-white">
+    <div className="text-white">
       <header className="border-b border-white/10">
         <div className="mx-auto max-w-5xl px-5 py-12 sm:px-8 md:py-16">
           <p className="text-xs font-medium tracking-[0.18em] text-white/60 uppercase">
@@ -82,7 +82,7 @@ export default function WorkIndexPage() {
             {additionalProducts.map((product) => (
               <div
                 key={product.name}
-                className="flex flex-col gap-3 rounded-xl border border-white/12 bg-white/5 p-3"
+                className="glow-card flex flex-col gap-3 rounded-xl border border-white/12 bg-white/5 p-3"
               >
                 <div className="flex h-14 items-center">
                   <img

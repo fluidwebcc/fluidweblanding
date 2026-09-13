@@ -8,7 +8,7 @@ const linkClass =
 
 export default function Footer() {
   return (
-    <div className="relative z-40 flex flex-col bg-[#010233] p-4 sm:p-10 items-center w-full">
+    <div className="relative z-40 flex w-full flex-col items-center p-4 sm:p-10">
       <div className="w-[95%] sm:w-[90%] max-w-8xl flex flex-col py-5 px-5 sm:py-7 sm:px-9 rounded-xl backdrop-blur-md bg-white/10 border border-white/20 shadow-lg">
         <div className="flex flex-col gap-10 lg:flex-row lg:gap-8">
           <div className="flex w-full flex-col justify-between gap-6 lg:w-[32%]">

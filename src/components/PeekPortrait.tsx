@@ -8,6 +8,7 @@ const sizeClass = {
   sm: "h-12 w-12 md:h-14 md:w-14",
   md: "h-14 w-14 md:h-16 md:w-16",
   lg: "h-16 w-16 md:h-20 md:w-20",
+  xl: "h-[4.25rem] w-[4.25rem] md:h-24 md:w-24 lg:h-28 lg:w-28",
 } as const;
 
 function shuffle<T>(items: readonly T[]): T[] {
@@ -29,7 +30,8 @@ export default function PeekPortrait({
   size = "md",
   rotate = 0,
   delay = 0,
-}: PeekSlot) {
+  eager = false,
+}: PeekSlot & { eager?: boolean }) {
   const [speech, setSpeech] = useState<{ name: string; line: string } | null>(
     null,
   );
@@ -47,8 +49,12 @@ export default function PeekPortrait({
       className={`absolute z-30 ${className}`}
       style={{ rotate: tilt }}
       initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
+      {...(eager
+        ? { animate: { opacity: 1, y: 0 } }
+        : {
+            whileInView: { opacity: 1, y: 0 },
+            viewport: { once: true, margin: "-40px" },
+          })}
       transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }}
       onMouseEnter={showSaying}
       onMouseLeave={() => setSpeech(null)}
@@ -114,11 +120,14 @@ function pickLayoutSubset(slots: readonly PeekLayout[]): PeekLayout[] {
 export function PeekGroup({
   slots,
   id,
+  all = false,
 }: {
   slots: readonly PeekLayout[];
   id: string;
+  /** Use every slot (hero corners). Other sections still pick a random subset. */
+  all?: boolean;
 }) {
-  const [layouts] = useState(() => pickLayoutSubset(slots));
+  const [layouts] = useState(() => (all ? [...slots] : pickLayoutSubset(slots)));
   const people = useCyclingPeekPeople(layouts.length);
 
   return (
@@ -130,6 +139,7 @@ export function PeekGroup({
           <PeekPortrait
             key={`${id}-${i}`}
             person={person}
+            eager={all}
             {...layout}
           />
         );

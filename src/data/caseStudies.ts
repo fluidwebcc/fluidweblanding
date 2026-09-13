@@ -43,7 +43,7 @@ export const companyProof = {
   mission:
     "We ship AI-native product engineering for startups and teams that are stuck. Old waterfall habits and slow agency practices don't scale — we pick up the pace and get the work into market.",
   whoWeHelp:
-    "Startups and product teams struggling to move. We embed engineers — in squads or solo — and turn stalled roadmaps into live product.",
+    "Startups and product teams struggling to move. We embed engineers — in squads or solo — pick up the pace, and turn stalled roadmaps into live product that customers can actually use.",
 } as const;
 
 export const caseStudies: CaseStudy[] = [

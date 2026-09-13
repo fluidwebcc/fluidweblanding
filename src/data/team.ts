@@ -15,6 +15,11 @@ export const teamMembers = [
     image: "/team/azhar.png",
   },
   {
+    name: "Jawad Asghar",
+    role: "Lead Web and Mobile Engineer",
+    image: "/team/jawad-asghar.png",
+  },
+  {
     name: "Ramzan Nasir",
     role: "Product/UI Lead",
     image: "/team/ramzan-nasir.png",
@@ -85,7 +90,7 @@ export type TeamMember = (typeof teamMembers)[number];
 export type PeekLayout = {
   className: string;
   rotate?: number;
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "xl";
   delay?: number;
 };
 
@@ -101,27 +106,27 @@ export type PeekSlot = PeekLayout & { person: TeamMember };
 export const sectionPeeks = {
   hero: [
     {
-      className: "bottom-[12%] left-[4%] hidden sm:block",
-      rotate: -9,
-      size: "lg",
+      className: "top-28 left-[3%] sm:left-[4%] lg:top-24 lg:left-[5%]",
+      rotate: -6,
+      size: "xl",
     },
     {
-      className: "top-[18%] right-[4%] hidden md:block",
+      className: "top-28 right-[3%] sm:right-[4%] lg:top-24 lg:right-[5%]",
       rotate: 7,
-      size: "md",
+      size: "xl",
       delay: 0.12,
     },
     {
-      className: "bottom-[12%] right-[4%] hidden lg:block",
-      rotate: 11,
-      size: "sm",
-      delay: 0.2,
+      className: "bottom-[7%] left-[3%] sm:bottom-[9%] sm:left-[4%] lg:left-[5%]",
+      rotate: -9,
+      size: "xl",
+      delay: 0.16,
     },
     {
-      className: "top-[18%] left-[4%] hidden md:block",
-      rotate: -6,
-      size: "md",
-      delay: 0.16,
+      className: "bottom-[7%] right-[3%] sm:bottom-[9%] sm:right-[4%] lg:right-[5%]",
+      rotate: 11,
+      size: "xl",
+      delay: 0.2,
     },
   ] satisfies PeekLayout[],
 
@@ -155,24 +160,24 @@ export const sectionPeeks = {
   // so they cannot collide across the seam with the neighbouring panel.
   build: [
     {
-      className: "top-12 left-[18%] hidden md:block",
+      className: "top-8 left-[8%] hidden md:block",
       rotate: -8,
       size: "lg",
     },
     {
-      className: "bottom-16 left-[16%] hidden sm:block",
+      className: "bottom-10 left-[7%] hidden sm:block",
       rotate: 7,
       size: "md",
       delay: 0.12,
     },
     {
-      className: "bottom-14 left-[58%] hidden md:block",
+      className: "bottom-10 right-[8%] hidden md:block",
       rotate: -9,
       size: "sm",
       delay: 0.2,
     },
     {
-      className: "top-12 left-[58%] hidden lg:block",
+      className: "top-8 right-[8%] hidden lg:block",
       rotate: 8,
       size: "md",
       delay: 0.16,
@@ -181,38 +186,32 @@ export const sectionPeeks = {
 
   tech: [
     {
-      className: "top-12 left-[58%] hidden md:block",
+      className: "top-4 right-4 hidden lg:block",
       rotate: 10,
-      size: "md",
+      size: "sm",
     },
     {
-      className: "bottom-16 left-[18%] hidden lg:block",
+      className: "bottom-4 left-4 hidden lg:block",
       rotate: -6,
       size: "sm",
       delay: 0.1,
-    },
-    {
-      className: "bottom-14 left-[60%] hidden sm:block",
-      rotate: 8,
-      size: "lg",
-      delay: 0.18,
     },
   ] satisfies PeekLayout[],
 
   engage: [
     {
-      className: "top-14 left-[58%] hidden md:block",
+      className: "top-6 right-4 hidden md:block md:right-8",
       rotate: -9,
       size: "md",
     },
     {
-      className: "bottom-16 left-[16%] hidden sm:block",
+      className: "bottom-6 left-4 hidden sm:block",
       rotate: 8,
       size: "lg",
       delay: 0.12,
     },
     {
-      className: "top-12 left-[16%] hidden lg:block",
+      className: "top-8 left-4 hidden lg:block",
       rotate: 7,
       size: "md",
       delay: 0.18,
@@ -221,24 +220,24 @@ export const sectionPeeks = {
 
   pace: [
     {
-      className: "top-14 left-[58%] hidden md:block",
+      className: "top-6 right-4 hidden md:block md:right-8",
       rotate: 6,
       size: "sm",
     },
     {
-      className: "bottom-16 left-[16%] hidden sm:block",
+      className: "bottom-6 left-4 hidden sm:block",
       rotate: 11,
       size: "md",
       delay: 0.15,
     },
     {
-      className: "top-12 left-[16%] hidden lg:block",
+      className: "top-8 left-4 hidden lg:block",
       rotate: -7,
       size: "md",
       delay: 0.2,
     },
     {
-      className: "bottom-14 left-[58%] hidden md:block",
+      className: "bottom-6 right-6 hidden md:block",
       rotate: 9,
       size: "sm",
       delay: 0.18,

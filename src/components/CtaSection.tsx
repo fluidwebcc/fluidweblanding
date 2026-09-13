@@ -10,12 +10,12 @@ export default function CtaSection({ pullUp = false }: { pullUp?: boolean }) {
     <section
       className={
         pullUp
-          ? "relative z-20 -mt-16 bg-[#010233] px-5 pb-20 pt-8 text-white sm:px-10 md:-mt-28 md:px-16 md:pb-28 md:pt-10"
-          : "bg-[#010233] px-5 py-20 text-white sm:px-10 md:px-16 md:py-28"
+          ? "relative z-20 -mt-16 px-5 pb-20 pt-8 text-white sm:px-10 md:-mt-28 md:px-16 md:pb-28 md:pt-10"
+          : "relative px-5 py-20 text-white sm:px-10 md:px-16 md:py-28"
       }
     >
       <div className="mx-auto max-w-6xl">
-        <div className="relative overflow-visible rounded-3xl border border-white/15 bg-gradient-to-br from-[#16194E] to-[#010233] px-6 py-12 md:px-12 md:py-16">
+        <div className="glow-card relative overflow-visible rounded-3xl border border-white/15 bg-gradient-to-br from-[#16194E] to-[#010233] px-6 py-12 md:px-12 md:py-16">
           <PeekGroup slots={sectionPeeks.cta} id="cta" />
           <h2 className="relative z-10 max-w-2xl text-3xl font-bold md:text-5xl">
             Stuck shipping? We&apos;ll pick up the pace.

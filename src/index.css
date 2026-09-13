@@ -6,6 +6,45 @@ body {
   color: #fff;
 }
 
+/*
+  Site-wide atmosphere lives inside the layout stacking context (isolate + z-0)
+  so it sits behind content but in front of the body fill. Hero/map keep their own media.
+*/
+.site-atmosphere {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: #010233;
+  background-image:
+    radial-gradient(ellipse 110% 55% at 50% 4%, rgba(96, 112, 228, 0.22), transparent 58%),
+    radial-gradient(ellipse 58% 42% at 100% 36%, rgba(56, 74, 190, 0.18), transparent 55%),
+    radial-gradient(ellipse 50% 38% at 0% 70%, rgba(64, 86, 200, 0.12), transparent 52%),
+    radial-gradient(ellipse 90% 46% at 50% 100%, rgba(16, 24, 90, 0.42), transparent 60%);
+}
+
+.site-atmosphere::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.55;
+  mix-blend-mode: soft-light;
+  background-image: url("/textures/clouds.svg");
+  background-repeat: repeat;
+  background-size: 120vmax 80vmax;
+}
+
+.site-atmosphere::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.45;
+  mix-blend-mode: overlay;
+  background-image: url("/textures/grain.png");
+  background-repeat: repeat;
+  background-size: 160px 180px;
+}
+
 @theme {
   --font-sf: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
@@ -21,4 +60,99 @@ body {
 @keyframes go-right {
   from { transform: translateX(-50%); }
   to   { transform: translateX(0); }
+}
+
+@keyframes tech-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--tech-tilt, 0deg));
+  }
+  50% {
+    transform: translateY(-8px) rotate(calc(var(--tech-tilt, 0deg) + 2.4deg));
+  }
+}
+
+.tech-float {
+  --tech-tilt: 0deg;
+  transform: rotate(var(--tech-tilt));
+  animation: tech-float var(--tech-dur, 6.8s) ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-float {
+    animation: none;
+  }
+}
+
+/*
+  Cursor-following corner specular for cards.
+  --glow-x / --glow-y are written by useCardGlow on pointermove.
+*/
+.glow-card {
+  --glow-x: 50%;
+  --glow-y: 0%;
+  position: relative;
+}
+
+.glow-card::before,
+.glow-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.glow-card::before {
+  z-index: 2;
+  background: radial-gradient(
+    280px circle at var(--glow-x) var(--glow-y),
+    rgba(150, 170, 255, 0.08),
+    transparent 48%
+  );
+}
+
+.glow-card::after {
+  z-index: 3;
+  padding: 1px;
+  background:
+    radial-gradient(
+      140px circle at var(--glow-x) var(--glow-y),
+      rgba(210, 222, 255, 0.55),
+      transparent 42%
+    ),
+    radial-gradient(
+      240px circle at var(--glow-x) var(--glow-y),
+      rgba(130, 155, 255, 0.22),
+      transparent 55%
+    );
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+}
+
+.glow-card.is-glowing::before,
+.glow-card.is-glowing::after {
+  opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .glow-card:hover::before,
+  .glow-card:hover::after {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-card::before,
+  .glow-card::after {
+    content: none;
+  }
 }

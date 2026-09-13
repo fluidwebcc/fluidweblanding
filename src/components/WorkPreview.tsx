@@ -7,7 +7,7 @@ export default function WorkPreview() {
   return (
     <section
       id="work"
-      className="relative w-full overflow-visible bg-[#010233] px-5 py-20 text-white sm:px-10 md:px-16 md:py-28"
+      className="relative w-full overflow-visible px-5 py-20 text-white sm:px-10 md:px-16 md:py-28"
     >
       <PeekGroup slots={sectionPeeks.work} id="work" />
 
@@ -37,7 +37,7 @@ export default function WorkPreview() {
             <Link
               key={study.slug}
               to={`/work/${study.slug}`}
-              className="group flex flex-col rounded-2xl border border-white/10 bg-white/3 p-5 transition hover:border-white/25 hover:bg-white/6"
+              className="glow-card group flex flex-col rounded-2xl border border-white/10 bg-white/3 p-5 transition hover:border-white/25 hover:bg-white/6"
             >
               <div className="flex h-16 items-center">
                 <img

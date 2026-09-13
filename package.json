@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.4",
+    "@ybouane/liquidglass": "^1.0.3",
     "framer-motion": "^12.38.0",
+    "html-to-image": "^1.11.13",
     "lenis": "^1.3.23",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",

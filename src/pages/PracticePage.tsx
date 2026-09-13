@@ -26,7 +26,7 @@ export default function PracticePage({ kind }: { kind: PracticeEntry["kind"] }) 
     .filter((study) => study !== undefined);
 
   return (
-    <article className="bg-[#010233] text-white">
+    <article className="text-white">
       <header className="border-b border-white/10">
         <div className="mx-auto max-w-4xl px-5 pb-12 pt-4 sm:px-8">
           <Link
@@ -71,7 +71,7 @@ export default function PracticePage({ kind }: { kind: PracticeEntry["kind"] }) 
           ))}
         </div>
 
-        <section className="rounded-2xl border border-white/12 bg-white/5 px-6 py-7">
+        <section className="glow-card rounded-2xl border border-white/12 bg-white/5 px-6 py-7">
           <h2 className="text-lg font-semibold text-white md:text-xl">
             You probably need this if
           </h2>
@@ -222,7 +222,7 @@ export default function PracticePage({ kind }: { kind: PracticeEntry["kind"] }) 
           </Link>
         </section>
 
-        <div className="mt-12 rounded-2xl border border-white/12 bg-white/5 px-6 py-7">
+        <div className="glow-card mt-12 rounded-2xl border border-white/12 bg-white/5 px-6 py-7">
           <h2 className="text-xl font-semibold">Need this on your product?</h2>
           <p className="mt-2 max-w-xl text-sm text-white/72 md:text-base">
             Tell us where delivery is stuck. We will give you an honest read on

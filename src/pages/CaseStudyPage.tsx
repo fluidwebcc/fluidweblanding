@@ -17,7 +17,7 @@ export default function CaseStudyPage() {
     .slice(0, 3);
 
   return (
-    <article className="bg-[#010233] text-white">
+    <article className="text-white">
       <div className="mx-auto max-w-4xl px-5 pb-16 pt-4 sm:px-8">
         <BackToWork />
 
@@ -126,7 +126,7 @@ export default function CaseStudyPage() {
             {study.hardParts.map((part) => (
               <div
                 key={part.title}
-                className="rounded-2xl border border-white/12 bg-white/5 px-5 py-5"
+                className="glow-card rounded-2xl border border-white/12 bg-white/5 px-5 py-5"
               >
                 <h3 className="font-semibold text-white">{part.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-white/65">
@@ -195,7 +195,7 @@ export default function CaseStudyPage() {
           </section>
         </div>
 
-        <div className="mt-12 rounded-2xl border border-white/12 bg-white/5 px-6 py-7">
+        <div className="glow-card mt-12 rounded-2xl border border-white/12 bg-white/5 px-6 py-7">
           <h2 className="text-xl font-semibold">Got something similar?</h2>
           <p className="mt-2 max-w-xl text-sm text-white/60 md:text-base">
             Tell us where delivery is stuck. We will give you an honest read on
