@@ -59,7 +59,7 @@ export default function Footer() {
               <Link to="/work" className={linkClass}>
                 Case Studies
               </Link>
-              <Link to="/#team" className={linkClass}>
+              <Link to="/team" className={linkClass}>
                 Engineering Team
               </Link>
               <Link to="/faq" className={linkClass}>

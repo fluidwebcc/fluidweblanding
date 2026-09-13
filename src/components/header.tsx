@@ -14,7 +14,7 @@ export default function Header() {
           <Link to="/#work" className="transition hover:text-white">
             Work
           </Link>
-          <Link to="/#team" className="transition hover:text-white">
+          <Link to="/team" className="transition hover:text-white">
             Team
           </Link>
           <a

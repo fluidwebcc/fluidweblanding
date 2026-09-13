@@ -78,6 +78,8 @@ export const teamMembers = [
 
 export const TEAM_SIZE_LABEL = "30+";
 
+export const featuredTeamMembers = teamMembers.slice(0, 6);
+
 export type TeamMember = (typeof teamMembers)[number];
 
 export type PeekLayout = {
