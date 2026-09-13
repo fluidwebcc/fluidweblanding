@@ -17,8 +17,9 @@ type UseLiquidGlassOptions = {
   /** Remount/re-init when this changes (e.g. route pathname). */
   revision?: string | number;
   /**
-   * Wait this long after fonts are ready before init.
-   * Lets entrance animations finish so html-to-image doesn't cache opacity:0 text.
+   * Optional delay before init. Default is 0 so the nav glass can
+   * appear on the first frames; raise only if a route still captures
+   * mid-animation.
    */
   settleMs?: number;
 };
@@ -32,7 +33,7 @@ export function useLiquidGlass(
   targets: GlassTarget[],
   options: UseLiquidGlassOptions = {},
 ) {
-  const { defaults, revision = 0, settleMs = 750 } = options;
+  const { defaults, revision = 0, settleMs = 0 } = options;
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
   const instanceRef = useRef<LiquidGlassInstance | null>(null);
@@ -44,17 +45,17 @@ export function useLiquidGlass(
 
     const start = async () => {
       try {
-        await document.fonts.ready;
-        if (cancelled) return;
+        // Don't wait on document.fonts.ready — Google Fonts can add a
+        // second of delay before the nav glass appears. The library still
+        // embeds @font-face during init. Cap any optional settle so the
+        // bar isn't empty while webfonts download.
+        if (settleMs > 0) {
+          await new Promise<void>((resolve) => {
+            settleTimer = window.setTimeout(resolve, settleMs);
+          });
+          if (cancelled) return;
+        }
 
-        // Wait for framer-motion / layout to settle so text isn't
-        // rasterised at opacity 0 into the static capture cache.
-        await new Promise<void>((resolve) => {
-          settleTimer = window.setTimeout(resolve, settleMs);
-        });
-        if (cancelled) return;
-
-        // One more frame so final styles are committed.
         await new Promise<void>((resolve) =>
           requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
         );

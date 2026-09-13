@@ -15,6 +15,11 @@ export const teamMembers = [
     image: "/team/azhar.png",
   },
   {
+    name: "Jawad Asghar",
+    role: "Lead Web and Mobile Engineer",
+    image: "/team/jawad-asghar.png",
+  },
+  {
     name: "Ramzan Nasir",
     role: "Product/UI Lead",
     image: "/team/ramzan-nasir.png",

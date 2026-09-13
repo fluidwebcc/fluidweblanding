@@ -1,4 +1,4 @@
-import { useEffect, useRef, type RefObject } from "react";
+import { useEffect, useLayoutEffect, useRef, type RefObject } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/fluidlogo.png";
 import { BOOKING_URL } from "../data/site";
@@ -87,11 +87,8 @@ export default function LiquidGlassNav({
     if (barRef.current) instanceRef.current?.markChanged(barRef.current);
   };
 
-  useEffect(() => {
-    const id = requestAnimationFrame(() =>
-      requestAnimationFrame(syncButtons),
-    );
-    return () => cancelAnimationFrame(id);
+  useLayoutEffect(() => {
+    syncButtons();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ready]);
 
@@ -128,7 +125,7 @@ export default function LiquidGlassNav({
       <div
         ref={barRef}
         className={`fixed top-6 left-1/2 z-50 flex h-16 w-[min(92vw,44rem)] -translate-x-1/2 items-center justify-between px-5 sm:px-6 ${
-          failed ? BAR_FALLBACK : "bg-transparent"
+          failed || !ready ? BAR_FALLBACK : "bg-transparent"
         }`}
       >
         <Link to="/" className="relative z-[2] flex shrink-0 items-center">
@@ -164,7 +161,7 @@ export default function LiquidGlassNav({
       <Link
         ref={workRef}
         to="/work"
-        className={`${btnClass} ${failed ? BTN_FALLBACK : "bg-transparent"}`}
+        className={`${btnClass} ${failed || !ready ? BTN_FALLBACK : "bg-transparent"}`}
         style={{ left: 0, top: 0, width: 0, height: 0 }}
       >
         Work
@@ -172,7 +169,7 @@ export default function LiquidGlassNav({
       <Link
         ref={teamRef}
         to="/team"
-        className={`${btnClass} hidden md:flex ${failed ? BTN_FALLBACK : "bg-transparent"}`}
+        className={`${btnClass} hidden md:flex ${failed || !ready ? BTN_FALLBACK : "bg-transparent"}`}
         style={{ left: 0, top: 0, width: 0, height: 0 }}
       >
         Team
@@ -182,7 +179,7 @@ export default function LiquidGlassNav({
         href={BOOKING_URL}
         target="_blank"
         rel="noreferrer"
-        className={`${btnClass} hidden md:flex ${failed ? BTN_FALLBACK : "bg-transparent"}`}
+        className={`${btnClass} hidden md:flex ${failed || !ready ? BTN_FALLBACK : "bg-transparent"}`}
         style={{ left: 0, top: 0, width: 0, height: 0 }}
       >
         Book a call

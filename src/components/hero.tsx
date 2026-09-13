@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { companyProof } from "../data/caseStudies";
@@ -6,14 +6,32 @@ import { PeekGroup } from "./PeekPortrait";
 import { sectionPeeks } from "../data/team";
 import { BOOKING_URL } from "../data/site";
 
-const HERO_VIDEO = "/videos/14473573_640_360_30fps.mp4";
+const HERO_POSTER = "/videos/hero-waves.webp";
+const HERO_VIDEO = "/videos/hero-waves.mp4";
+
+const mediaClass =
+  "pointer-events-none absolute inset-0 z-0 h-full w-full scale-105 object-cover opacity-[0.32] [filter:brightness(0.72)_contrast(1.1)_saturate(0.5)]";
 
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [loadVideo, setLoadVideo] = useState(false);
+
+  useEffect(() => {
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (motionQuery.matches) return;
+
+    const enable = () => setLoadVideo(true);
+    window.addEventListener("liquidglass-ready", enable);
+    const fallback = window.setTimeout(enable, 400);
+    return () => {
+      window.removeEventListener("liquidglass-ready", enable);
+      window.clearTimeout(fallback);
+    };
+  }, []);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !loadVideo) return;
 
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     const syncPlayback = () => {
@@ -25,9 +43,13 @@ export default function Hero() {
     };
 
     syncPlayback();
+    video.addEventListener("canplay", syncPlayback);
     motionQuery.addEventListener("change", syncPlayback);
-    return () => motionQuery.removeEventListener("change", syncPlayback);
-  }, []);
+    return () => {
+      video.removeEventListener("canplay", syncPlayback);
+      motionQuery.removeEventListener("change", syncPlayback);
+    };
+  }, [loadVideo]);
 
   return (
     <section
@@ -35,17 +57,28 @@ export default function Hero() {
       className="relative h-svh w-full overflow-hidden text-white md:min-h-screen"
     >
       <div className="pointer-events-none absolute inset-0 z-0 bg-[#010233]" />
-      <video
-        ref={videoRef}
-        src={HERO_VIDEO}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        aria-hidden
-        className="pointer-events-none absolute inset-0 z-0 h-full w-full scale-105 object-cover opacity-[0.32] [filter:brightness(0.72)_contrast(1.1)_saturate(0.5)]"
+      <img
+        src={HERO_POSTER}
+        alt=""
+        fetchPriority="high"
+        className={mediaClass}
+        draggable={false}
       />
+      {loadVideo ? (
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster={HERO_POSTER}
+          aria-hidden
+          className={mediaClass}
+        >
+          <source src={HERO_VIDEO} type="video/mp4" />
+        </video>
+      ) : null}
       <div className="pointer-events-none absolute inset-0 z-[1] bg-[#010233]/35" />
       <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,rgba(1,2,51,0.48)_0%,rgba(1,2,51,0.14)_42%,rgba(1,2,51,0.7)_100%)]" />
 

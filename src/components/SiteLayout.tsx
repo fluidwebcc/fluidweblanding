@@ -52,7 +52,7 @@ export default function SiteLayout() {
     glassTargets,
     {
       revision: location.pathname,
-      settleMs: 200,
+      settleMs: 0,
     },
   );
 
