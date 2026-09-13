@@ -1,0 +1,14 @@
+---
+description: Do not open the browser to test or verify UI changes
+alwaysApply: true
+---
+
+# No browser testing
+
+Do not open, lock, navigate, screenshot, or interact with a browser tab to test, preview, or verify work.
+
+- Do not use browser tools (`browser_navigate`, `browser_lock`, `browser_snapshot`, `browser_take_screenshot`, `browser_click`, `browser_cdp`, or similar) for QA, visual checks, or "verify in the browser."
+- Finish at the code level: implement the change, reason about it from source, and stop.
+- Do not start a local preview session for the purpose of clicking through the app.
+
+The user reviews the UI themselves. Only use the browser if they explicitly ask to open or drive a page in that message.

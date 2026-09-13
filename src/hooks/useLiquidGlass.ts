@@ -22,6 +22,8 @@ type UseLiquidGlassOptions = {
    * mid-animation.
    */
   settleMs?: number;
+  /** When false, skip init (e.g. wait for the page-level instance). */
+  enabled?: boolean;
 };
 
 /**
@@ -33,7 +35,7 @@ export function useLiquidGlass(
   targets: GlassTarget[],
   options: UseLiquidGlassOptions = {},
 ) {
-  const { defaults, revision = 0, settleMs = 0 } = options;
+  const { defaults, revision = 0, settleMs = 0, enabled = true } = options;
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
   const instanceRef = useRef<LiquidGlassInstance | null>(null);
@@ -42,6 +44,8 @@ export function useLiquidGlass(
     let cancelled = false;
     let instance: LiquidGlassInstance | null = null;
     let settleTimer = 0;
+
+    if (!enabled) return;
 
     const start = async () => {
       try {
@@ -114,7 +118,7 @@ export function useLiquidGlass(
       setReady(false);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [revision, settleMs]);
+  }, [revision, settleMs, enabled]);
 
   return { ready, failed, instanceRef };
 }

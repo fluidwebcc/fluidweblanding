@@ -28,7 +28,7 @@ export default function NotFoundPage() {
   const { pathname } = useLocation();
 
   return (
-    <div className="bg-[#010233] text-white">
+    <div className="text-white">
       <header className="border-b border-white/10">
         <div className="mx-auto max-w-4xl px-5 py-12 sm:px-8 md:py-16">
           <p className="text-xs font-medium tracking-[0.18em] text-white/60 uppercase">
@@ -54,7 +54,7 @@ export default function NotFoundPage() {
             <Link
               key={item.to}
               to={item.to}
-              className="rounded-2xl border border-white/12 bg-white/5 px-5 py-5 transition hover:border-white/25 hover:bg-white/8"
+              className="glow-card rounded-2xl border border-white/12 bg-white/5 px-5 py-5 transition hover:border-white/25 hover:bg-white/8"
             >
               <div className="text-lg font-semibold">{item.label}</div>
               <p className="mt-1 text-sm text-white/55">{item.detail}</p>
@@ -62,7 +62,7 @@ export default function NotFoundPage() {
           ))}
         </div>
 
-        <div className="mt-10 rounded-2xl border border-white/12 bg-white/5 px-6 py-7">
+        <div className="glow-card mt-10 rounded-2xl border border-white/12 bg-white/5 px-6 py-7">
           <h2 className="text-xl font-semibold">Looking for us instead?</h2>
           <p className="mt-2 max-w-xl text-sm text-white/72 md:text-base">
             If a page moved, we can still help with the product problem behind

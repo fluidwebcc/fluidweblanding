@@ -3,6 +3,8 @@ import Hero from "../components/hero";
 import LogoMarquee from "../components/LogoMarquee";
 import Cards from "../components/cards";
 import HorizontalMapSection from "../components/HorizontalMapSection";
+import EngageFanSection from "../components/EngageFanSection";
+import PaceSection from "../components/PaceSection";
 import WorkPreview from "../components/WorkPreview";
 import TeamSection from "../components/TeamSection";
 import CtaSection from "../components/CtaSection";
@@ -30,7 +32,7 @@ function DeferredMap() {
   if (!mount) {
     return (
       <section
-        className="relative h-[280vh] bg-[#010233]"
+        className="relative h-[280vh]"
         aria-hidden
       />
     );
@@ -46,6 +48,8 @@ export default function HomePage() {
       <LogoMarquee />
       <Cards />
       <DeferredMap />
+      <EngageFanSection />
+      <PaceSection />
       <WorkPreview />
       <TeamSection />
       <CtaSection pullUp />

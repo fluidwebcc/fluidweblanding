@@ -2,7 +2,7 @@ import type { TeamMember } from "../data/team";
 
 export function TeamMemberCard({ person }: { person: TeamMember }) {
   return (
-    <div className="group overflow-hidden rounded-2xl border border-white/10 bg-white/3 transition hover:border-white/25 hover:bg-white/6">
+    <div className="glow-card group overflow-hidden rounded-2xl border border-white/10 bg-white/3 transition hover:border-white/25 hover:bg-white/6">
       <div className="aspect-square bg-[#16194E]/80">
         <img
           src={person.image}

@@ -5,7 +5,7 @@ import { BOOKING_URL } from "../data/site";
 
 export default function FaqPage() {
   return (
-    <div className="bg-[#010233] text-white">
+    <div className="text-white">
       <header className="border-b border-white/10">
         <div className="mx-auto max-w-4xl px-5 py-12 sm:px-8 md:py-16">
           <p className="text-xs font-medium tracking-[0.18em] text-white/60 uppercase">
@@ -36,7 +36,7 @@ export default function FaqPage() {
           ))}
         </div>
 
-        <div className="mt-12 rounded-2xl border border-white/12 bg-white/5 px-6 py-7">
+        <div className="glow-card mt-12 rounded-2xl border border-white/12 bg-white/5 px-6 py-7">
           <h2 className="text-xl font-semibold">Still deciding?</h2>
           <p className="mt-2 max-w-xl text-sm text-white/72 md:text-base">
             Read what we shipped for teams in the same position, or send us the

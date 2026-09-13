@@ -16,7 +16,6 @@ import {
 import { mapPins, type MapPin } from "../data/caseStudies";
 import { PeekGroup } from "./PeekPortrait";
 import { sectionPeeks } from "../data/team";
-import { BOOKING_URL } from "../data/site";
 
 const GEO_URL = "/maps/countries-110m.json";
 
@@ -67,25 +66,6 @@ const techGroups = [
   {
     label: "AI layer",
     items: ["LLMs", "Vapi", "Voice agents", "Document AI", "Multi-model"],
-  },
-] as const;
-
-const engagementModes = [
-  {
-    label: "Dedicated squads",
-    note: "12+ engineers on a product when you need horsepower.",
-  },
-  {
-    label: "Solo embeds",
-    note: "One senior owns the build end to end — fast and accountable.",
-  },
-  {
-    label: "Greenfield",
-    note: "0 → live without discovery theater or agency drag.",
-  },
-  {
-    label: "Ongoing ownership",
-    note: "We stay embedded and keep the release train moving.",
   },
 ] as const;
 
@@ -346,7 +326,7 @@ function BuildPanel() {
           {capabilities.map((item) => (
             <div
               key={item.title}
-              className="rounded-2xl border border-white/12 bg-white/5 px-5 py-5"
+              className="glow-card rounded-2xl border border-white/12 bg-white/5 px-5 py-5"
             >
               <h3 className="text-base font-semibold text-white md:text-lg">
                 {item.title}
@@ -367,7 +347,7 @@ function TechPanel() {
     <PanelShell
       className="w-[100vw] bg-[#0c1454] md:w-[110vw]"
       fadeFrom="#0c1454"
-      fadeTo="#121a5c"
+      fadeTo="#010233"
     >
       <PeekGroup slots={sectionPeeks.tech} id="tech" />
       <div className="relative z-30">
@@ -405,84 +385,6 @@ function TechPanel() {
   );
 }
 
-function EngagePanel() {
-  return (
-    <PanelShell
-      className="w-[100vw] bg-[#121a5c] md:w-[100vw]"
-      fadeFrom="#121a5c"
-      fadeTo="#16194E"
-    >
-      <PeekGroup slots={sectionPeeks.engage} id="engage" />
-      <div className="relative z-30">
-        <p className="text-xs font-medium tracking-[0.2em] text-white/45 uppercase">
-          How we embed
-        </p>
-        <h2 className="mt-3 max-w-2xl text-3xl font-bold text-white md:text-5xl">
-          Squads, solo, or stay
-        </h2>
-        <p className="mt-4 max-w-xl text-base text-white/55 md:text-lg">
-          Pick the shape that matches the bottleneck — we pick up the pace either
-          way.
-        </p>
-        <div className="mt-10 grid max-w-4xl gap-4 sm:grid-cols-2">
-          {engagementModes.map((mode) => (
-            <div
-              key={mode.label}
-              className="rounded-2xl border border-white/12 bg-white/5 px-6 py-6"
-            >
-              <h3 className="text-xl font-semibold text-white">{mode.label}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/55">{mode.note}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </PanelShell>
-  );
-}
-
-function PacePanel() {
-  return (
-    <PanelShell className="w-[100vw] bg-[#16194E] md:w-[95vw]" fadeFrom="#16194E">
-      <PeekGroup slots={sectionPeeks.pace} id="pace" />
-      <div className="relative z-30">
-        <p className="text-xs font-medium tracking-[0.2em] text-white/45 uppercase">
-          The mission
-        </p>
-        <h2 className="mt-3 max-w-3xl text-3xl font-bold leading-tight text-white md:text-6xl">
-          Ship faster. Build better.
-        </h2>
-        <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/60 md:text-xl">
-          AI-native engineering for startups and teams that are stuck. Old
-          waterfall habits don&apos;t scale — we embed, accelerate, and get the
-          product into market.
-        </p>
-        <div className="mt-10 flex flex-wrap gap-8 text-white">
-          <div>
-            <div className="text-3xl font-bold md:text-4xl">15+</div>
-            <div className="mt-1 text-sm text-white/45">Products shipped</div>
-          </div>
-          <div>
-            <div className="text-3xl font-bold md:text-4xl">6</div>
-            <div className="mt-1 text-sm text-white/45">Continents</div>
-          </div>
-          <div>
-            <div className="text-3xl font-bold md:text-4xl">30+</div>
-            <div className="mt-1 text-sm text-white/45">Team strong</div>
-          </div>
-        </div>
-        <a
-          href={BOOKING_URL}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-10 inline-flex w-fit rounded-2xl bg-white px-6 py-3 font-semibold text-[#010233] transition hover:bg-white/90"
-        >
-          Book a meeting
-        </a>
-      </div>
-    </PanelShell>
-  );
-}
-
 export default function HorizontalMapSection() {
   const targetRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -504,8 +406,8 @@ export default function HorizontalMapSection() {
 
   const washColor = useTransform(
     smoothProgress,
-    [0, 0.22, 0.45, 0.68, 1],
-    ["#010233", "#071038", "#0c1454", "#121a5c", "#16194E"],
+    [0, 0.38, 0.7, 1],
+    ["#010233", "#071038", "#0c1454", "#0c1454"],
   );
 
   useEffect(() => {
@@ -548,8 +450,6 @@ export default function HorizontalMapSection() {
           <FullScreenMap />
           <BuildPanel />
           <TechPanel />
-          <EngagePanel />
-          <PacePanel />
         </motion.div>
       </div>
     </section>

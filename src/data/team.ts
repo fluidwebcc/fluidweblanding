@@ -206,18 +206,18 @@ export const sectionPeeks = {
 
   engage: [
     {
-      className: "top-14 left-[58%] hidden md:block",
+      className: "top-6 right-4 hidden md:block md:right-8",
       rotate: -9,
       size: "md",
     },
     {
-      className: "bottom-16 left-[16%] hidden sm:block",
+      className: "bottom-6 left-4 hidden sm:block",
       rotate: 8,
       size: "lg",
       delay: 0.12,
     },
     {
-      className: "top-12 left-[16%] hidden lg:block",
+      className: "top-8 left-4 hidden lg:block",
       rotate: 7,
       size: "md",
       delay: 0.18,
@@ -226,24 +226,24 @@ export const sectionPeeks = {
 
   pace: [
     {
-      className: "top-14 left-[58%] hidden md:block",
+      className: "top-6 right-4 hidden md:block md:right-8",
       rotate: 6,
       size: "sm",
     },
     {
-      className: "bottom-16 left-[16%] hidden sm:block",
+      className: "bottom-6 left-4 hidden sm:block",
       rotate: 11,
       size: "md",
       delay: 0.15,
     },
     {
-      className: "top-12 left-[16%] hidden lg:block",
+      className: "top-8 left-4 hidden lg:block",
       rotate: -7,
       size: "md",
       delay: 0.2,
     },
     {
-      className: "bottom-14 left-[58%] hidden md:block",
+      className: "bottom-6 right-6 hidden md:block",
       rotate: 9,
       size: "sm",
       delay: 0.18,

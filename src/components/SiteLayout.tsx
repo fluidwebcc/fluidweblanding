@@ -7,6 +7,7 @@ import LiquidGlassNav, {
   FROSTED_BAR_GLASS,
   REGULAR_BTN_GLASS,
 } from "./LiquidGlassNav";
+import { useCardGlow } from "../hooks/useCardGlow";
 import { useLiquidGlass } from "../hooks/useLiquidGlass";
 
 let lenisInstance: Lenis | null = null;
@@ -55,6 +56,8 @@ export default function SiteLayout() {
       settleMs: 0,
     },
   );
+
+  useCardGlow();
 
   // Heavy sections (map) wait for this before mounting so prewarm stays fast.
   useEffect(() => {
@@ -106,11 +109,8 @@ export default function SiteLayout() {
   }, [location.pathname, location.hash, location.key]);
 
   return (
-    <div ref={liquidRootRef} className="relative min-h-svh text-white">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 bg-[#010233]"
-      />
+    <div ref={liquidRootRef} className="relative isolate min-h-svh text-white">
+      <div aria-hidden className="site-atmosphere" />
 
       <LiquidGlassNav
         barRef={barRef}
@@ -122,18 +122,20 @@ export default function SiteLayout() {
         failed={failed}
       />
 
-      {isHome ? (
-        <Outlet />
-      ) : (
-        <>
-          <main className="relative z-0 flex-1 pt-28 md:pt-32">
-            <Outlet />
-          </main>
-          <div className="relative z-10 mt-auto">
-            <Footer />
-          </div>
-        </>
-      )}
+      <div className="relative z-[1]">
+        {isHome ? (
+          <Outlet />
+        ) : (
+          <>
+            <main className="relative flex-1 pt-28 md:pt-32">
+              <Outlet />
+            </main>
+            <div className="relative z-10 mt-auto">
+              <Footer />
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }
