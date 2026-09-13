@@ -3,7 +3,6 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 import Lenis from "lenis";
 import type { GlassConfig } from "@ybouane/liquidglass";
 import Footer from "./footer";
-import LiquidGlassCursor, { CURSOR_GLASS } from "./LiquidGlassCursor";
 import LiquidGlassNav, {
   FROSTED_BAR_GLASS,
   REGULAR_BTN_GLASS,
@@ -33,29 +32,26 @@ export default function SiteLayout() {
   const workRef = useRef<HTMLAnchorElement>(null);
   const teamRef = useRef<HTMLAnchorElement>(null);
   const bookRef = useRef<HTMLAnchorElement>(null);
-  const dropRef = useRef<HTMLDivElement>(null);
 
-  const glassTargets = useMemo(() => {
-    const targets: {
-      ref: RefObject<HTMLElement | null>;
-      config: Partial<GlassConfig>;
-    }[] = [
-      { ref: barRef, config: { ...FROSTED_BAR_GLASS } },
-      { ref: workRef, config: { ...REGULAR_BTN_GLASS } },
-      { ref: teamRef, config: { ...REGULAR_BTN_GLASS } },
-      { ref: bookRef, config: { ...REGULAR_BTN_GLASS } },
-    ];
-    if (isHome) {
-      targets.push({ ref: dropRef, config: { ...CURSOR_GLASS } });
-    }
-    return targets;
-  }, [isHome]);
+  const glassTargets = useMemo(
+    () =>
+      [
+        { ref: barRef, config: { ...FROSTED_BAR_GLASS } },
+        { ref: workRef, config: { ...REGULAR_BTN_GLASS } },
+        { ref: teamRef, config: { ...REGULAR_BTN_GLASS } },
+        { ref: bookRef, config: { ...REGULAR_BTN_GLASS } },
+      ] as {
+        ref: RefObject<HTMLElement | null>;
+        config: Partial<GlassConfig>;
+      }[],
+    [],
+  );
 
   const { ready, failed, instanceRef } = useLiquidGlass(
     liquidRootRef,
     glassTargets,
     {
-      revision: `${location.pathname}:${isHome ? "home" : "page"}`,
+      revision: location.pathname,
       settleMs: 200,
     },
   );
@@ -125,15 +121,6 @@ export default function SiteLayout() {
         ready={ready}
         failed={failed}
       />
-
-      {isHome && (
-        <LiquidGlassCursor
-          dropRef={dropRef}
-          instanceRef={instanceRef}
-          ready={ready}
-          failed={failed}
-        />
-      )}
 
       {isHome ? (
         <Outlet />

@@ -49,9 +49,8 @@ const BTN_FALLBACK =
   "border border-white/20 bg-white/10 shadow-md";
 
 /**
- * Original header layout: wide frosted bar (logo left) + regular-glass
- * action pills on the right. All glass nodes are direct children of the
- * LiquidGlass root (fragment flattens).
+ * Slim frosted bar — wider horizontally (logo left, actions right).
+ * Glass nodes are direct children of the LiquidGlass root (fragment flattens).
  */
 export default function LiquidGlassNav({
   barRef,
@@ -125,14 +124,14 @@ export default function LiquidGlassNav({
 
   return (
     <>
-      {/* Frosted glass bar — logo + invisible slots that size the real buttons */}
+      {/* Frosted glass bar — logo left, invisible slots pin buttons to the right */}
       <div
         ref={barRef}
-        className={`fixed top-6 left-1/2 z-50 flex h-16 w-[92%] max-w-6xl -translate-x-1/2 items-center justify-between px-5 sm:px-6 ${
+        className={`fixed top-6 left-1/2 z-50 flex h-16 w-[min(92vw,44rem)] -translate-x-1/2 items-center justify-between px-5 sm:px-6 ${
           failed ? BAR_FALLBACK : "bg-transparent"
         }`}
       >
-        <Link to="/" className="relative z-[2] flex items-center">
+        <Link to="/" className="relative z-[2] flex shrink-0 items-center">
           <img src={logo} alt="Fluid Web" className="h-9 w-auto" />
         </Link>
 
@@ -158,7 +157,6 @@ export default function LiquidGlassNav({
           >
             Book a call
           </span>
-          {/* Mobile: only Work slot is visible for sizing; Team hidden */}
         </div>
       </div>
 
