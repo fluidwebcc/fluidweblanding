@@ -1,14 +1,15 @@
 import { BOOKING_URL } from "../data/site";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { BackToWork } from "../components/SiteLayout";
 import { allCaseStudiesSorted, getCaseStudy } from "../data/caseStudies";
+import NotFoundPage from "./NotFoundPage";
 
 export default function CaseStudyPage() {
   const { slug } = useParams();
   const study = slug ? getCaseStudy(slug) : undefined;
 
   if (!study) {
-    return <Navigate to="/work" replace />;
+    return <NotFoundPage />;
   }
 
   const related = allCaseStudiesSorted

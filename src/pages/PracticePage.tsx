@@ -1,4 +1,4 @@
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getCaseStudy } from "../data/caseStudies";
 import {
   engagements,
@@ -7,13 +7,14 @@ import {
   type PracticeEntry,
 } from "../data/practice";
 import { BOOKING_URL } from "../data/site";
+import NotFoundPage from "./NotFoundPage";
 
 export default function PracticePage({ kind }: { kind: PracticeEntry["kind"] }) {
   const { slug } = useParams();
   const entry = slug ? getPracticeEntry(kind, slug) : undefined;
 
   if (!entry) {
-    return <Navigate to="/" replace />;
+    return <NotFoundPage />;
   }
 
   const basePath = kind === "service" ? "services" : "engage";

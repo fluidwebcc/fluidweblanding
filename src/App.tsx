@@ -6,6 +6,7 @@ import CaseStudyPage from "./pages/CaseStudyPage";
 import PracticePage from "./pages/PracticePage";
 import FaqPage from "./pages/FaqPage";
 import TeamPage from "./pages/TeamPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="engage/:slug" element={<PracticePage kind="engage" />} />
         <Route path="team" element={<TeamPage />} />
         <Route path="faq" element={<FaqPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   );
