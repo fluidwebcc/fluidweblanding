@@ -1,13 +1,27 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import type { PeekSlot } from "../data/team";
+import { type PeekLayout, type PeekSlot } from "../data/team";
 import { randomPeekSaying } from "../data/peekSayings";
+import { useCyclingPeekPeople } from "../hooks/useCyclingPeekPeople";
 
 const sizeClass = {
   sm: "h-12 w-12 md:h-14 md:w-14",
   md: "h-14 w-14 md:h-16 md:w-16",
   lg: "h-16 w-16 md:h-20 md:w-20",
 } as const;
+
+function shuffle<T>(items: readonly T[]): T[] {
+  const next = [...items];
+  for (let i = next.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const a = next[i];
+    const b = next[j];
+    if (a === undefined || b === undefined) continue;
+    next[i] = b;
+    next[j] = a;
+  }
+  return next;
+}
 
 export default function PeekPortrait({
   person,
@@ -16,20 +30,30 @@ export default function PeekPortrait({
   rotate = 0,
   delay = 0,
 }: PeekSlot) {
-  const [line, setLine] = useState<string | null>(null);
+  const [speech, setSpeech] = useState<{ name: string; line: string } | null>(
+    null,
+  );
+  const [tilt] = useState(() => rotate + (Math.random() * 10 - 5));
+  const line = speech?.name === person.name ? speech.line : null;
+
+  const showSaying = () =>
+    setSpeech((prev) => ({
+      name: person.name,
+      line: randomPeekSaying(prev?.name === person.name ? prev.line : undefined),
+    }));
 
   return (
     <motion.div
       className={`absolute z-30 ${className}`}
-      style={{ rotate }}
+      style={{ rotate: tilt }}
       initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }}
-      onMouseEnter={() => setLine((prev) => randomPeekSaying(prev ?? undefined))}
-      onMouseLeave={() => setLine(null)}
-      onFocus={() => setLine((prev) => randomPeekSaying(prev ?? undefined))}
-      onBlur={() => setLine(null)}
+      onMouseEnter={showSaying}
+      onMouseLeave={() => setSpeech(null)}
+      onFocus={showSaying}
+      onBlur={() => setSpeech(null)}
     >
       <motion.button
         type="button"
@@ -42,14 +66,20 @@ export default function PeekPortrait({
           ease: "easeInOut",
         }}
       >
-        <span className="block h-full w-full overflow-hidden rounded-2xl">
-          <img
-            src={person.image}
-            alt=""
-            className="h-full w-full object-cover object-top"
-            loading="lazy"
-            draggable={false}
-          />
+        <span className="relative block h-full w-full overflow-hidden rounded-2xl">
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={person.image}
+              src={person.image}
+              alt=""
+              className="h-full w-full object-cover object-top"
+              draggable={false}
+              initial={{ opacity: 0, scale: 1.08 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.94 }}
+              transition={{ duration: 0.28 }}
+            />
+          </AnimatePresence>
         </span>
 
         <AnimatePresence>
@@ -62,7 +92,7 @@ export default function PeekPortrait({
               exit={{ opacity: 0, y: 4, scale: 0.98 }}
               transition={{ duration: 0.18 }}
               className="pointer-events-none absolute bottom-[calc(100%+10px)] left-1/2 z-40 w-max max-w-[11rem] -translate-x-1/2 rounded-xl border border-white/20 bg-[#0a0d3a] px-3 py-2 text-left text-[11px] leading-snug font-medium text-white shadow-xl"
-              style={{ rotate: -rotate }}
+              style={{ rotate: -tilt }}
             >
               {line}
               <span className="absolute top-full left-1/2 -mt-px -translate-x-1/2 border-4 border-transparent border-t-[#0a0d3a]" />
@@ -74,18 +104,36 @@ export default function PeekPortrait({
   );
 }
 
+function pickLayoutSubset(slots: readonly PeekLayout[]): PeekLayout[] {
+  if (slots.length <= 2) return [...slots];
+  const min = 2;
+  const count = min + Math.floor(Math.random() * (slots.length - min + 1));
+  return shuffle(slots).slice(0, count);
+}
+
 export function PeekGroup({
   slots,
   id,
 }: {
-  slots: readonly PeekSlot[];
+  slots: readonly PeekLayout[];
   id: string;
 }) {
+  const [layouts] = useState(() => pickLayoutSubset(slots));
+  const people = useCyclingPeekPeople(layouts.length);
+
   return (
     <>
-      {slots.map((slot, i) => (
-        <PeekPortrait key={`${id}-${slot.person.name}-${i}`} {...slot} />
-      ))}
+      {layouts.map((layout, i) => {
+        const person = people[i];
+        if (!person) return null;
+        return (
+          <PeekPortrait
+            key={`${id}-${i}`}
+            person={person}
+            {...layout}
+          />
+        );
+      })}
     </>
   );
 }

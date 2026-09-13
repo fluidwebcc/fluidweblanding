@@ -744,7 +744,7 @@ export const engagements: PracticeEntry[] = [
           "Considerably, and for the right scope it is also faster. The trade-off is throughput ceiling, not quality.",
       },
     ],
-    proof: ["smartfaktura", "ppv-my"],
+    proof: [/* "smartfaktura", */ "ppv-my"],
     accent: "#A3E635",
   },
   {
@@ -862,7 +862,7 @@ export const engagements: PracticeEntry[] = [
           "Most greenfield engagements roll into ongoing ownership, because launch is when the real learning begins. Some hand over to an in-house team instead, which we plan for from the start.",
       },
     ],
-    proof: ["treply", "smartfaktura", "otteri"],
+    proof: ["treply", /* "smartfaktura", */ "otteri"],
     accent: "#FBBF24",
   },
   {

@@ -550,6 +550,7 @@ export const caseStudies: CaseStudy[] = [
     order: 4,
     accent: "#38BDF8",
   },
+  /* Hidden for now
   {
     slug: "smartfaktura",
     name: "SmartFaktura",
@@ -659,6 +660,7 @@ export const caseStudies: CaseStudy[] = [
     order: 5,
     accent: "#A3E635",
   },
+  */
   {
     slug: "voxtell",
     name: "Voxtell AI",
@@ -897,7 +899,7 @@ export const geographyHighlights = [
   "France",
   "Australia",
   "Malaysia",
-  "Norway · Rwanda",
+  // "Norway · Rwanda",
   "Chile",
 ] as const;
 
@@ -989,6 +991,7 @@ export const mapPins: MapPin[] = [
     accent: "#F59E0B",
     projects: [{ name: "PPV.MY", slug: "ppv-my" }],
   },
+  /* Hidden for now
   {
     id: "norway",
     label: "Norway",
@@ -1007,6 +1010,7 @@ export const mapPins: MapPin[] = [
     accent: "#A3E635",
     projects: [{ name: "SmartFaktura", slug: "smartfaktura" }],
   },
+  */
   {
     id: "chile",
     label: "Chile",

@@ -1,5 +1,6 @@
 import { companyProof } from "../data/caseStudies";
 import PeekPortrait from "./PeekPortrait";
+import { useCyclingPeekPeople } from "../hooks/useCyclingPeekPeople";
 import { sectionPeeks } from "../data/team";
 
 const points = [
@@ -22,6 +23,9 @@ const points = [
 ] as const;
 
 export default function Cards() {
+  const peeks = sectionPeeks.why;
+  const people = useCyclingPeekPeople(peeks.length);
+
   return (
     <section className="relative z-10 overflow-visible bg-[#010233] px-5 py-20 text-white sm:px-10 md:px-16 md:py-28">
       <div className="relative mx-auto max-w-6xl">
@@ -33,7 +37,8 @@ export default function Cards() {
         </p>
         <div className="mt-14 grid gap-10 sm:grid-cols-2 sm:gap-8 md:gap-10">
           {points.map((point, i) => {
-            const peek = sectionPeeks.why[i];
+            const layout = peeks[i];
+            const person = people[i];
             return (
               <div key={point.title} className="relative">
                 <div className="relative rounded-2xl border border-white/15 bg-white/6 px-6 py-7 transition hover:border-white/25 hover:bg-white/9">
@@ -42,10 +47,10 @@ export default function Cards() {
                     {point.body}
                   </p>
                 </div>
-                {peek ? (
+                {layout && person ? (
                   <PeekPortrait
-                    key={`why-${peek.person.name}-${i}`}
-                    {...peek}
+                    person={person}
+                    {...layout}
                   />
                 ) : null}
               </div>

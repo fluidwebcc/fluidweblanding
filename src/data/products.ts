@@ -30,12 +30,14 @@ export const portfolioProducts: PortfolioProduct[] = [
     logo: "/logos/clinicos.svg",
     slug: "clinicos",
   },
+  /* Hidden for now
   {
     name: "SmartFaktura",
     location: "Norway · Rwanda",
     logo: "/logos/smartfaktura.png",
     slug: "smartfaktura",
   },
+  */
   {
     name: "Voxtell AI",
     location: "Florida, USA",
