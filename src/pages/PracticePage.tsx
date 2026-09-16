@@ -1,22 +1,18 @@
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getCaseStudy } from "../data/caseStudies";
 import {
   engagements,
-  getPracticeEntry,
   services,
   type PracticeEntry,
 } from "../data/practice";
 import { BOOKING_URL } from "../data/site";
-import NotFoundPage from "./NotFoundPage";
 
-export default function PracticePage({ kind }: { kind: PracticeEntry["kind"] }) {
-  const { slug } = useParams();
-  const entry = slug ? getPracticeEntry(kind, slug) : undefined;
+type PracticePageProps = {
+  entry: PracticeEntry;
+};
 
-  if (!entry) {
-    return <NotFoundPage />;
-  }
-
+export default function PracticePage({ entry }: PracticePageProps) {
+  const kind = entry.kind;
   const basePath = kind === "service" ? "services" : "engage";
   const siblings = (kind === "service" ? services : engagements).filter(
     (item) => item.slug !== entry.slug,

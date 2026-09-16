@@ -3,10 +3,8 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 import Lenis from "lenis";
 import type { GlassConfig } from "@ybouane/liquidglass";
 import Footer from "./footer";
-import LiquidGlassNav, {
-  FROSTED_BAR_GLASS,
-  REGULAR_BTN_GLASS,
-} from "./LiquidGlassNav";
+import LiquidGlassNav from "./LiquidGlassNav";
+import { FROSTED_BAR_GLASS, REGULAR_BTN_GLASS } from "../lib/liquidGlassConfig";
 import { useCardGlow } from "../hooks/useCardGlow";
 import { useLiquidGlass } from "../hooks/useLiquidGlass";
 

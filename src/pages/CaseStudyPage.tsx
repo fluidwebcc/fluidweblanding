@@ -1,23 +1,38 @@
 import { BOOKING_URL } from "../data/site";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { BackToWork } from "../components/SiteLayout";
-import { allCaseStudiesSorted, getCaseStudy } from "../data/caseStudies";
-import NotFoundPage from "./NotFoundPage";
+import {
+  allCaseStudiesSorted,
+  type CaseStudy,
+} from "../data/caseStudies";
+import { absoluteUrl } from "../lib/seo";
 
-export default function CaseStudyPage() {
-  const { slug } = useParams();
-  const study = slug ? getCaseStudy(slug) : undefined;
+type CaseStudyPageProps = {
+  study: CaseStudy;
+};
 
-  if (!study) {
-    return <NotFoundPage />;
-  }
-
+export default function CaseStudyPage({ study }: CaseStudyPageProps) {
   const related = allCaseStudiesSorted
     .filter((c) => c.slug !== study.slug)
     .slice(0, 3);
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: `${study.name} case study`,
+    description: study.summary,
+    url: absoluteUrl(`/work/${study.slug}`),
+    image: absoluteUrl(study.logo),
+    about: study.name,
+    keywords: [study.sector, study.location, ...study.stack].join(", "),
+  };
+
   return (
     <article className="text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <div className="mx-auto max-w-4xl px-5 pb-16 pt-4 sm:px-8">
         <BackToWork />
 

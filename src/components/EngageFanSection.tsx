@@ -290,12 +290,8 @@ export default function EngageFanSection({
     max: 1,
   });
 
-  const metricsRef = useRef(metrics);
-  metricsRef.current = metrics;
-
   const local = useTransform(trackX, (x) => {
-    const m = metricsRef.current;
-    return Math.min(1, Math.max(0, (-x - m.left) / m.max));
+    return Math.min(1, Math.max(0, (-x - metrics.left) / metrics.max));
   });
 
   const smooth = useSpring(local, {
@@ -306,9 +302,8 @@ export default function EngageFanSection({
   });
 
   const pinX = useTransform(trackX, (x) => {
-    const m = metricsRef.current;
-    const localX = -x - m.left;
-    return Math.min(Math.max(0, localX), Math.max(0, m.width - m.vw));
+    const localX = -x - metrics.left;
+    return Math.min(Math.max(0, localX), Math.max(0, metrics.width - metrics.vw));
   });
 
   useEffect(() => {
