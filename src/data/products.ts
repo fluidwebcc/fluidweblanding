@@ -57,7 +57,6 @@ export const portfolioProducts: PortfolioProduct[] = [
     location: "Australia",
     logo: "/logos/practice-pro.png",
   },
-  { name: "GoodOff", location: "Illinois, USA", logo: "/logos/goodoff.png" },
   { name: "Pikcel", location: "Illinois, USA", logo: "/logos/pikcel.png" },
   {
     name: "Snap.Photo",

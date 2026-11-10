@@ -929,7 +929,6 @@ export const mapPins: MapPin[] = [
     projects: [
       { name: "Treply", slug: "treply" },
       { name: "Otteri AI", slug: "otteri" },
-      { name: "GoodOff" },
       { name: "Pikcel" },
       { name: "Snap.Photo" },
     ],
